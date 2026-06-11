@@ -37,7 +37,8 @@
       --c-brand-cyan: #0ea5e9;
       --c-sky-soft: #64d2ff;
       --c-brand-gradient: linear-gradient(135deg, #5b61ff 0%, #0ea5e9 100%);
-      --c-text-gradient: linear-gradient(90deg, #5b61ff 0%, #007aff 48%, #0ea5e9 100%);
+      --c-text-gradient: linear-gradient(90deg, #a8b8ff 0%, #7dd3fc 50%, #c8f4ff 100%);
+      --c-text-bright: #8ed8ff;
       --c-rail-fill: linear-gradient(180deg, #5b61ff 0%, #007aff 50%, #0ea5e9 100%);
       --bg: var(--c-ink);
       --text: var(--c-bone);
@@ -63,6 +64,7 @@
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --content: min(680px, calc(100% - 2rem));
       --content-wide: min(1040px, calc(100% - 2rem));
+      --hero-content: min(920px, calc(100% - 2.5rem));
       --rail-w: 88px;
       --header-h: 4.5rem;
       --grain-opacity: 0.04;
@@ -93,11 +95,55 @@
     }
 
     .text-captas-gradient {
+      color: var(--c-text-bright);
+      -webkit-text-fill-color: var(--c-text-bright);
+      background: none;
+      background-image: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      text-shadow: none;
+      filter: none;
+    }
+
+    .text-gradient-ui {
       background-image: var(--c-text-gradient);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter: none;
+    }
+
+    .captas-logo-dot,
+    .captas-preload-dot {
+      background-image: var(--c-text-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter: none;
+    }
+
+    .price-row.featured .val,
+    .compare-item.best .amt,
+    .hero-price {
+      background-image: var(--c-text-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter: none;
+    }
+
+    .hero-title-shadow {
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .flujo-hero-title-shadow {
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
     }
 
     .font-mono {
@@ -544,7 +590,7 @@
       font-size: clamp(1.85rem, 3.4vw, 2.85rem);
       line-height: 1.12;
       letter-spacing: -0.035em;
-      text-shadow: 0 4px 32px rgba(0, 0, 0, 0.75);
+      text-shadow: none;
     }
 
     #flujo .flujo-hero .section-lead-text {
@@ -734,7 +780,7 @@
       letter-spacing: -0.04em;
       text-align: center;
       margin-bottom: 1.25rem;
-      text-shadow: 0 0 60px rgba(0, 0, 0, 0.85), 0 4px 28px rgba(0, 0, 0, 0.65);
+      text-shadow: none;
     }
 
     .hero-title .hero-line {
@@ -802,7 +848,8 @@
 
     /* Hero cinematográfico con scroll zoom */
     .hero.story-section {
-      height: min(100vh, 900px);
+      height: min(100vh, 920px);
+      min-height: 36rem;
       padding: 0;
       overflow: hidden;
       --section-accent: var(--c-accent);
@@ -812,28 +859,198 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      min-height: 32rem;
+      min-height: 36rem;
       display: flex;
-      align-items: center;
-      padding: calc(var(--header-h) + 2rem) 1.5rem 3rem;
+      align-items: stretch;
+      padding: calc(var(--header-h) + 1.25rem) 1.5rem 1.75rem;
       z-index: 2;
     }
 
     .hero .section-scrim.hero-scrim {
       background:
-        linear-gradient(180deg, rgba(8, 10, 15, 0.45) 0%, rgba(15, 18, 24, 0.72) 50%, rgba(15, 18, 24, 0.92) 100%),
-        radial-gradient(ellipse 70% 55% at 50% 38%, rgba(0, 122, 255, 0.16), transparent 62%);
+        linear-gradient(105deg, rgba(8, 10, 15, 0.82) 0%, rgba(8, 10, 15, 0.45) 42%, rgba(15, 18, 24, 0.35) 68%, rgba(15, 18, 24, 0.75) 100%),
+        linear-gradient(180deg, rgba(8, 10, 15, 0.2) 0%, rgba(15, 18, 24, 0.55) 55%, rgba(15, 18, 24, 0.9) 100%),
+        radial-gradient(ellipse 55% 70% at 22% 48%, rgba(0, 122, 255, 0.14), transparent 62%);
     }
 
     .story-section:not(.hero) {
       padding: var(--space-section) 1.5rem;
     }
 
+    .hero-wrap {
+      width: var(--hero-content);
+      margin: 0 auto;
+      display: flex;
+      flex: 1;
+      align-items: center;
+    }
+
     .hero-editorial {
       width: 100%;
-      max-width: 42rem;
-      margin: 0 auto;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(1.5rem, 3vh, 2.25rem);
+      min-height: calc(100vh - var(--header-h) - 3rem);
+      justify-content: center;
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      align-items: center;
+    }
+
+    .hero-copy {
+      text-align: left;
+      max-width: 34rem;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.45rem 0.65rem;
+      padding: 0.45rem 0.9rem 0.45rem 0.65rem;
+      margin-bottom: 1.25rem;
+      border-radius: 100px;
+      background: rgba(0, 122, 255, 0.1);
+      border: 1px solid rgba(142, 216, 255, 0.22);
+    }
+
+    .hero-kicker .kicker-mono {
+      padding: 0.2rem 0.45rem;
+      border-radius: 100px;
+      background: rgba(0, 122, 255, 0.18);
+    }
+
+    .hero-kicker .kicker-label {
+      font-size: clamp(0.62rem, 1.4vw, 0.72rem);
+      text-align: left;
+      color: rgba(234, 232, 228, 0.82);
+    }
+
+    .hero-copy .hero-title {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .hero-copy .hero-desc {
+      margin: 0 0 1.5rem;
+      max-width: 38ch;
+      text-align: left;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0.6rem;
+    }
+
+    .hero-services {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .hero-service {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-sm);
+      text-align: left;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .hero-service:hover {
+      transform: translateX(4px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-service-num {
+      flex-shrink: 0;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--c-text-bright);
+      background: rgba(142, 216, 255, 0.1);
+      border: 1px solid rgba(142, 216, 255, 0.28);
+    }
+
+    .hero-service-title {
+      font-family: var(--font-d);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-service-desc {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .hero-service.featured {
+      border-color: rgba(142, 216, 255, 0.28);
+      background: rgba(0, 122, 255, 0.08);
+    }
+
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.5rem;
+      font-family: var(--font-d);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--c-accent);
+      border-radius: 100px;
+      box-shadow: 0 8px 28px rgba(0, 122, 255, 0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0, 122, 255, 0.45);
+    }
+
+    .btn-hero-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.85rem 1.35rem;
+      font-family: var(--font-d);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--c-text-bright);
+      background: rgba(142, 216, 255, 0.08);
+      border: 1px solid rgba(142, 216, 255, 0.35);
+      border-radius: 100px;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .btn-hero-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(142, 216, 255, 0.14);
+      border-color: rgba(142, 216, 255, 0.5);
     }
 
     .hero-top {
@@ -876,49 +1093,10 @@
     }
 
     .hero-desc {
-      font-size: clamp(0.98rem, 1.25vw, 1.1rem);
+      font-size: clamp(0.98rem, 1.25vw, 1.08rem);
       font-weight: 400;
       color: rgba(234, 232, 228, 0.88);
-      max-width: 42ch;
       line-height: 1.65;
-      margin: 0 auto 2rem;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin-bottom: 3rem;
-    }
-
-    .hero-stat {
-      padding: 1.25rem 1rem;
-      text-align: center;
-      background: var(--glass);
-      border-right: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .hero-stat:last-child { border-right: none; }
-
-    .hero-stat .num {
-      font-family: var(--font-d);
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--captas-accent);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-stat .lbl {
-      font-size: 0.5rem;
-      font-weight: 500;
-      letter-spacing: var(--ls-wide);
-      text-transform: uppercase;
-      color: var(--text-muted);
     }
 
     .scroll-hint {
@@ -926,7 +1104,8 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      margin: 0 auto;
+      margin: auto auto 0;
+      padding-top: 0.5rem;
       color: var(--text-muted);
       font-family: var(--font-d);
       font-size: 0.52rem;
@@ -947,46 +1126,233 @@
       50% { transform: translateY(6px); }
     }
 
-    /* Context */
-    #contexto { --section-accent: var(--c-brand-indigo); }
+    /* Context — antes / después dinámico */
+    #contexto {
+      --section-accent: var(--c-brand-indigo);
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(91, 97, 255, 0.08), transparent 55%),
+        var(--c-ink);
+    }
 
-    .quote-glass {
-      border-radius: var(--radius);
-      padding: 2rem 1.75rem;
+    #contexto .section-intro {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    #contexto .contexto-hero {
       text-align: center;
-      position: relative;
-      overflow: hidden;
+      padding: clamp(1.75rem, 4vh, 2.5rem) clamp(1.25rem, 4vw, 2rem);
+      border-radius: var(--radius);
+      max-width: 40rem;
+      margin-inline: auto;
     }
 
-    .quote-glass::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60%;
-      height: 1px;
-      background: var(--c-text-gradient);
-      opacity: 0.5;
+    #contexto .contexto-hero-title {
+      font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+      line-height: 1.14;
+      letter-spacing: -0.035em;
     }
 
-    .quote-glass blockquote {
-      font-family: var(--font-d);
-      font-size: clamp(1.2rem, 2.6vw, 1.55rem);
-      font-weight: 600;
-      line-height: 1.45;
-      letter-spacing: -0.02em;
-      border: none;
-      text-align: left;
+    #contexto .contexto-hero .section-lead-text {
+      margin-inline: auto;
+      max-width: 48ch;
     }
 
-    .context-body {
+    #contexto .contexto-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 1.15rem;
+    }
+
+    #contexto .contexto-chips span {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      font-weight: 450;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.85rem;
+      border-radius: 100px;
+      background: rgba(91, 97, 255, 0.12);
+      border: 1px solid rgba(91, 97, 255, 0.28);
+      color: rgba(234, 232, 228, 0.9);
+    }
+
+    #contexto .section-content {
+      padding-top: var(--space-block);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .contexto-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contexto-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0.85rem;
+      align-items: stretch;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .contexto-flow.is-live .contexto-row:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+    .contexto-flow.is-live .contexto-row:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.2s; }
+
+    .contexto-node {
+      border-radius: var(--radius-sm);
+      padding: 1.25rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .contexto-node:hover {
+      transform: translateY(-2px);
+    }
+
+    .contexto-node.from {
+      border-left: 2px solid rgba(234, 232, 228, 0.2);
+    }
+
+    .contexto-node.to {
+      border-left: 2px solid var(--c-accent);
+      background: rgba(0, 122, 255, 0.06);
+    }
+
+    .contexto-node-tag {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 450;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.8;
     }
 
-    .context-body p + p { margin-top: 1rem; }
+    .contexto-node.from .contexto-node-tag { color: rgba(234, 232, 228, 0.45); }
+    .contexto-node.to .contexto-node-tag { color: var(--c-sky-soft); }
+
+    .contexto-node h3 {
+      font-family: var(--font-d);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .contexto-node p {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .contexto-connector {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      min-width: 2.75rem;
+      padding-inline: 0.15rem;
+    }
+
+    .contexto-connector-line {
+      width: auto;
+      height: 2px;
+      flex: 1;
+      min-width: 1.25rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(234, 232, 228, 0.15), var(--c-accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .contexto-flow.is-live .contexto-connector-line {
+      transform: scaleX(1);
+    }
+
+    .contexto-flow.is-live .contexto-row:nth-child(1) .contexto-connector-line { transition-delay: 0.12s; }
+    .contexto-flow.is-live .contexto-row:nth-child(2) .contexto-connector-line { transition-delay: 0.27s; }
+
+    .contexto-connector-arrow {
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: var(--c-sky-soft);
+      background: rgba(0, 122, 255, 0.15);
+      border: 1px solid rgba(0, 122, 255, 0.35);
+      box-shadow: 0 0 16px rgba(0, 122, 255, 0.25);
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .contexto-flow.is-live .contexto-connector-arrow {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .contexto-flow.is-live .contexto-row:nth-child(1) .contexto-connector-arrow { transition-delay: 0.35s; }
+    .contexto-flow.is-live .contexto-row:nth-child(2) .contexto-connector-arrow { transition-delay: 0.5s; }
+
+    .contexto-synthesis {
+      margin-top: 0.25rem;
+      padding: 1.35rem 1.5rem;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      line-height: 1.65;
+      color: rgba(234, 232, 228, 0.92);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .contexto-flow.is-live + .contexto-synthesis {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.45s;
+    }
+
+    @media (max-width: 768px) {
+      .contexto-row {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+
+      .contexto-connector {
+        flex-direction: column;
+        min-width: 0;
+        padding: 0.2rem 0;
+      }
+
+      .contexto-connector-line {
+        width: 2px;
+        height: auto;
+        min-height: 1.25rem;
+        flex: 1;
+        transform: scaleY(0);
+        transform-origin: top;
+        background: linear-gradient(180deg, rgba(234, 232, 228, 0.15), var(--c-accent));
+      }
+
+      .contexto-flow.is-live .contexto-connector-line {
+        transform: scaleY(1);
+      }
+
+      .contexto-connector-arrow { transform: rotate(90deg) scale(0.6); }
+      .contexto-flow.is-live .contexto-connector-arrow { transform: rotate(90deg) scale(1); }
+    }
 
     /* Systems */
     #sistemas { --section-accent: var(--c-accent); }
@@ -1051,6 +1417,26 @@
 
     .card-header .card-title { margin: 0; flex: 1; }
 
+    .card-title-main {
+      display: block;
+      font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+    }
+
+    .card-title-role {
+      display: block;
+      margin-top: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 450;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .system-card.fichas .card-title-role { color: #9ba0ff; }
+    .system-card.webpay .card-title-role { color: var(--c-sky-soft); }
+
     .card-sub {
       font-family: var(--font-mono);
       font-size: 0.52rem;
@@ -1058,8 +1444,11 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--c-fog);
-      margin-top: 0.2rem;
+      margin-top: 0.45rem;
     }
+
+    .system-card.fichas .card-sub { color: rgba(155, 160, 255, 0.72); }
+    .system-card.webpay .card-sub { color: rgba(125, 211, 252, 0.78); }
 
     .system-card .lead {
       color: var(--text-muted);
@@ -1394,8 +1783,145 @@
       line-height: 1.65;
     }
 
-    /* CTA */
-    #contacto { --section-accent: var(--c-brand-cyan); }
+    /* Contacto — cierre de propuesta */
+    #contacto {
+      --section-accent: var(--c-brand-cyan);
+      padding: clamp(5rem, 12vh, 7rem) 1.5rem clamp(2.5rem, 6vh, 3.5rem);
+      background:
+        radial-gradient(ellipse 90% 55% at 50% 0%, rgba(0, 122, 255, 0.14), transparent 58%),
+        var(--c-ink);
+    }
+
+    #contacto .section-intro {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .contact-finale {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-gap);
+    }
+
+    .contact-finale-title {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .contact-steps {
+      padding: 1.5rem 1.35rem;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-steps-label {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 450;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-step {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .contact-step-num {
+      flex-shrink: 0;
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      font-weight: 500;
+      color: var(--c-text-bright);
+      background: rgba(142, 216, 255, 0.1);
+      border: 1px solid rgba(142, 216, 255, 0.28);
+    }
+
+    .contact-step h3 {
+      font-family: var(--font-d);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-step p {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .contact-cta {
+      padding: clamp(1.75rem, 4vh, 2.25rem) clamp(1.35rem, 3vw, 2rem);
+      border-radius: var(--radius);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(0, 122, 255, 0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    .contact-cta > * { position: relative; z-index: 1; }
+
+    .contact-cta-lead {
+      font-size: clamp(1rem, 1.2vw, 1.08rem);
+      line-height: 1.6;
+      color: rgba(234, 232, 228, 0.92);
+      max-width: 36ch;
+      margin: 0;
+    }
+
+    .contact-trust {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.25rem;
+      padding: 1rem 0 0.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      font-weight: 450;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .contact-trust span::before {
+      content: '·';
+      margin-right: 1.25rem;
+      opacity: 0.35;
+    }
+
+    .contact-trust span:first-child::before { content: none; margin: 0; }
 
     .cta-box {
       border-radius: var(--radius);
@@ -1403,33 +1929,6 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-    }
-
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 100%, rgba(0,122,255,0.1), transparent 65%);
-    }
-
-    .cta-box > * { position: relative; z-index: 1; }
-
-    .cta-box h2 {
-      font-family: var(--font-d);
-      font-size: clamp(2rem, 5vw, 3.25rem);
-      font-weight: 800;
-      line-height: 1.05;
-      margin-bottom: 1rem;
-      letter-spacing: -0.03em;
-    }
-
-
-    .cta-box p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      margin-bottom: 2rem;
-      max-width: 40ch;
-      margin-inline: auto;
     }
 
     .btn-primary {
@@ -1460,29 +1959,21 @@
     .btn-primary .arr { transition: transform 0.25s; }
     .btn-primary:hover .arr { transform: translateX(4px); }
 
-    /* Footer */
-    footer {
-      padding: 2rem 1.5rem 3rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
+    /* Footer — barra mínima */
+    .site-footer {
+      padding: 1.35rem 1.5rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--c-ink-soft);
     }
 
     .footer-inner {
-      width: var(--content);
+      width: var(--content-wide);
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-brand {
-      font-family: var(--font-d);
-      font-weight: 800;
-      letter-spacing: var(--ls-wider);
-      font-size: 0.78rem;
-      color: var(--captas-accent);
-      margin-bottom: 0.35rem;
+      gap: 0.75rem 1.5rem;
     }
 
     .footer-meta {
@@ -1492,6 +1983,42 @@
       color: var(--text-muted);
       letter-spacing: var(--ls-wide);
       text-transform: uppercase;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 1rem 1.65rem;
+      font-family: var(--font-d);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      color: rgba(234, 232, 228, 0.95);
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      border-radius: 100px;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(37, 211, 102, 0.2);
+    }
+
+    .btn-secondary svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      fill: #25d366;
     }
 
     /* Responsive */
@@ -1514,12 +2041,26 @@
       .story-body { gap: 1.5rem; }
       .hero-title { font-size: clamp(1.85rem, 9vw, 2.5rem); }
       .hero.story-section { height: auto; min-height: 100vh; }
-      .hero-sticky { position: relative; height: auto; min-height: 100vh; padding: calc(var(--header-h) + 2.5rem) 1.25rem 3rem; }
+      .hero-sticky { position: relative; height: auto; min-height: 100vh; padding: calc(var(--header-h) + 1.5rem) 1.25rem 2rem; }
+      .hero-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero-copy,
+      .hero-copy .hero-title,
+      .hero-copy .hero-desc { text-align: center; max-width: none; margin-inline: auto; }
+      .hero-kicker { justify-content: center; margin-inline: auto; }
+      .hero-kicker .kicker-label { text-align: center; }
+      .hero-cta { justify-content: center; }
+      .hero-service:hover { transform: none; }
+      .hero-editorial { min-height: 0; }
       .hero-top { flex-direction: column; gap: 1.25rem; }
       .hero-agency { text-align: left; }
-      .hero-stats { grid-template-columns: 1fr; }
-      .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-      .hero-stat:last-child { border-bottom: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-inner { justify-content: center; text-align: center; }
+      .hero-cta { flex-direction: column; align-items: stretch; }
+      .btn-hero-primary,
+      .btn-hero-ghost { justify-content: center; }
+      .cta-actions { flex-direction: column; align-items: stretch; }
+      .cta-actions .btn-primary,
+      .cta-actions .btn-secondary { justify-content: center; }
     }
 
     /* Preloader — igual que captas-cyan.vercel.app */
@@ -1583,13 +2124,6 @@
       letter-spacing: -0.04em;
       line-height: 1;
       color: var(--c-bone);
-    }
-
-    .captas-preload-dot {
-      background: linear-gradient(120deg, #5b61ff 0%, #007aff 50%, #0ea5e9 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
     }
 
     .captas-preload-copy {
@@ -1698,13 +2232,6 @@
       .captas-logo-word { font-size: 1.15rem; }
     }
 
-    .captas-logo-dot {
-      background: linear-gradient(120deg, #5b61ff 0%, #007aff 50%, #0ea5e9 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
     .header-client {
       font-family: var(--font-mono);
       font-size: 0.58rem;
@@ -1731,7 +2258,7 @@
       html { scroll-behavior: auto; }
       .scroll-section { opacity: 1; transition: none; }
       .scroll-hint, .pulse-dot { animation: none; }
-      .system-card:hover, .btn-primary:hover { transform: none; }
+      .system-card:hover, .btn-primary:hover, .btn-secondary:hover, .btn-hero-primary:hover, .btn-hero-ghost:hover, .hero-service:hover { transform: none; }
       body.captas-ready #captas-preload { transition: none; }
       .hero .section-media-inner,
       .story-section.section-video .section-media-inner { transform: none !important; }
@@ -1742,6 +2269,10 @@
         background: center / cover no-repeat;
       }
       #flujo .section-media-inner { background-image: url('media/flujo-poster.jpg'); }
+      .contexto-row,
+      .contexto-synthesis,
+      .contexto-connector-line,
+      .contexto-connector-arrow { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
   </style>
 </head>
@@ -1819,22 +2350,47 @@
           <div class="section-scrim hero-scrim"></div>
         </div>
         <div class="hero-sticky">
-          <div class="section-wrap narrow story-body">
+          <div class="hero-wrap">
             <div class="hero-editorial">
-              <div class="kicker-row">
-                <span class="kicker-mono">001</span>
-                <span class="kicker-line" aria-hidden="true"></span>
-                <span class="kicker-label">Propuesta digital · Óptica Salud Visual · Ovalle</span>
-              </div>
-              <h1 class="hero-title">
-                <span class="hero-line">Tu óptica, ordenada y</span>
-                <span class="hero-line">vendiendo <span class="text-captas-gradient">en línea.</span></span>
-              </h1>
-              <p class="hero-desc">Dos sistemas hechos a la medida: fichas clínicas digitales y tienda online con pago Webpay. Todo respaldado, sin depender del papel ni del mostrador.</p>
-              <div class="hero-stats glass">
-                <div class="hero-stat"><div class="num">01</div><div class="lbl">Fichas digitales</div></div>
-                <div class="hero-stat"><div class="num">02</div><div class="lbl">Tienda + Webpay</div></div>
-                <div class="hero-stat"><div class="num">∞</div><div class="lbl">Soporte Captas</div></div>
+              <div class="hero-layout">
+                <div class="hero-copy">
+                  <div class="hero-kicker">
+                    <span class="kicker-mono">001</span>
+                    <span class="kicker-label">Propuesta digital 2026 · Óptica Salud Visual · Ovalle</span>
+                  </div>
+                  <h1 class="hero-title">
+                    <span class="hero-line"><span class="hero-title-shadow">Tu óptica, ordenada</span></span>
+                    <span class="hero-line"><span class="hero-title-shadow">por dentro y </span><span class="text-captas-gradient">en línea.</span></span>
+                  </h1>
+                  <p class="hero-desc">Fichas clínicas digitales y tienda online con Webpay — dos desarrollos a medida, una sola operación más profesional.</p>
+                  <div class="hero-cta">
+                    <a href="#contexto" class="btn-hero-primary">Ver la propuesta</a>
+                    <a href="https://wa.me/56967289704?text=Hola%2C%20vi%20la%20propuesta%20digital%20para%20%C3%93ptica%20Salud%20Visual%20Ovalle%20y%20quiero%20avanzar.%20%C2%BFPodemos%20coordinar%3F" class="btn-hero-ghost" target="_blank" rel="noopener noreferrer">Quiero avanzar →</a>
+                  </div>
+                </div>
+                <div class="hero-services" aria-label="Dos sistemas de la propuesta">
+                  <article class="hero-service glass featured">
+                    <span class="hero-service-num">01</span>
+                    <div>
+                      <h2 class="hero-service-title">Fichas digitales</h2>
+                      <p class="hero-service-desc">Clínica sin papel · consulta y documentos al instante.</p>
+                    </div>
+                  </article>
+                  <article class="hero-service glass">
+                    <span class="hero-service-num">02</span>
+                    <div>
+                      <h2 class="hero-service-title">Tienda + Webpay</h2>
+                      <p class="hero-service-desc">Venta y cobro en tu web, incluso con la óptica cerrada.</p>
+                    </div>
+                  </article>
+                  <article class="hero-service glass">
+                    <span class="hero-service-num">∞</span>
+                    <div>
+                      <h2 class="hero-service-title">Soporte Captas</h2>
+                      <p class="hero-service-desc">Hosting, respaldos y acompañamiento continuo.</p>
+                    </div>
+                  </article>
+                </div>
               </div>
               <div class="scroll-hint" aria-hidden="true">
                 <span>Descubre la propuesta</span>
@@ -1847,19 +2403,54 @@
 
       <section class="story-section scroll-section" id="contexto" data-step="1">
         <div class="section-wrap narrow story-body">
-          <header class="section-intro">
-            <div class="section-step"><span class="num">01</span><span class="sep">·</span><span class="label">El problema hoy</span></div>
-            <h2 class="section-title">Del papel al sistema.</h2>
-            <p class="section-lead-text">Lo que frena el crecimiento no es la falta de clientes — es cómo se organiza la información y cómo se vende.</p>
+          <header class="section-intro is-center">
+            <div class="contexto-hero glass-strong">
+              <div class="section-step"><span class="num">01</span><span class="sep">·</span><span class="label">El problema hoy</span></div>
+              <h2 class="section-title contexto-hero-title">Del papel al <span class="text-captas-gradient">sistema.</span></h2>
+              <p class="section-lead-text">No es falta de clientes — es cómo se organiza la clínica por dentro y cómo se vende hacia afuera.</p>
+              <div class="contexto-chips" aria-hidden="true">
+                <span>Clínica</span>
+                <span>Venta online</span>
+                <span>Una sola operación</span>
+              </div>
+            </div>
           </header>
           <div class="section-content">
-            <div class="quote-glass glass-strong">
-              <blockquote>Las fichas en papel se traspapelan. Las ventas que dependen solo del mostrador tienen un techo.</blockquote>
+            <div class="contexto-flow" id="contextoFlow">
+              <div class="contexto-row">
+                <article class="contexto-node from glass">
+                  <span class="contexto-node-tag">Hoy · Clínica</span>
+                  <h3>Fichas en papel</h3>
+                  <p>Se traspapelan, se pierden y frenan la atención al paciente.</p>
+                </article>
+                <div class="contexto-connector" aria-hidden="true">
+                  <span class="contexto-connector-line"></span>
+                  <span class="contexto-connector-arrow">→</span>
+                </div>
+                <article class="contexto-node to glass">
+                  <span class="contexto-node-tag">Con Captas</span>
+                  <h3>Fichas digitales</h3>
+                  <p>Al instante, respaldadas y siempre en orden — sin depender del papel.</p>
+                </article>
+              </div>
+              <div class="contexto-row">
+                <article class="contexto-node from glass">
+                  <span class="contexto-node-tag">Hoy · Ventas</span>
+                  <h3>Solo mostrador</h3>
+                  <p>Las ventas tienen techo cuando la óptica cierra o no hay quien atienda.</p>
+                </article>
+                <div class="contexto-connector" aria-hidden="true">
+                  <span class="contexto-connector-line"></span>
+                  <span class="contexto-connector-arrow">→</span>
+                </div>
+                <article class="contexto-node to glass">
+                  <span class="contexto-node-tag">Con Captas</span>
+                  <h3>Tienda + Webpay</h3>
+                  <p>El cliente elige, paga en línea y el pedido llega listo para despachar.</p>
+                </article>
+              </div>
             </div>
-            <div class="context-body">
-              <p>Ambas cosas tienen solución, y no es comprar dos programas distintos.</p>
-              <p>Es una sola operación más profesional: la ficha de cada paciente al instante y en orden, y una vitrina que vende y cobra mientras la óptica está cerrada.</p>
-            </div>
+            <p class="contexto-synthesis glass">Ambas cosas tienen solución — no son dos programas distintos, sino <strong>una sola operación más profesional</strong>.</p>
             <aside class="section-outro">
               <p class="section-takeaway">Si esto le suena familiar, la propuesta de abajo está pensada para ustedes.</p>
             </aside>
@@ -1885,8 +2476,11 @@
               <div class="card-header">
                 <span class="card-badge">01</span>
                 <div>
-                  <h3 class="card-title">Fichas clínicas al instante</h3>
-                  <div class="card-sub">Sistema de fichas · Clínica</div>
+                  <h3 class="card-title">
+                    <span class="card-title-main">Sistema de fichas clínicas</span>
+                    <span class="card-title-role">Servicio 01 · Por dentro de la óptica</span>
+                  </h3>
+                  <div class="card-sub">Secretaría, consulta y documentos al instante</div>
                 </div>
               </div>
               <p class="lead">La secretaria ingresa la ficha; aparece en tu pantalla apenas la guarda.</p>
@@ -1904,8 +2498,11 @@
               <div class="card-header">
                 <span class="card-badge">02</span>
                 <div>
-                  <h3 class="card-title">Vende y cobra desde tu web</h3>
-                  <div class="card-sub">Tienda online · Webpay</div>
+                  <h3 class="card-title">
+                    <span class="card-title-main">Tienda online con Webpay</span>
+                    <span class="card-title-role">Servicio 02 · Hacia afuera, 24/7</span>
+                  </h3>
+                  <div class="card-sub">Catálogo, carrito, venta y cobro en tu web</div>
                 </div>
               </div>
               <p class="lead">El cliente elige, paga con tarjeta, y a la óptica le llega el pedido al correo para despachar.</p>
@@ -1943,7 +2540,7 @@
           <header class="section-intro is-center">
             <div class="flujo-hero glass-strong">
               <div class="section-step"><span class="num">03</span><span class="sep">·</span><span class="label">Cómo funciona</span></div>
-              <h2 class="section-title flujo-hero-title">Del clic a la <span class="text-captas-gradient">entrega.</span></h2>
+              <h2 class="section-title flujo-hero-title"><span class="flujo-hero-title-shadow">Del clic a la </span><span class="text-captas-gradient">entrega.</span></h2>
               <p class="section-lead-text">El cliente prueba y elige sus lentes en la vitrina online; la óptica recibe el pedido pagado y lo despacha con todo en orden.</p>
               <div class="flujo-hero-chips" aria-hidden="true">
                 <span>Elige sus lentes</span>
@@ -2053,35 +2650,67 @@
         <div class="section-wrap narrow story-body">
           <header class="section-intro is-center">
             <div class="section-step"><span class="num">06</span><span class="sep">·</span><span class="label">Siguiente paso</span></div>
-            <h2 class="section-title">Listos para empezar.</h2>
-            <p class="section-lead-text">Agendemos una reunión breve para resolver dudas, definir prioridades y poner fechas de entrega.</p>
+            <h2 class="section-title contact-finale-title">¿Avanzamos <span class="text-captas-gradient">juntos?</span></h2>
+            <p class="section-lead-text">Un mensaje y coordinamos una reunión breve para resolver dudas, prioridades y fechas de entrega.</p>
           </header>
           <div class="section-content">
-            <div class="cta-box glass-strong">
-              <p class="section-takeaway" style="margin:0 auto 2rem;text-align:center;">Sin compromiso: revisamos juntos qué sistema conviene activar primero.</p>
-              <a href="mailto:contacto@captas.cl?subject=Reunión%20Propuesta%20Óptica%20Salud%20Visual%20Ovalle" class="btn-primary">
-                Coordinar reunión <span class="arr">→</span>
-              </a>
+            <div class="contact-finale">
+              <div class="contact-grid">
+                <div class="contact-steps glass">
+                  <span class="contact-steps-label">Cómo seguimos</span>
+                  <div class="contact-step">
+                    <span class="contact-step-num">1</span>
+                    <div>
+                      <h3>Escriben por WhatsApp</h3>
+                      <p>Cuéntennos si les interesa uno o ambos sistemas. El mensaje ya viene listo para enviar.</p>
+                    </div>
+                  </div>
+                  <div class="contact-step">
+                    <span class="contact-step-num">2</span>
+                    <div>
+                      <h3>Reunión breve</h3>
+                      <p>Resolvemos dudas, definimos por dónde empezar y qué incluye cada plan.</p>
+                    </div>
+                  </div>
+                  <div class="contact-step">
+                    <span class="contact-step-num">3</span>
+                    <div>
+                      <h3>Fechas y arranque</h3>
+                      <p>Acordamos entregas, pagos y el calendario de implementación.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-cta glass-strong">
+                  <p class="contact-cta-lead">Sin compromiso: revisamos juntos qué sistema conviene activar primero.</p>
+                  <div class="cta-actions">
+                    <a href="https://wa.me/56967289704?text=Hola%2C%20vi%20la%20propuesta%20digital%20para%20%C3%93ptica%20Salud%20Visual%20Ovalle%20y%20quiero%20avanzar.%20%C2%BFPodemos%20coordinar%3F" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                      Quiero <span class="arr">→</span>
+                    </a>
+                    <a href="https://wa.me/56967289704?text=Hola%2C%20tengo%20una%20consulta%20sobre%20la%20propuesta%20digital%20para%20%C3%93ptica%20Salud%20Visual%20Ovalle." class="btn-secondary" target="_blank" rel="noopener noreferrer">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                      WhatsApp · +56 9 6728 9704
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="contact-trust" aria-label="Garantías de contacto">
+                <span>Respuesta en menos de 24 h</span>
+                <span>Sin compromiso</span>
+                <span>06 / 06 · Propuesta 2026</span>
+              </div>
             </div>
           </div>
-          <footer class="section-foot">
-            <span>contacto@captas.cl</span>
-            <span>06 / 06</span>
-          </footer>
         </div>
       </section>
     </main>
 
-    <footer>
+    <footer class="site-footer">
       <div class="footer-inner">
-        <div>
-          <a href="https://captas-cyan.vercel.app/" class="captas-logo" target="_blank" rel="noopener" style="color:inherit;">
-            <img src="brand/captas-icon.png" alt="" class="captas-logo-mark" width="28" height="28">
-            <span class="captas-logo-word">CAPTAS<span class="captas-logo-dot">.</span></span>
-          </a>
-          <div class="footer-meta">Agencia Creativa · Limarí</div>
-        </div>
-        <div class="footer-meta">Propuesta Digital 2026 · 06 / 06</div>
+        <a href="https://captas-cyan.vercel.app/" class="captas-logo" target="_blank" rel="noopener" style="color:inherit;">
+          <img src="brand/captas-icon.png" alt="" class="captas-logo-mark" width="28" height="28">
+          <span class="captas-logo-word">CAPTAS<span class="captas-logo-dot">.</span></span>
+        </a>
+        <div class="footer-meta">Agencia Creativa · Limarí · Propuesta Óptica Salud Visual 2026</div>
       </div>
     </footer>
   </div>
@@ -2169,6 +2798,16 @@
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
       sections.forEach(s => revealObs.observe(s));
+
+      const contextoFlow = document.getElementById('contextoFlow');
+      if (contextoFlow) {
+        const contextoObs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            contextoFlow.classList.toggle('is-live', e.isIntersecting);
+          });
+        }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+        contextoObs.observe(contextoFlow);
+      }
 
       /* Active section + fiber rail */
       const activeObs = new IntersectionObserver((entries) => {
