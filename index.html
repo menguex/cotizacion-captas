@@ -1563,8 +1563,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.75rem;
+      gap: 1.35rem;
       text-align: center;
+      width: min(20rem, 88vw);
     }
 
     .captas-preload-icon {
@@ -1589,6 +1590,76 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+    }
+
+    .captas-preload-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.15rem;
+    }
+
+    .captas-preload-title {
+      font-family: var(--font-d);
+      font-size: clamp(1rem, 2.8vw, 1.15rem);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(234, 232, 228, 0.95);
+      margin: 0;
+    }
+
+    .captas-preload-sub {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 450;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-fog);
+      margin: 0;
+    }
+
+    .captas-preload-progress {
+      width: 100%;
+      margin-top: 0.35rem;
+    }
+
+    .captas-preload-progress-track {
+      position: relative;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .captas-preload-progress-fill {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #5b61ff 0%, #007aff 48%, #0ea5e9 100%);
+      box-shadow: 0 0 14px rgba(0, 122, 255, 0.55);
+      transition: width 0.08s linear;
+    }
+
+    .captas-preload-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.7rem;
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      font-weight: 450;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .captas-preload-meta strong {
+      font-weight: 500;
+      color: var(--c-sky-soft);
+      font-variant-numeric: tabular-nums;
     }
 
     /* Logo Captas — igual que CaptasLogo withMark */
@@ -1679,6 +1750,19 @@
     <div class="captas-preload-inner">
       <img src="brand/captas-icon.png" alt="" class="captas-preload-icon" width="72" height="72">
       <span class="captas-preload-logo">CAPTAS<span class="captas-preload-dot">.</span></span>
+      <div class="captas-preload-copy">
+        <p class="captas-preload-title">Cotización web y sistema</p>
+        <p class="captas-preload-sub">Óptica Salud Visual · Ovalle</p>
+      </div>
+      <div class="captas-preload-progress">
+        <div class="captas-preload-progress-track">
+          <span class="captas-preload-progress-fill" id="captasPreloadBar"></span>
+        </div>
+        <div class="captas-preload-meta">
+          <span>Cargando propuesta</span>
+          <strong id="captasPreloadPct">0%</strong>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2004,10 +2088,13 @@
 
   <script>
     (function () {
-      /* Preloader — igual que captas-cyan.vercel.app (3 s en cotización) */
-      const PRELOAD_MS = 3000;
+      /* Preloader Captas — 2 s + barra de progreso */
+      const PRELOAD_MS = 2000;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const preloadDuration = reducedMotion ? 400 : PRELOAD_MS;
+      const preloadBar = document.getElementById('captasPreloadBar');
+      const preloadPct = document.getElementById('captasPreloadPct');
+      let preloadDone = false;
 
       try {
         if (sessionStorage.getItem('captas-cotizacion-visited')) {
@@ -2018,7 +2105,16 @@
         }
       } catch (e) { /* ignore */ }
 
+      function setPreloadProgress(pct) {
+        const value = Math.min(100, Math.max(0, pct));
+        if (preloadBar) preloadBar.style.width = value + '%';
+        if (preloadPct) preloadPct.textContent = Math.round(value) + '%';
+      }
+
       function finishPreload() {
+        if (preloadDone) return;
+        preloadDone = true;
+        setPreloadProgress(100);
         document.body.classList.add('captas-ready');
         document.body.classList.remove('captas-loading');
         try { sessionStorage.setItem('captas-cotizacion-visited', '1'); } catch (e) { /* ignore */ }
@@ -2030,6 +2126,16 @@
 
       if (!document.body.classList.contains('captas-ready')) {
         const start = performance.now();
+        let rafId = 0;
+
+        function tickPreload() {
+          const elapsed = performance.now() - start;
+          setPreloadProgress((elapsed / preloadDuration) * 100);
+          if (elapsed < preloadDuration) rafId = requestAnimationFrame(tickPreload);
+        }
+
+        rafId = requestAnimationFrame(tickPreload);
+
         const icon = new Image();
         icon.src = 'brand/captas-icon.png';
         Promise.all([
@@ -2040,7 +2146,7 @@
           const wait = Math.max(0, preloadDuration - (performance.now() - start));
           setTimeout(finishPreload, wait);
         });
-        setTimeout(finishPreload, preloadDuration + 500);
+        setTimeout(finishPreload, preloadDuration + 120);
       }
 
       const sections = document.querySelectorAll('.scroll-section');
