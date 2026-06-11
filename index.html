@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Propuesta Digital 2026 · Óptica Salud Visual Ovalle</title>
   <meta name="description" content="Cotización: Sistema de fichas clínicas digitales y tienda online con Webpay para Óptica Salud Visual Ovalle.">
   <link rel="preload" href="brand/captas-icon.png" as="image" type="image/png">
@@ -82,6 +82,8 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: calc(var(--header-h) + 1.25rem);
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
@@ -92,6 +94,14 @@
       letter-spacing: var(--ls-normal);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      padding-left: env(safe-area-inset-left, 0);
+      padding-right: env(safe-area-inset-right, 0);
+    }
+
+    img,
+    video {
+      max-width: 100%;
+      height: auto;
     }
 
     .text-captas-gradient {
@@ -345,6 +355,7 @@
       z-index: 1;
       margin-left: var(--rail-w);
       min-height: 100vh;
+      overflow-x: clip;
     }
 
     /* Glass utility */
@@ -2047,44 +2058,254 @@
     }
 
     @media (max-width: 768px) {
-      .nav-pills { display: none; }
+      :root {
+        --header-h: 4rem;
+        --hero-content: min(100%, calc(100% - 2rem));
+      }
+
+      html {
+        scroll-padding-top: calc(var(--header-h) + 3.1rem);
+      }
+
+      [id] {
+        scroll-margin-top: calc(var(--header-h) + 3.1rem);
+      }
+
+      .page-shell {
+        padding-top: 2.65rem;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+
+      .site-header {
+        padding-left: env(safe-area-inset-left, 0);
+        padding-right: env(safe-area-inset-right, 0);
+      }
+
+      .header-content {
+        width: 100%;
+        padding: 0 1rem;
+      }
+
+      .captas-logo-mark {
+        width: 1.75rem !important;
+        height: 1.75rem !important;
+      }
+
+      .captas-logo-word { font-size: 0.95rem; }
+
       .header-client { display: none; }
+
+      .nav-pills {
+        display: flex;
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        z-index: 99;
+        margin: 0;
+        padding: 0.4rem 0.85rem;
+        padding-left: max(0.85rem, env(safe-area-inset-left, 0.85rem));
+        padding-right: max(0.85rem, env(safe-area-inset-right, 0.85rem));
+        border-radius: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        background: rgba(12, 15, 20, 0.94);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        gap: 0.3rem;
+      }
+
+      .nav-pills::-webkit-scrollbar { display: none; }
+
+      .nav-pills a {
+        flex-shrink: 0;
+        white-space: nowrap;
+        font-size: 0.52rem;
+        padding: 0.45rem 0.7rem;
+        min-height: 2rem;
+        display: inline-flex;
+        align-items: center;
+      }
+
       .systems-grid,
       .pricing-grid,
       .flow-track { grid-template-columns: 1fr; }
-      .story-section:not(.hero) { padding: 4rem 1.25rem; }
+
+      .story-section:not(.hero) { padding: 3.5rem 1.15rem; }
+
+      #contacto {
+        padding: 3.5rem 1.15rem 2.25rem;
+      }
+
       .section-intro { padding-bottom: 1.5rem; }
       .story-body { gap: 1.5rem; }
-      .hero-title { font-size: clamp(1.85rem, 9vw, 2.5rem); }
-      .hero.story-section { height: auto; min-height: 100vh; }
+      .section-foot {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: clamp(1.75rem, 8.5vw, 2.35rem);
+        line-height: 1.08;
+      }
+
+      .hero.story-section {
+        height: auto;
+        min-height: auto;
+      }
+
       .hero-sticky {
         position: relative;
         height: auto;
-        min-height: 100vh;
+        min-height: auto;
         padding:
-          calc(var(--header-h) + 2.5rem)
-          1.25rem
+          calc(var(--header-h) + 3.25rem)
+          1rem
           2.5rem;
       }
-      .hero-wrap { padding-top: 0.5rem; }
+
+      .hero-wrap {
+        width: 100%;
+        padding-top: 0.25rem;
+      }
+
       .hero-editorial {
         min-height: 0;
-        padding-top: 1.25rem;
-        padding-bottom: 1rem;
-        gap: 1.5rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.5rem;
+        gap: 1.35rem;
       }
-      .hero-services { grid-template-columns: 1fr; max-width: 22rem; }
+
+      .hero-layout {
+        max-width: 100%;
+      }
+
+      .hero-kicker {
+        max-width: 100%;
+        padding: 0.4rem 0.75rem;
+      }
+
+      .hero-kicker .kicker-label {
+        font-size: 0.56rem;
+        line-height: 1.4;
+      }
+
+      .hero-copy .hero-desc {
+        font-size: 0.95rem;
+        max-width: 34ch;
+      }
+
+      .hero-services {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .hero-service {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        padding: 0.95rem 1rem;
+      }
+
       .hero-service:hover { transform: none; }
+
       .hero-top { flex-direction: column; gap: 1.25rem; }
       .hero-agency { text-align: left; }
+
+      .contexto-hero,
+      #flujo .flujo-hero {
+        padding: 1.5rem 1.15rem;
+      }
+
+      .system-card { padding: 1.5rem 1.15rem; }
+
+      .price-body,
+      .price-head { padding-inline: 1.15rem; }
+
+      .price-row {
+        flex-wrap: wrap;
+        gap: 0.35rem 0.75rem;
+      }
+
+      .price-row .val { font-size: 0.95rem; }
+
+      .combined { padding: 2rem 1.15rem; }
+
+      .compare { gap: 0.65rem; }
+
+      .compare-item { min-width: 0; flex: 1 1 calc(50% - 0.5rem); }
+
       .contact-grid { grid-template-columns: 1fr; }
-      .footer-inner { justify-content: center; text-align: center; }
+
+      .contact-trust {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .contact-trust span::before { content: none; margin: 0; }
+
+      .contact-cta { padding: 1.5rem 1.15rem; }
+
+      .footer-inner {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+      }
+
       .hero-cta { flex-direction: column; align-items: stretch; }
+
       .btn-hero-primary,
-      .btn-hero-ghost { justify-content: center; }
-      .cta-actions { flex-direction: column; align-items: stretch; }
+      .btn-hero-ghost,
+      .btn-primary,
+      .btn-secondary {
+        justify-content: center;
+        min-height: 2.75rem;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+
       .cta-actions .btn-primary,
       .cta-actions .btn-secondary { justify-content: center; }
+
+      .btn-secondary {
+        font-size: 0.7rem;
+        padding-inline: 1rem;
+        text-align: center;
+        line-height: 1.35;
+      }
+
+      .scroll-hint { padding-bottom: 0.5rem; }
+
+      #flujo.story-section:not(.hero) { padding-top: 3.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(1.65rem, 8vw, 2rem); }
+
+      .price-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .price-row .val { white-space: normal; }
+
+      .card-header { flex-wrap: wrap; }
+
+      .flow-card { padding: 1.35rem 1rem; }
+
+      .contact-finale-title { font-size: clamp(1.75rem, 7.5vw, 2.25rem); }
     }
 
     /* Preloader — igual que captas-cyan.vercel.app */
