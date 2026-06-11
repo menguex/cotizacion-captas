@@ -507,23 +507,72 @@
 
     #flujo .flujo-scrim {
       background:
-        linear-gradient(180deg, rgba(8, 10, 15, 0.8) 0%, rgba(15, 18, 24, 0.5) 45%, rgba(15, 18, 24, 0.88) 100%),
-        radial-gradient(ellipse 78% 58% at 50% 38%, rgba(14, 165, 233, 0.16), transparent 62%),
-        linear-gradient(90deg, rgba(8, 10, 15, 0.4) 0%, transparent 20%, transparent 80%, rgba(8, 10, 15, 0.4) 100%);
+        linear-gradient(180deg, rgba(8, 10, 15, 0.55) 0%, rgba(15, 18, 24, 0.42) 38%, rgba(15, 18, 24, 0.9) 100%),
+        radial-gradient(ellipse 70% 50% at 50% 22%, rgba(14, 165, 233, 0.2), transparent 58%),
+        linear-gradient(90deg, rgba(8, 10, 15, 0.35) 0%, transparent 18%, transparent 82%, rgba(8, 10, 15, 0.35) 100%);
+    }
+
+    #flujo.story-section:not(.hero) {
+      padding-top: clamp(5rem, 12vh, 7rem);
+    }
+
+    #flujo .section-video-bg {
+      filter: saturate(0.88) contrast(1.05) brightness(0.92);
+      object-position: center 28%;
     }
 
     #flujo .flow-card.glass,
     #flujo .flow-note.glass {
-      background: rgba(10, 14, 20, 0.62);
-      border-color: rgba(255, 255, 255, 0.11);
+      background: rgba(10, 14, 20, 0.68);
+      border-color: rgba(255, 255, 255, 0.12);
     }
 
-    #flujo .section-title {
-      text-shadow: 0 2px 28px rgba(0, 0, 0, 0.7);
+    #flujo .section-intro {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
-    #flujo .section-lead-text {
-      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55);
+    #flujo .flujo-hero {
+      text-align: center;
+      padding: clamp(2rem, 5vh, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+      border-radius: var(--radius);
+      max-width: 44rem;
+      margin-inline: auto;
+    }
+
+    #flujo .flujo-hero-title {
+      font-size: clamp(1.85rem, 3.4vw, 2.85rem);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+      text-shadow: 0 4px 32px rgba(0, 0, 0, 0.75);
+    }
+
+    #flujo .flujo-hero .section-lead-text {
+      max-width: 46ch;
+      margin-inline: auto;
+      font-size: clamp(1rem, 1.2vw, 1.08rem);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
+    }
+
+    #flujo .flujo-hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.35rem;
+    }
+
+    #flujo .flujo-hero-chips span {
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      font-weight: 450;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem;
+      border-radius: 100px;
+      background: rgba(0, 122, 255, 0.14);
+      border: 1px solid rgba(0, 122, 255, 0.28);
+      color: rgba(234, 232, 228, 0.92);
     }
 
     .section-wrap {
@@ -1072,6 +1121,15 @@
 
     /* Flow */
     #flujo { --section-accent: var(--c-brand-cyan); }
+
+    @media (max-width: 768px) {
+      #flujo .flujo-hero-chips span { flex: 1 1 calc(50% - 0.5rem); text-align: center; }
+    }
+
+    #flujo .section-content {
+      padding-top: var(--space-block);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
     .flow-track {
       display: grid;
@@ -1790,7 +1848,7 @@
 
       <section class="story-section scroll-section section-video" id="flujo" data-step="3">
         <div class="section-media" aria-hidden="true">
-          <div class="section-media-inner" data-parallax="0.22">
+          <div class="section-media-inner" data-parallax="0.28">
             <video class="section-video-bg" autoplay muted loop playsinline poster="media/flujo-poster.jpg" preload="metadata">
               <source src="media/flujo.mp4" type="video/mp4">
             </video>
@@ -1799,9 +1857,17 @@
         </div>
         <div class="section-wrap story-body">
           <header class="section-intro is-center">
-            <div class="section-step"><span class="num">03</span><span class="sep">·</span><span class="label">Cómo funciona</span></div>
-            <h2 class="section-title">Del clic a la entrega.</h2>
-            <p class="section-lead-text">Así se ve una venta online para su cliente — y qué recibe la óptica en cada paso.</p>
+            <div class="flujo-hero glass-strong">
+              <div class="section-step"><span class="num">03</span><span class="sep">·</span><span class="label">Cómo funciona</span></div>
+              <h2 class="section-title flujo-hero-title">Del clic a la <span class="text-captas-gradient">entrega.</span></h2>
+              <p class="section-lead-text">El cliente prueba y elige sus lentes en la vitrina online; la óptica recibe el pedido pagado y lo despacha con todo en orden.</p>
+              <div class="flujo-hero-chips" aria-hidden="true">
+                <span>Elige sus lentes</span>
+                <span>Paga con Webpay</span>
+                <span>Pedido al correo</span>
+                <span>Despacho óptica</span>
+              </div>
+            </div>
           </header>
 
           <div class="section-content">
