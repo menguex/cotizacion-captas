@@ -2178,22 +2178,33 @@
       letter-spacing: -0.035em;
     }
 
-    .contact-grid {
+    .contact-brief-layout {
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.15fr);
       gap: 1rem;
       align-items: stretch;
     }
 
-    .contact-steps {
-      padding: 1.5rem 1.35rem;
+    .brief-journey {
+      padding: 1.35rem 1.25rem;
       border-radius: var(--radius);
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .contact-steps-label {
+    .brief-journey::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 1.55rem;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(142, 216, 255, 0.22) 12%, rgba(142, 216, 255, 0.22) 88%, transparent);
+      pointer-events: none;
+    }
+
+    .brief-journey-label {
       font-family: var(--font-mono);
       font-size: 0.5rem;
       font-weight: 450;
@@ -2202,52 +2213,88 @@
       color: var(--text-muted);
     }
 
-    .contact-step {
+    .brief-journey-list {
+      list-style: none;
       display: flex;
+      flex-direction: column;
       gap: 0.85rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .brief-journey-item {
+      display: flex;
+      gap: 0.8rem;
       align-items: flex-start;
       text-align: left;
+      opacity: 0.42;
+      transform: translateX(0);
+      transition: opacity 0.35s var(--ease-out), transform 0.35s var(--ease-out);
     }
 
-    .contact-step-num {
+    .brief-journey-item.is-active {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    .brief-journey-item.is-done {
+      opacity: 0.72;
+    }
+
+    .brief-journey-item.is-done .brief-journey-marker {
+      background: rgba(0, 122, 255, 0.2);
+      border-color: rgba(0, 122, 255, 0.45);
+      color: var(--c-sky-soft);
+    }
+
+    .brief-journey-marker {
       flex-shrink: 0;
-      width: 1.65rem;
-      height: 1.65rem;
+      width: 1.75rem;
+      height: 1.75rem;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
       font-family: var(--font-mono);
-      font-size: 0.55rem;
+      font-size: 0.52rem;
       font-weight: 500;
       color: var(--c-text-bright);
-      background: rgba(142, 216, 255, 0.1);
-      border: 1px solid rgba(142, 216, 255, 0.28);
+      background: rgba(142, 216, 255, 0.08);
+      border: 1px solid rgba(142, 216, 255, 0.22);
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease-out);
+      position: relative;
+      z-index: 1;
     }
 
-    .contact-step h3 {
+    .brief-journey-item.is-active .brief-journey-marker {
+      background: rgba(0, 122, 255, 0.18);
+      border-color: rgba(0, 122, 255, 0.5);
+      box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1), 0 0 20px rgba(0, 122, 255, 0.22);
+      transform: scale(1.06);
+    }
+
+    .brief-journey-item h3 {
       font-family: var(--font-d);
-      font-size: 0.92rem;
+      font-size: 0.86rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.15rem;
     }
 
-    .contact-step p {
-      font-size: 0.82rem;
-      line-height: 1.55;
+    .brief-journey-item p {
+      font-size: 0.76rem;
+      line-height: 1.5;
       color: var(--text-muted);
     }
 
     .contact-cta {
-      padding: clamp(1.75rem, 4vh, 2.25rem) clamp(1.35rem, 3vw, 2rem);
+      padding: clamp(1.5rem, 3.5vh, 2rem) clamp(1.25rem, 2.5vw, 1.75rem);
       border-radius: var(--radius);
       text-align: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1.25rem;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 1rem;
       position: relative;
       overflow: hidden;
     }
@@ -2263,28 +2310,47 @@
     .contact-cta > * { position: relative; z-index: 1; }
 
     .contact-cta-lead {
-      font-size: clamp(1rem, 1.2vw, 1.08rem);
-      line-height: 1.6;
-      color: rgba(234, 232, 228, 0.92);
-      max-width: 36ch;
-      margin: 0;
+      font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+      line-height: 1.55;
+      color: rgba(234, 232, 228, 0.88);
+      max-width: 42ch;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .brief-studio {
+      position: relative;
+      border-radius: calc(var(--radius-sm) + 2px);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(91, 97, 255, 0.45), rgba(14, 165, 233, 0.28), rgba(0, 122, 255, 0.15));
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .brief-studio-inner {
+      border-radius: var(--radius-sm);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 122, 255, 0.1), transparent 65%),
+        rgba(12, 16, 22, 0.92);
+      padding: 1.15rem 1.2rem 1.05rem;
     }
 
     .brief-wizard {
       width: 100%;
-      max-width: 22rem;
       text-align: left;
-      padding: 1.1rem 1.15rem 1rem;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .brief-wizard-head {
       display: flex;
       flex-direction: column;
-      gap: 0.55rem;
-      margin-bottom: 0.85rem;
+      gap: 0.65rem;
+      margin-bottom: 0.95rem;
+    }
+
+    .brief-wizard-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
     }
 
     .brief-wizard-kicker {
@@ -2294,6 +2360,48 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--c-sky-soft);
+    }
+
+    .brief-step-dots {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .brief-dot {
+      width: 0.42rem;
+      height: 0.42rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.3s var(--ease-out), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .brief-dot.is-active {
+      transform: scale(1.35);
+      background: var(--c-accent);
+      border-color: rgba(142, 216, 255, 0.6);
+      box-shadow: 0 0 12px rgba(0, 122, 255, 0.45);
+    }
+
+    .brief-dot.is-done {
+      background: rgba(0, 122, 255, 0.55);
+      border-color: rgba(0, 122, 255, 0.35);
+    }
+
+    .brief-step-title {
+      font-family: var(--font-d);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--c-bone);
+      transition: opacity 0.25s ease, transform 0.35s var(--ease-out);
+    }
+
+    .brief-wizard.is-step-changing .brief-step-title {
+      opacity: 0;
+      transform: translateY(6px);
     }
 
     .brief-progress {
@@ -2329,39 +2437,37 @@
 
     .brief-panels {
       position: relative;
-      min-height: 10.5rem;
+      min-height: 11.5rem;
     }
 
     .brief-panel {
       display: none;
       flex-direction: column;
-      gap: 0.55rem;
-      animation: brief-panel-in 0.42s var(--ease-out) both;
+      gap: 0.6rem;
     }
 
     .brief-panel.is-active {
       display: flex;
+      animation: brief-panel-in 0.48s var(--ease-out) both;
     }
 
     @keyframes brief-panel-in {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .brief-question {
-      font-family: var(--font-d);
-      font-size: 0.88rem;
-      font-weight: 650;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
-      color: var(--c-bone);
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--text-muted);
     }
 
     .brief-hint {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       line-height: 1.45;
-      color: var(--text-muted);
-      margin-top: -0.15rem;
+      color: rgba(163, 174, 188, 0.85);
+      margin-top: -0.25rem;
     }
 
     .brief-field {
@@ -2406,31 +2512,52 @@
       gap: 0.45rem;
     }
 
+    .brief-options.is-scroll {
+      max-height: 13.5rem;
+      overflow-y: auto;
+      padding-right: 0.15rem;
+      mask-image: linear-gradient(180deg, #000 92%, transparent 100%);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 122, 255, 0.35) transparent;
+    }
+
+    .brief-panel.is-active .brief-option {
+      animation: brief-option-in 0.42s var(--ease-out) both;
+      animation-delay: calc(var(--opt-i, 0) * 45ms);
+    }
+
+    @keyframes brief-option-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .brief-option {
       display: flex;
       align-items: flex-start;
       gap: 0.65rem;
       width: 100%;
-      padding: 0.7rem 0.75rem;
+      padding: 0.72rem 0.8rem;
       text-align: left;
-      border-radius: 0.65rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0.7rem;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.025);
       color: inherit;
       cursor: pointer;
       transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s var(--ease-out), box-shadow 0.25s ease;
     }
 
     .brief-option:hover {
-      border-color: rgba(142, 216, 255, 0.35);
-      background: rgba(142, 216, 255, 0.06);
-      transform: translateY(-1px);
+      border-color: rgba(142, 216, 255, 0.38);
+      background: rgba(142, 216, 255, 0.07);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
     }
 
     .brief-option.is-selected {
-      border-color: rgba(0, 122, 255, 0.55);
-      background: rgba(0, 122, 255, 0.12);
-      box-shadow: 0 0 0 1px rgba(0, 122, 255, 0.2);
+      border-color: rgba(0, 122, 255, 0.58);
+      background: linear-gradient(135deg, rgba(0, 122, 255, 0.16), rgba(14, 165, 233, 0.08));
+      box-shadow: 0 0 0 1px rgba(0, 122, 255, 0.22), 0 10px 28px rgba(0, 122, 255, 0.12);
+      transform: translateY(-1px);
     }
 
     .brief-option-icon {
@@ -2494,6 +2621,9 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       opacity: 0;
       transform: scale(0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: opacity 0.2s ease, transform 0.25s var(--ease-out), background 0.2s ease, border-color 0.2s ease;
     }
 
@@ -2502,7 +2632,17 @@
       transform: scale(1);
       background: var(--c-accent);
       border-color: var(--c-accent);
-      box-shadow: inset 0 0 0 2px var(--c-ink);
+      box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.25);
+    }
+
+    .brief-option.is-selected .brief-option-check::after {
+      content: '';
+      display: block;
+      width: 0.35rem;
+      height: 0.2rem;
+      border-left: 1.5px solid #fff;
+      border-bottom: 1.5px solid #fff;
+      transform: rotate(-45deg) translateY(-1px);
     }
 
     .brief-nav {
@@ -2547,13 +2687,23 @@
     .brief-next {
       margin-left: auto;
       color: var(--bg);
-      background: rgba(0, 122, 255, 0.85);
+      background: var(--c-brand-gradient);
       border: 1px solid transparent;
+      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.28);
     }
 
     .brief-next:hover:not(:disabled) {
-      transform: translateY(-1px);
-      background: var(--c-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0, 122, 255, 0.38);
+    }
+
+    .brief-next.is-armed:not(:disabled) {
+      animation: brief-next-glow 1.8s ease-in-out infinite;
+    }
+
+    @keyframes brief-next-glow {
+      0%, 100% { box-shadow: 0 6px 20px rgba(0, 122, 255, 0.28); }
+      50% { box-shadow: 0 8px 28px rgba(0, 122, 255, 0.48), 0 0 0 3px rgba(0, 122, 255, 0.12); }
     }
 
     .brief-next:disabled {
@@ -2587,22 +2737,46 @@
     .brief-recap {
       display: none;
       flex-direction: column;
-      gap: 0.45rem;
-      margin-top: 0.65rem;
-      padding: 0.75rem 0.85rem;
-      border-radius: 0.65rem;
-      background: rgba(0, 122, 255, 0.08);
-      border: 1px solid rgba(0, 122, 255, 0.22);
-      animation: brief-panel-in 0.45s var(--ease-out) both;
+      gap: 0.55rem;
+      margin-top: 0.25rem;
+      padding: 0.9rem 0.95rem;
+      border-radius: 0.7rem;
+      background: linear-gradient(145deg, rgba(0, 122, 255, 0.12), rgba(14, 165, 233, 0.06));
+      border: 1px solid rgba(0, 122, 255, 0.28);
+      animation: brief-panel-in 0.5s var(--ease-out) both;
     }
 
     .brief-recap.is-visible {
       display: flex;
     }
 
-    .brief-wizard.is-complete .brief-panels {
+    .brief-wizard.is-complete .brief-panels,
+    .brief-wizard.is-complete .brief-nav,
+    .brief-wizard.is-complete .brief-skip {
       display: none;
-      min-height: 0;
+    }
+
+    .brief-wizard.is-complete .brief-wizard-head {
+      margin-bottom: 0.5rem;
+    }
+
+    .brief-recap-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .brief-recap-icon {
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      color: #7dffb8;
+      flex-shrink: 0;
     }
 
     .brief-recap-label {
@@ -2626,18 +2800,52 @@
 
     .brief-msg-preview {
       margin: 0;
-      padding: 0.7rem 0.75rem;
+      padding: 0.75rem 0.8rem;
       border-radius: 0.55rem;
-      background: rgba(0, 0, 0, 0.22);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: var(--font-b);
-      font-size: 0.72rem;
-      line-height: 1.55;
-      color: rgba(234, 232, 228, 0.88);
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      line-height: 1.6;
+      color: rgba(234, 232, 228, 0.9);
       white-space: pre-wrap;
       word-break: break-word;
-      max-height: 11rem;
+      max-height: 10.5rem;
       overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .cta-send-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      padding-top: 0.15rem;
+    }
+
+    .cta-send-label {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .cta-send-hint {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin: 0;
+      max-width: 30ch;
+      line-height: 1.45;
+    }
+
+    .cta-send-block.is-ready .cta-send-label {
+      color: #7dffb8;
+    }
+
+    .cta-send-block.is-ready .cta-send-hint {
+      color: rgba(234, 232, 228, 0.88);
     }
 
     .brief-recap-edit {
@@ -2757,8 +2965,10 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      align-self: center;
       gap: 0.75rem;
       margin-top: 0.25rem;
+      width: 100%;
     }
 
     .btn-secondary {
@@ -2988,7 +3198,30 @@
 
       .compare-item { min-width: 0; flex: 1 1 calc(50% - 0.5rem); }
 
-      .contact-grid { grid-template-columns: 1fr; }
+      .contact-brief-layout { grid-template-columns: 1fr; }
+
+      .brief-journey::before { display: none; }
+
+      .brief-journey-list {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.5rem;
+      }
+
+      .brief-journey-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.35rem;
+      }
+
+      .brief-journey-item p { display: none; }
+
+      .brief-journey-item h3 {
+        font-size: 0.58rem;
+        letter-spacing: 0.04em;
+        line-height: 1.25;
+      }
 
       .contact-trust {
         flex-direction: column;
@@ -3262,8 +3495,11 @@
       .scroll-hint, .pulse-dot { animation: none; }
       .system-card:hover, .plan-card:hover, .btn-primary:hover, .btn-secondary:hover, .btn-hero-primary:hover, .btn-hero-ghost:hover, .hero-service:hover { transform: none; }
       .brief-panel { animation: none; }
+      .brief-panel.is-active .brief-option { animation: none; }
       .brief-recap { animation: none; }
       .btn-primary.is-ready { animation: none; }
+      .brief-next.is-armed { animation: none; }
+      .brief-journey-item { transition: none; }
       .plans-viewport.is-fitted .plans-marquee { justify-content: center; width: 100%; }
       body.captas-ready #captas-preload { transition: none; }
       .hero .section-media-inner,
@@ -3763,41 +3999,39 @@
           <header class="section-intro is-center">
             <div class="section-step"><span class="num">06</span><span class="sep">·</span><span class="label">Siguiente paso</span></div>
             <h2 class="section-title contact-finale-title">¿Avanzamos <span class="text-captas-gradient">juntos?</span></h2>
-            <p class="section-lead-text">Un mensaje y coordinamos una reunión breve para elegir el plan ideal, resolver dudas y definir fechas de entrega.</p>
+            <p class="section-lead-text">El asistente te guía paso a paso. En un minuto tenés tu solicitud lista para WhatsApp.</p>
           </header>
           <div class="section-content">
             <div class="contact-finale">
-              <div class="contact-grid">
-                <div class="contact-steps glass">
-                  <span class="contact-steps-label">Cómo seguimos</span>
-                  <div class="contact-step">
-                    <span class="contact-step-num">1</span>
-                    <div>
-                      <h3>Armas tu mensaje</h3>
-                      <p>El asistente te guía en 5 pasos. WhatsApp abre con el servicio y alcance bien detallados.</p>
-                    </div>
-                  </div>
-                  <div class="contact-step">
-                    <span class="contact-step-num">2</span>
-                    <div>
-                      <h3>Reunión breve</h3>
-                      <p>Resolvemos dudas, revisamos alcance y definimos el plan que mejor calza con tu presupuesto.</p>
-                    </div>
-                  </div>
-                  <div class="contact-step">
-                    <span class="contact-step-num">3</span>
-                    <div>
-                      <h3>Fechas y arranque</h3>
-                      <p>Acordamos entregas, calendario y forma de pago: transferencia 50/50 o link de Mercado Pago en cuotas.</p>
-                    </div>
-                  </div>
-                </div>
+              <div class="contact-brief-layout">
+                <nav class="brief-journey glass" id="briefJourney" aria-label="Progreso del asistente">
+                  <span class="brief-journey-label">Tu recorrido</span>
+                  <ol class="brief-journey-list">
+                    <li class="brief-journey-item is-active" data-brief-sync="0"><span class="brief-journey-marker">1</span><div><h3>Negocio</h3><p>Rubro y nombre</p></div></li>
+                    <li class="brief-journey-item" data-brief-sync="1"><span class="brief-journey-marker">2</span><div><h3>Objetivo</h3><p>Qué buscas lograr</p></div></li>
+                    <li class="brief-journey-item" data-brief-sync="2"><span class="brief-journey-marker">3</span><div><h3>Plan</h3><p>Servicio y alcance</p></div></li>
+                    <li class="brief-journey-item" data-brief-sync="3"><span class="brief-journey-marker">4</span><div><h3>Plazo</h3><p>Cuándo lanzar</p></div></li>
+                    <li class="brief-journey-item" data-brief-sync="4"><span class="brief-journey-marker">5</span><div><h3>Envío</h3><p>Pago y WhatsApp</p></div></li>
+                  </ol>
+                </nav>
                 <div class="contact-cta glass-strong">
-                  <p class="contact-cta-lead">Sin compromiso: revisamos juntos qué plan calza con tu negocio y etapa actual.</p>
+                  <p class="contact-cta-lead">Armá tu solicitud en menos de un minuto. Sin compromiso.</p>
 
+                  <div class="brief-studio">
+                  <div class="brief-studio-inner">
                   <div class="brief-wizard" id="briefWizard" aria-label="Asistente para armar tu mensaje">
                     <div class="brief-wizard-head">
-                      <span class="brief-wizard-kicker">Cuéntanos qué necesitas</span>
+                      <div class="brief-wizard-top">
+                        <span class="brief-wizard-kicker">Asistente Captas</span>
+                        <div class="brief-step-dots" id="briefStepDots" aria-hidden="true">
+                          <span class="brief-dot is-active" data-dot="0"></span>
+                          <span class="brief-dot" data-dot="1"></span>
+                          <span class="brief-dot" data-dot="2"></span>
+                          <span class="brief-dot" data-dot="3"></span>
+                          <span class="brief-dot" data-dot="4"></span>
+                        </div>
+                      </div>
+                      <h3 class="brief-step-title" id="briefStepTitle">Tu negocio</h3>
                       <div class="brief-progress" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" id="briefProgress">
                         <div class="brief-progress-track" aria-hidden="true"><span class="brief-progress-fill" id="briefProgressFill"></span></div>
                         <span class="brief-progress-label" id="briefProgressLabel">1 / 5</span>
@@ -3835,7 +4069,7 @@
                       <div class="brief-panel" data-brief-step="2">
                         <p class="brief-question">¿Qué plan te interesa?</p>
                         <p class="brief-hint">Marcamos el sugerido según tu objetivo. Podés cambiarlo en la reunión.</p>
-                        <div class="brief-options" role="group" aria-label="Plan de interés">
+                        <div class="brief-options is-scroll" role="group" aria-label="Plan de interés">
                           <button type="button" class="brief-option" data-field="plan" data-value="Web Básica" data-price="$600.000" data-suggest="presencia" data-service="Landing 1 página, diseño responsive, WhatsApp, formulario, SSL y publicación"><span class="brief-option-text"><strong>Web Básica</strong><span>$600.000 · 1 página</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
                           <button type="button" class="brief-option" data-field="plan" data-value="Web Esencial" data-price="$850.000" data-suggest="servicios" data-service="Hasta 4 páginas, galería, Google Maps y todo lo de Básica"><span class="brief-option-text"><strong>Web Esencial</strong><span>$850.000 · hasta 4 páginas</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
                           <button type="button" class="brief-option" data-field="plan" data-value="Web Profesional" data-price="$1.100.000" data-suggest="servicios renovar" data-service="Hasta 8 páginas, SEO on-page, blog y animaciones"><span class="brief-option-text"><strong>Web Profesional</strong><span>$1.100.000 · SEO y blog</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
@@ -3877,10 +4111,20 @@
                     <button type="button" class="brief-skip" id="briefSkip">Saltar y escribir directo</button>
 
                     <div class="brief-recap" id="briefRecap" aria-live="polite">
-                      <span class="brief-recap-label">Así llegará tu solicitud a Captas</span>
+                      <div class="brief-recap-head">
+                        <span class="brief-recap-icon" aria-hidden="true">✓</span>
+                        <span class="brief-recap-label">Solicitud lista para enviar</span>
+                      </div>
                       <pre class="brief-msg-preview" id="briefMsgPreview"></pre>
                       <button type="button" class="brief-recap-edit" id="briefEdit">Editar respuestas</button>
                     </div>
+                  </div>
+                  </div>
+                  </div>
+
+                  <div class="cta-send-block" id="ctaSendBlock">
+                    <span class="cta-send-label" id="ctaSendLabel">Paso 1 de 5</span>
+                    <p class="cta-send-hint" id="ctaSendHint">Completá el asistente para personalizar tu mensaje</p>
                   </div>
 
                   <div class="cta-actions">
@@ -4302,7 +4546,22 @@
         const briefBusinessName = document.getElementById('briefBusinessName');
         const briefNotes = document.getElementById('briefNotes');
         const briefMsgPreview = document.getElementById('briefMsgPreview');
+        const briefStepTitle = document.getElementById('briefStepTitle');
+        const briefJourneyItems = document.querySelectorAll('.brief-journey-item');
+        const briefDots = document.querySelectorAll('.brief-dot');
+        const ctaSendBlock = document.getElementById('ctaSendBlock');
+        const ctaSendLabel = document.getElementById('ctaSendLabel');
+        const ctaSendHint = document.getElementById('ctaSendHint');
         const briefFields = ['rubro', 'goal', 'plan', 'timeline', 'payment'];
+        const briefStepTitles = ['Tu negocio', 'Tu objetivo', 'Tu plan', 'Tu plazo', 'Pago y envío'];
+        const briefSendHints = [
+          'Elegí el rubro que mejor describe tu negocio',
+          'Contanos qué querés lograr con la web',
+          'Seleccioná el plan o dejá que te orientemos',
+          '¿Cuándo te gustaría estar en línea?',
+          'Último paso: forma de pago y detalles'
+        ];
+        let briefAutoTimer = 0;
         const briefAnswers = {
           rubro: '',
           goal: '',
@@ -4349,19 +4608,53 @@
           if (briefProgress) briefProgress.setAttribute('aria-valuenow', String(briefComplete ? briefFields.length : stepNum));
         }
 
+        function briefAnimateOptions() {
+          const panel = briefCurrentPanel();
+          if (!panel) return;
+          panel.querySelectorAll('.brief-option').forEach((opt, i) => {
+            opt.style.setProperty('--opt-i', String(i));
+          });
+        }
+
+        function briefSyncChrome() {
+          if (briefStepTitle) {
+            briefStepTitle.textContent = briefComplete ? '¡Listo para enviar!' : briefStepTitles[briefStep];
+          }
+          briefJourneyItems.forEach((item, i) => {
+            item.classList.toggle('is-active', !briefComplete && i === briefStep);
+            item.classList.toggle('is-done', briefComplete ? i <= briefFields.length - 1 : i < briefStep);
+          });
+          briefDots.forEach((dot, i) => {
+            dot.classList.toggle('is-active', !briefComplete && i === briefStep);
+            dot.classList.toggle('is-done', briefComplete ? true : i < briefStep);
+          });
+          if (ctaSendBlock) ctaSendBlock.classList.toggle('is-ready', briefComplete);
+          if (ctaSendLabel) {
+            ctaSendLabel.textContent = briefComplete
+              ? 'Solicitud personalizada'
+              : 'Paso ' + (briefStep + 1) + ' de ' + briefFields.length;
+          }
+          if (ctaSendHint) {
+            ctaSendHint.textContent = briefComplete
+              ? 'Tocá Quiero para abrir WhatsApp con tu mensaje armado'
+              : briefSendHints[briefStep];
+          }
+        }
+
         function briefUpdateNav() {
           if (briefBack) briefBack.disabled = briefStep === 0 || briefComplete;
           if (briefNext) {
-            briefNext.disabled = !briefStepHasAnswer();
+            const ready = briefStepHasAnswer();
+            briefNext.disabled = !ready;
+            briefNext.classList.toggle('is-armed', ready && !briefComplete);
             briefNext.textContent = briefStep === briefFields.length - 1 ? 'Armar mensaje' : 'Continuar';
           }
-          if (briefSkip) briefSkip.hidden = briefComplete;
-          const briefNav = briefWizard.querySelector('.brief-nav');
-          if (briefNav) briefNav.hidden = briefComplete;
           briefPanels.forEach((panel, i) => {
             panel.classList.toggle('is-active', !briefComplete && i === briefStep);
           });
           if (briefRecap) briefRecap.classList.toggle('is-visible', briefComplete);
+          briefAnimateOptions();
+          briefSyncChrome();
           briefUpdateProgress();
         }
 
@@ -4424,10 +4717,20 @@
           if (briefMsgPreview) briefMsgPreview.textContent = msg;
         }
 
+        function briefMaybeAutoAdvance() {
+          if (reduced || briefComplete || briefStep === 2) return;
+          if (briefAutoTimer) clearTimeout(briefAutoTimer);
+          briefAutoTimer = setTimeout(() => {
+            if (!briefStepHasAnswer() || briefStep >= briefFields.length - 1) return;
+            briefShowStep(briefStep + 1);
+          }, 520);
+        }
+
         function briefSelectOption(btn, silent) {
           const field = btn.dataset.field;
           const value = btn.dataset.value;
           if (!field || !value) return;
+          if (briefAutoTimer) clearTimeout(briefAutoTimer);
           briefAnswers[field] = value;
           if (field === 'goal') briefAnswers.goalMsg = btn.dataset.msg || value;
           if (field === 'plan') {
@@ -4442,11 +4745,7 @@
           briefUpdateNav();
           if (briefComplete) briefUpdateRecap();
           briefUpdateWhatsApp();
-          if (!silent && !reduced && briefStep < briefFields.length - 1) {
-            setTimeout(() => {
-              if (briefStepHasAnswer() && briefNext && !briefNext.disabled) briefNext.focus();
-            }, 180);
-          }
+          if (!silent) briefMaybeAutoAdvance();
         }
 
         function briefOnEnterStep() {
@@ -4454,15 +4753,22 @@
         }
 
         function briefShowStep(nextStep) {
+          if (briefAutoTimer) clearTimeout(briefAutoTimer);
+          const goingForward = nextStep > briefStep;
           briefStep = Math.max(0, Math.min(briefFields.length - 1, nextStep));
           briefComplete = false;
           briefWizard.classList.remove('is-complete');
+          if (!reduced && goingForward) {
+            briefWizard.classList.add('is-step-changing');
+            setTimeout(() => briefWizard.classList.remove('is-step-changing'), 220);
+          }
           briefUpdateNav();
           briefOnEnterStep();
           briefUpdateWhatsApp();
         }
 
         function briefFinish() {
+          if (briefAutoTimer) clearTimeout(briefAutoTimer);
           briefComplete = true;
           briefWizard.classList.add('is-complete');
           briefUpdateRecap();
@@ -4520,6 +4826,7 @@
         if (briefEdit) {
           briefEdit.addEventListener('click', () => {
             briefComplete = false;
+            briefWizard.classList.remove('is-complete');
             briefShowStep(0);
           });
         }
