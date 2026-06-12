@@ -2364,6 +2364,43 @@
       margin-top: -0.15rem;
     }
 
+    .brief-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .brief-field-label {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .brief-input {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--c-bone);
+      font-family: var(--font-b);
+      font-size: 0.82rem;
+      line-height: 1.4;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .brief-input::placeholder {
+      color: rgba(163, 174, 188, 0.75);
+    }
+
+    .brief-input:focus {
+      outline: none;
+      border-color: rgba(0, 122, 255, 0.45);
+      background: rgba(0, 122, 255, 0.06);
+    }
+
     .brief-options {
       display: grid;
       gap: 0.45rem;
@@ -2585,6 +2622,22 @@
     .brief-recap-item strong {
       color: var(--c-bone);
       font-weight: 600;
+    }
+
+    .brief-msg-preview {
+      margin: 0;
+      padding: 0.7rem 0.75rem;
+      border-radius: 0.55rem;
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-b);
+      font-size: 0.72rem;
+      line-height: 1.55;
+      color: rgba(234, 232, 228, 0.88);
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 11rem;
+      overflow-y: auto;
     }
 
     .brief-recap-edit {
@@ -2949,7 +3002,7 @@
 
       .brief-wizard { max-width: 100%; }
 
-      .brief-panels { min-height: 11.5rem; }
+      .brief-panels { min-height: 13rem; }
 
       .footer-inner {
         justify-content: center;
@@ -3721,7 +3774,7 @@
                     <span class="contact-step-num">1</span>
                     <div>
                       <h3>Armas tu mensaje</h3>
-                      <p>El asistente te guía en 4 pasos. Al terminar, WhatsApp abre con todo listo para enviar.</p>
+                      <p>El asistente te guía en 5 pasos. WhatsApp abre con el servicio y alcance bien detallados.</p>
                     </div>
                   </div>
                   <div class="contact-step">
@@ -3745,38 +3798,54 @@
                   <div class="brief-wizard" id="briefWizard" aria-label="Asistente para armar tu mensaje">
                     <div class="brief-wizard-head">
                       <span class="brief-wizard-kicker">Cuéntanos qué necesitas</span>
-                      <div class="brief-progress" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" id="briefProgress">
+                      <div class="brief-progress" role="progressbar" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" id="briefProgress">
                         <div class="brief-progress-track" aria-hidden="true"><span class="brief-progress-fill" id="briefProgressFill"></span></div>
-                        <span class="brief-progress-label" id="briefProgressLabel">1 / 4</span>
+                        <span class="brief-progress-label" id="briefProgressLabel">1 / 5</span>
                       </div>
                     </div>
 
                     <div class="brief-panels" id="briefPanels">
                       <div class="brief-panel is-active" data-brief-step="0">
-                        <p class="brief-question">¿Qué buscas con tu web?</p>
-                        <p class="brief-hint">Elegí lo más cercano a tu situación hoy.</p>
-                        <div class="brief-options" role="group" aria-label="Objetivo de la web">
-                          <button type="button" class="brief-option" data-field="goal" data-value="Presencia profesional (landing con contacto)"><span class="brief-option-icon" aria-hidden="true">✦</span><span class="brief-option-text"><strong>Presencia profesional</strong><span>Landing clara con WhatsApp y formulario</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="goal" data-value="Mostrar servicios o catálogo"><span class="brief-option-icon" aria-hidden="true">◫</span><span class="brief-option-text"><strong>Mostrar servicios</strong><span>Varias páginas, galería y mapa</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="goal" data-value="Vender en línea (tienda)"><span class="brief-option-icon" aria-hidden="true">🛒</span><span class="brief-option-text"><strong>Vender en línea</strong><span>Catálogo, carrito y checkout</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="goal" data-value="Renovar una web que ya tengo"><span class="brief-option-icon" aria-hidden="true">↻</span><span class="brief-option-text"><strong>Renovar mi web actual</strong><span>Diseño nuevo y mejor experiencia</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        <p class="brief-question">¿De qué es tu negocio?</p>
+                        <p class="brief-hint">Así entendemos mejor el servicio que necesitas.</p>
+                        <div class="brief-options" role="group" aria-label="Rubro del negocio">
+                          <button type="button" class="brief-option" data-field="rubro" data-value="Comercio / tienda física"><span class="brief-option-text"><strong>Comercio / tienda</strong><span>Retail, productos o showroom</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="rubro" data-value="Servicios profesionales"><span class="brief-option-text"><strong>Servicios profesionales</strong><span>Consultoría, oficios, B2B</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="rubro" data-value="Gastronomía / delivery"><span class="brief-option-text"><strong>Gastronomía</strong><span>Restaurante, café, delivery</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="rubro" data-value="Salud y bienestar"><span class="brief-option-text"><strong>Salud y bienestar</strong><span>Clínicas, estética, fitness</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="rubro" data-value="Otro rubro"><span class="brief-option-text"><strong>Otro rubro</strong><span>Lo detallamos en el mensaje</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
                         </div>
+                        <label class="brief-field" for="briefBusinessName">
+                          <span class="brief-field-label">Nombre del negocio (opcional)</span>
+                          <input type="text" class="brief-input" id="briefBusinessName" placeholder="Ej: Óptica del Valle" maxlength="80" autocomplete="organization">
+                        </label>
                       </div>
 
                       <div class="brief-panel" data-brief-step="1">
-                        <p class="brief-question">¿Qué plan te interesa?</p>
-                        <p class="brief-hint">Podés cambiarlo después en la reunión.</p>
-                        <div class="brief-options" role="group" aria-label="Plan de interés">
-                          <button type="button" class="brief-option" data-field="plan" data-value="Web Básica · $600.000" data-suggest="presencia"><span class="brief-option-text"><strong>Web Básica</strong><span>$600.000 · 1 página</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="plan" data-value="Web Esencial · $850.000" data-suggest="servicios"><span class="brief-option-text"><strong>Web Esencial</strong><span>$850.000 · hasta 4 páginas</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="plan" data-value="Web Profesional · $1.100.000" data-suggest="servicios renovar"><span class="brief-option-text"><strong>Web Profesional</strong><span>$1.100.000 · SEO y blog</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="plan" data-value="Web Premium · $1.400.000"><span class="brief-option-text"><strong>Web Premium</strong><span>$1.400.000 · panel admin</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="plan" data-value="Web + Tienda · $1.700.000" data-suggest="tienda"><span class="brief-option-text"><strong>Web + Tienda</strong><span>$1.700.000 · e-commerce</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
-                          <button type="button" class="brief-option" data-field="plan" data-value="Aún no sé, necesito orientación"><span class="brief-option-text"><strong>No estoy seguro</strong><span>Quiero que me recomienden en la reunión</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        <p class="brief-question">¿Qué buscas con tu web?</p>
+                        <p class="brief-hint">Elegí lo más cercano a tu situación hoy.</p>
+                        <div class="brief-options" role="group" aria-label="Objetivo de la web">
+                          <button type="button" class="brief-option" data-field="goal" data-value="Presencia profesional (landing con contacto)" data-msg="Landing profesional con contacto y WhatsApp"><span class="brief-option-icon" aria-hidden="true">✦</span><span class="brief-option-text"><strong>Presencia profesional</strong><span>Landing clara con WhatsApp y formulario</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="goal" data-value="Mostrar servicios o catálogo" data-msg="Sitio para mostrar servicios o catálogo"><span class="brief-option-icon" aria-hidden="true">◫</span><span class="brief-option-text"><strong>Mostrar servicios</strong><span>Varias páginas, galería y mapa</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="goal" data-value="Vender en línea (tienda)" data-msg="Tienda en línea con carrito y checkout"><span class="brief-option-icon" aria-hidden="true">🛒</span><span class="brief-option-text"><strong>Vender en línea</strong><span>Catálogo, carrito y checkout</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="goal" data-value="Renovar una web que ya tengo" data-msg="Rediseño y mejora de web actual"><span class="brief-option-icon" aria-hidden="true">↻</span><span class="brief-option-text"><strong>Renovar mi web actual</strong><span>Diseño nuevo y mejor experiencia</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
                         </div>
                       </div>
 
                       <div class="brief-panel" data-brief-step="2">
+                        <p class="brief-question">¿Qué plan te interesa?</p>
+                        <p class="brief-hint">Marcamos el sugerido según tu objetivo. Podés cambiarlo en la reunión.</p>
+                        <div class="brief-options" role="group" aria-label="Plan de interés">
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Básica" data-price="$600.000" data-suggest="presencia" data-service="Landing 1 página, diseño responsive, WhatsApp, formulario, SSL y publicación"><span class="brief-option-text"><strong>Web Básica</strong><span>$600.000 · 1 página</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Esencial" data-price="$850.000" data-suggest="servicios" data-service="Hasta 4 páginas, galería, Google Maps y todo lo de Básica"><span class="brief-option-text"><strong>Web Esencial</strong><span>$850.000 · hasta 4 páginas</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Profesional" data-price="$1.100.000" data-suggest="servicios renovar" data-service="Hasta 8 páginas, SEO on-page, blog y animaciones"><span class="brief-option-text"><strong>Web Profesional</strong><span>$1.100.000 · SEO y blog</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Premium" data-price="$1.400.000" data-service="Panel admin, integraciones a medida y multi-idioma"><span class="brief-option-text"><strong>Web Premium</strong><span>$1.400.000 · panel admin</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web + Tienda" data-price="$1.700.000" data-suggest="tienda" data-service="E-commerce con carrito, panel de pedidos, checkout y pasarela de pago"><span class="brief-option-text"><strong>Web + Tienda</strong><span>$1.700.000 · e-commerce</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="A definir con Captas" data-service="Orientación en reunión para elegir el plan ideal"><span class="brief-option-text"><strong>No estoy seguro</strong><span>Quiero que me recomienden en la reunión</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        </div>
+                      </div>
+
+                      <div class="brief-panel" data-brief-step="3">
                         <p class="brief-question">¿Cuándo te gustaría lanzar?</p>
                         <p class="brief-hint">Nos ayuda a priorizar fechas contigo.</p>
                         <div class="brief-options" role="group" aria-label="Plazo estimado">
@@ -3786,7 +3855,7 @@
                         </div>
                       </div>
 
-                      <div class="brief-panel" data-brief-step="3">
+                      <div class="brief-panel" data-brief-step="4">
                         <p class="brief-question">¿Cómo prefieres pagar?</p>
                         <p class="brief-hint">Ambas opciones están disponibles.</p>
                         <div class="brief-options" role="group" aria-label="Forma de pago">
@@ -3794,6 +3863,10 @@
                           <button type="button" class="brief-option" data-field="payment" data-value="Mercado Pago en cuotas"><span class="brief-option-text"><strong>Mercado Pago en cuotas</strong><span>Con tarjeta de crédito</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
                           <button type="button" class="brief-option" data-field="payment" data-value="Quiero conocer ambas opciones"><span class="brief-option-text"><strong>Ver ambas opciones</strong><span>Lo definimos en la reunión</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
                         </div>
+                        <label class="brief-field" for="briefNotes">
+                          <span class="brief-field-label">Algo más sobre tu servicio (opcional)</span>
+                          <input type="text" class="brief-input" id="briefNotes" placeholder="Ej: necesito reservas online o catálogo de 50 productos" maxlength="160" autocomplete="off">
+                        </label>
                       </div>
                     </div>
 
@@ -3804,11 +3877,8 @@
                     <button type="button" class="brief-skip" id="briefSkip">Saltar y escribir directo</button>
 
                     <div class="brief-recap" id="briefRecap" aria-live="polite">
-                      <span class="brief-recap-label">Mensaje listo para WhatsApp</span>
-                      <p class="brief-recap-item"><strong>Objetivo:</strong> <span id="briefRecapGoal">—</span></p>
-                      <p class="brief-recap-item"><strong>Plan:</strong> <span id="briefRecapPlan">—</span></p>
-                      <p class="brief-recap-item"><strong>Plazo:</strong> <span id="briefRecapTimeline">—</span></p>
-                      <p class="brief-recap-item"><strong>Pago:</strong> <span id="briefRecapPayment">—</span></p>
+                      <span class="brief-recap-label">Así llegará tu solicitud a Captas</span>
+                      <pre class="brief-msg-preview" id="briefMsgPreview"></pre>
                       <button type="button" class="brief-recap-edit" id="briefEdit">Editar respuestas</button>
                     </div>
                   </div>
@@ -4229,11 +4299,23 @@
         const briefProgressFill = document.getElementById('briefProgressFill');
         const briefProgressLabel = document.getElementById('briefProgressLabel');
         const briefQuiero = document.getElementById('briefQuiero');
-        const briefFields = ['goal', 'plan', 'timeline', 'payment'];
-        const briefAnswers = { goal: '', plan: '', timeline: '', payment: '' };
+        const briefBusinessName = document.getElementById('briefBusinessName');
+        const briefNotes = document.getElementById('briefNotes');
+        const briefMsgPreview = document.getElementById('briefMsgPreview');
+        const briefFields = ['rubro', 'goal', 'plan', 'timeline', 'payment'];
+        const briefAnswers = {
+          rubro: '',
+          goal: '',
+          goalMsg: '',
+          plan: '',
+          planPrice: '',
+          planService: '',
+          timeline: '',
+          payment: ''
+        };
         let briefStep = 0;
         let briefComplete = false;
-        const BRIEF_DEFAULT_MSG = 'Hola Captas, quiero cotizar una página web para mi negocio. ¿Podemos coordinar?';
+        const BRIEF_DEFAULT_MSG = 'Hola Captas, quiero cotizar Servicios Web para mi negocio. ¿Podemos coordinar una reunión breve?';
 
         const goalSuggestMap = {
           'Presencia profesional (landing con contacto)': 'presencia',
@@ -4247,7 +4329,16 @@
         }
 
         function briefStepHasAnswer() {
-          return Boolean(briefAnswers[briefFields[briefStep]]);
+          const field = briefFields[briefStep];
+          return Boolean(briefAnswers[field]);
+        }
+
+        function briefGetBusinessName() {
+          return (briefBusinessName && briefBusinessName.value.trim()) || '';
+        }
+
+        function briefGetNotes() {
+          return (briefNotes && briefNotes.value.trim()) || '';
         }
 
         function briefUpdateProgress() {
@@ -4282,17 +4373,39 @@
           });
         }
 
+        function briefAutoSelectPlan() {
+          const hint = goalSuggestMap[briefAnswers.goal];
+          if (!hint || briefAnswers.plan) return;
+          const match = Array.from(briefWizard.querySelectorAll('[data-field="plan"]')).find(btn => {
+            const tags = (btn.dataset.suggest || '').split(/\s+/).filter(Boolean);
+            return tags.includes(hint);
+          });
+          if (match) briefSelectOption(match, true);
+        }
+
         function briefBuildMessage() {
+          const business = briefGetBusinessName() || 'A confirmar en reunión';
+          const goalLine = briefAnswers.goalMsg || briefAnswers.goal;
+          const planLine = briefAnswers.planPrice
+            ? briefAnswers.plan + ' (' + briefAnswers.planPrice + ')'
+            : briefAnswers.plan;
           const lines = [
-            'Hola Captas, quiero cotizar una página web.',
+            'Hola Captas 👋',
             '',
-            'Objetivo: ' + briefAnswers.goal,
-            'Plan de interés: ' + briefAnswers.plan,
-            'Plazo: ' + briefAnswers.timeline,
-            'Forma de pago: ' + briefAnswers.payment,
+            '*COTIZACIÓN · SERVICIOS WEB*',
             '',
-            '¿Podemos coordinar una reunión breve?'
+            '🏢 Negocio: ' + business,
+            '📂 Rubro: ' + briefAnswers.rubro,
+            '',
+            '🎯 Necesito: ' + goalLine,
+            '📦 Servicio: ' + planLine,
+            '   Alcance: ' + (briefAnswers.planService || 'Según plan elegido'),
+            '📅 Plazo: ' + briefAnswers.timeline,
+            '💳 Pago: ' + briefAnswers.payment
           ];
+          const notes = briefGetNotes();
+          if (notes) lines.push('📝 Detalle: ' + notes);
+          lines.push('', '¿Podemos coordinar una reunión breve?');
           return lines.join('\n');
         }
 
@@ -4302,39 +4415,42 @@
           briefQuiero.href = 'https://wa.me/56967289704?text=' + encodeURIComponent(msg);
           briefQuiero.classList.toggle('is-ready', briefComplete);
           briefQuiero.setAttribute('aria-label', briefComplete
-            ? 'Enviar mensaje personalizado por WhatsApp'
-            : 'Escribir por WhatsApp (completa el asistente para un mensaje más detallado)');
+            ? 'Enviar solicitud de Servicios Web por WhatsApp'
+            : 'Escribir por WhatsApp (completa el asistente para detallar el servicio)');
         }
 
         function briefUpdateRecap() {
-          const map = {
-            goal: document.getElementById('briefRecapGoal'),
-            plan: document.getElementById('briefRecapPlan'),
-            timeline: document.getElementById('briefRecapTimeline'),
-            payment: document.getElementById('briefRecapPayment')
-          };
-          Object.keys(map).forEach(key => {
-            if (map[key]) map[key].textContent = briefAnswers[key] || '—';
-          });
+          const msg = briefBuildMessage();
+          if (briefMsgPreview) briefMsgPreview.textContent = msg;
         }
 
-        function briefSelectOption(btn) {
+        function briefSelectOption(btn, silent) {
           const field = btn.dataset.field;
           const value = btn.dataset.value;
           if (!field || !value) return;
           briefAnswers[field] = value;
+          if (field === 'goal') briefAnswers.goalMsg = btn.dataset.msg || value;
+          if (field === 'plan') {
+            briefAnswers.planPrice = btn.dataset.price || '';
+            briefAnswers.planService = btn.dataset.service || '';
+          }
           briefWizard.querySelectorAll('.brief-option[data-field="' + field + '"]').forEach(el => {
             el.classList.toggle('is-selected', el === btn);
             el.setAttribute('aria-pressed', el === btn ? 'true' : 'false');
           });
           if (field === 'goal') briefApplySuggestions();
           briefUpdateNav();
+          if (briefComplete) briefUpdateRecap();
           briefUpdateWhatsApp();
-          if (!reduced && briefStep < briefFields.length - 1) {
+          if (!silent && !reduced && briefStep < briefFields.length - 1) {
             setTimeout(() => {
               if (briefStepHasAnswer() && briefNext && !briefNext.disabled) briefNext.focus();
             }, 180);
           }
+        }
+
+        function briefOnEnterStep() {
+          if (briefFields[briefStep] === 'plan') briefAutoSelectPlan();
         }
 
         function briefShowStep(nextStep) {
@@ -4342,6 +4458,7 @@
           briefComplete = false;
           briefWizard.classList.remove('is-complete');
           briefUpdateNav();
+          briefOnEnterStep();
           briefUpdateWhatsApp();
         }
 
@@ -4358,7 +4475,17 @@
 
         briefWizard.querySelectorAll('.brief-option').forEach(btn => {
           btn.setAttribute('aria-pressed', 'false');
-          btn.addEventListener('click', () => briefSelectOption(btn));
+          btn.addEventListener('click', () => briefSelectOption(btn, false));
+        });
+
+        [briefBusinessName, briefNotes].forEach(input => {
+          if (!input) return;
+          input.addEventListener('input', () => {
+            if (briefComplete) {
+              briefUpdateRecap();
+              briefUpdateWhatsApp();
+            }
+          });
         });
 
         if (briefBack) {
@@ -4372,7 +4499,7 @@
             if (!briefStepHasAnswer()) return;
             if (briefStep < briefFields.length - 1) {
               briefShowStep(briefStep + 1);
-              const first = briefCurrentPanel()?.querySelector('.brief-option');
+              const first = briefCurrentPanel()?.querySelector('.brief-option, .brief-input');
               if (first) first.focus();
             } else {
               briefFinish();
