@@ -1980,6 +1980,58 @@
       background: var(--c-accent);
     }
 
+    .payment-strip {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding: 1.15rem 1.35rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0, 188, 255, 0.22);
+      background:
+        linear-gradient(135deg, rgba(0, 188, 255, 0.08) 0%, rgba(0, 122, 255, 0.05) 100%),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .payment-strip-icon {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.65rem;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 188, 255, 0.14);
+      border: 1px solid rgba(0, 188, 255, 0.28);
+      color: #7ee0ff;
+    }
+
+    .payment-strip-icon svg {
+      width: 1.35rem;
+      height: 1.35rem;
+      display: block;
+    }
+
+    .payment-strip-title {
+      font-family: var(--font-d);
+      font-size: 0.92rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+      color: var(--c-bone);
+    }
+
+    .payment-strip-desc {
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 58ch;
+    }
+
+    .payment-strip-desc strong {
+      color: rgba(234, 232, 228, 0.92);
+      font-weight: 600;
+    }
+
     /* Combined */
     .combined {
       border-radius: var(--radius);
@@ -3150,7 +3202,7 @@
           <header class="section-intro is-center">
             <div class="section-step"><span class="num">04</span><span class="sep">·</span><span class="label">Inversión</span></div>
             <h2 class="section-title">Cinco planes, un solo estándar.</h2>
-            <p class="section-lead-text">Valores de desarrollo al contado (50% inicio / 50% entrega). Mantención mensual desde $18.000 según plan. Lo no descrito se cotiza aparte.</p>
+            <p class="section-lead-text">Desarrollo con 50% inicio / 50% entrega, o pago en cuotas con <strong>Mercado Pago</strong>. Mantención mensual desde $18.000 según plan. Lo no descrito se cotiza aparte.</p>
           </header>
 
           <div class="section-content">
@@ -3264,12 +3316,23 @@
 
           <div class="plans-legend" aria-hidden="true">
             <span>50% inicio / 50% entrega</span>
+            <span>Mercado Pago · cuotas</span>
             <span>Hosting + SSL incluido</span>
             <span>Dominio no incluido</span>
             <span>*Pasarela según proveedor</span>
           </div>
 
-          <p class="pricing-foot">Valores en pesos chilenos (CLP) · Vigencia 30 días · Reajuste IPC en mantención</p>
+          <div class="payment-strip glass" role="note" aria-label="Formas de pago">
+            <div class="payment-strip-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h3"/></svg>
+            </div>
+            <div>
+              <p class="payment-strip-title">Pago con Mercado Pago</p>
+              <p class="payment-strip-desc">Podés financiar el desarrollo <strong>en cuotas con tarjeta de crédito</strong> a través de Mercado Pago, además de pagar 50% al inicio y 50% al entregar. Las cuotas y condiciones dependen de tu banco y emisor.</p>
+            </div>
+          </div>
+
+          <p class="pricing-foot">Valores en pesos chilenos (CLP) · Vigencia 30 días · Reajuste IPC en mantención · Mercado Pago disponible</p>
 
           <div class="combined glass-strong">
             <p class="combined-label">Recomendado · Mejor relación valor</p>
@@ -3324,7 +3387,7 @@
                     <span class="contact-step-num">3</span>
                     <div>
                       <h3>Fechas y arranque</h3>
-                      <p>Acordamos entregas, pagos y el calendario de implementación.</p>
+                      <p>Acordamos entregas, calendario y forma de pago: transferencia 50/50 o link de Mercado Pago en cuotas.</p>
                     </div>
                   </div>
                 </div>
@@ -3343,6 +3406,7 @@
               </div>
               <div class="contact-trust" aria-label="Garantías de contacto">
                 <span>Respuesta en menos de 24 h</span>
+                <span>Mercado Pago · cuotas</span>
                 <span>Sin compromiso</span>
                 <span>06 / 06 · Servicios Web Captas 2026</span>
               </div>
