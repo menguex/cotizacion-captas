@@ -2270,6 +2270,352 @@
       margin: 0;
     }
 
+    .brief-wizard {
+      width: 100%;
+      max-width: 22rem;
+      text-align: left;
+      padding: 1.1rem 1.15rem 1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .brief-wizard-head {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .brief-wizard-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 450;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-sky-soft);
+    }
+
+    .brief-progress {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .brief-progress-track {
+      flex: 1;
+      height: 3px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .brief-progress-fill {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: var(--c-brand-gradient);
+      transition: width 0.45s var(--ease-out);
+    }
+
+    .brief-progress-label {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .brief-panels {
+      position: relative;
+      min-height: 10.5rem;
+    }
+
+    .brief-panel {
+      display: none;
+      flex-direction: column;
+      gap: 0.55rem;
+      animation: brief-panel-in 0.42s var(--ease-out) both;
+    }
+
+    .brief-panel.is-active {
+      display: flex;
+    }
+
+    @keyframes brief-panel-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brief-question {
+      font-family: var(--font-d);
+      font-size: 0.88rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+      color: var(--c-bone);
+    }
+
+    .brief-hint {
+      font-size: 0.74rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+      margin-top: -0.15rem;
+    }
+
+    .brief-options {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .brief-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      width: 100%;
+      padding: 0.7rem 0.75rem;
+      text-align: left;
+      border-radius: 0.65rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      color: inherit;
+      cursor: pointer;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s var(--ease-out), box-shadow 0.25s ease;
+    }
+
+    .brief-option:hover {
+      border-color: rgba(142, 216, 255, 0.35);
+      background: rgba(142, 216, 255, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .brief-option.is-selected {
+      border-color: rgba(0, 122, 255, 0.55);
+      background: rgba(0, 122, 255, 0.12);
+      box-shadow: 0 0 0 1px rgba(0, 122, 255, 0.2);
+    }
+
+    .brief-option-icon {
+      flex-shrink: 0;
+      width: 1.65rem;
+      height: 1.65rem;
+      border-radius: 0.45rem;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .brief-option-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+      min-width: 0;
+    }
+
+    .brief-option-text strong {
+      font-size: 0.78rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .brief-option-text span {
+      font-size: 0.68rem;
+      line-height: 1.4;
+      color: var(--text-muted);
+    }
+
+    .brief-option.is-suggested::after {
+      content: 'Sugerido';
+      position: absolute;
+      top: 0.45rem;
+      right: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.42rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-sky-soft);
+      padding: 0.15rem 0.35rem;
+      border-radius: 99px;
+      background: rgba(14, 165, 233, 0.15);
+      border: 1px solid rgba(14, 165, 233, 0.28);
+    }
+
+    .brief-option {
+      position: relative;
+    }
+
+    .brief-option-check {
+      flex-shrink: 0;
+      width: 1rem;
+      height: 1rem;
+      margin-left: auto;
+      margin-top: 0.1rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.2s ease, transform 0.25s var(--ease-out), background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .brief-option.is-selected .brief-option-check {
+      opacity: 1;
+      transform: scale(1);
+      background: var(--c-accent);
+      border-color: var(--c-accent);
+      box-shadow: inset 0 0 0 2px var(--c-ink);
+    }
+
+    .brief-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      margin-top: 0.85rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .brief-back,
+    .brief-next {
+      font-family: var(--font-d);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      padding: 0.55rem 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .brief-back {
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .brief-back:hover:not(:disabled) {
+      color: var(--c-bone);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .brief-back:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .brief-next {
+      margin-left: auto;
+      color: var(--bg);
+      background: rgba(0, 122, 255, 0.85);
+      border: 1px solid transparent;
+    }
+
+    .brief-next:hover:not(:disabled) {
+      transform: translateY(-1px);
+      background: var(--c-accent);
+    }
+
+    .brief-next:disabled {
+      opacity: 0.4;
+      cursor: default;
+      transform: none;
+    }
+
+    .brief-skip {
+      display: block;
+      width: 100%;
+      margin-top: 0.55rem;
+      padding: 0;
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .brief-skip:hover {
+      color: var(--c-sky-soft);
+    }
+
+    .brief-recap {
+      display: none;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-top: 0.65rem;
+      padding: 0.75rem 0.85rem;
+      border-radius: 0.65rem;
+      background: rgba(0, 122, 255, 0.08);
+      border: 1px solid rgba(0, 122, 255, 0.22);
+      animation: brief-panel-in 0.45s var(--ease-out) both;
+    }
+
+    .brief-recap.is-visible {
+      display: flex;
+    }
+
+    .brief-wizard.is-complete .brief-panels {
+      display: none;
+      min-height: 0;
+    }
+
+    .brief-recap-label {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-sky-soft);
+    }
+
+    .brief-recap-item {
+      font-size: 0.74rem;
+      line-height: 1.45;
+      color: rgba(234, 232, 228, 0.9);
+    }
+
+    .brief-recap-item strong {
+      color: var(--c-bone);
+      font-weight: 600;
+    }
+
+    .brief-recap-edit {
+      align-self: flex-start;
+      margin-top: 0.15rem;
+      padding: 0;
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .brief-recap-edit:hover {
+      color: var(--c-sky-soft);
+    }
+
+    .btn-primary.is-ready {
+      animation: brief-cta-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes brief-cta-pulse {
+      0%, 100% { box-shadow: 0 8px 32px rgba(0, 122, 255, 0.4); }
+      50% { box-shadow: 0 10px 40px rgba(0, 122, 255, 0.62), 0 0 0 4px rgba(0, 122, 255, 0.12); }
+    }
+
     .contact-trust {
       display: flex;
       flex-wrap: wrap;
@@ -2601,6 +2947,10 @@
 
       .contact-cta { padding: 1.5rem 1.15rem; }
 
+      .brief-wizard { max-width: 100%; }
+
+      .brief-panels { min-height: 11.5rem; }
+
       .footer-inner {
         justify-content: center;
         text-align: center;
@@ -2858,6 +3208,9 @@
       .scroll-section { opacity: 1; transition: none; }
       .scroll-hint, .pulse-dot { animation: none; }
       .system-card:hover, .plan-card:hover, .btn-primary:hover, .btn-secondary:hover, .btn-hero-primary:hover, .btn-hero-ghost:hover, .hero-service:hover { transform: none; }
+      .brief-panel { animation: none; }
+      .brief-recap { animation: none; }
+      .btn-primary.is-ready { animation: none; }
       .plans-viewport.is-fitted .plans-marquee { justify-content: center; width: 100%; }
       body.captas-ready #captas-preload { transition: none; }
       .hero .section-media-inner,
@@ -3367,8 +3720,8 @@
                   <div class="contact-step">
                     <span class="contact-step-num">1</span>
                     <div>
-                      <h3>Escribes por WhatsApp</h3>
-                      <p>Cuéntanos qué plan te interesa o describe tu negocio. El mensaje ya viene listo para enviar.</p>
+                      <h3>Armas tu mensaje</h3>
+                      <p>El asistente te guía en 4 pasos. Al terminar, WhatsApp abre con todo listo para enviar.</p>
                     </div>
                   </div>
                   <div class="contact-step">
@@ -3388,8 +3741,80 @@
                 </div>
                 <div class="contact-cta glass-strong">
                   <p class="contact-cta-lead">Sin compromiso: revisamos juntos qué plan calza con tu negocio y etapa actual.</p>
+
+                  <div class="brief-wizard" id="briefWizard" aria-label="Asistente para armar tu mensaje">
+                    <div class="brief-wizard-head">
+                      <span class="brief-wizard-kicker">Cuéntanos qué necesitas</span>
+                      <div class="brief-progress" role="progressbar" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" id="briefProgress">
+                        <div class="brief-progress-track" aria-hidden="true"><span class="brief-progress-fill" id="briefProgressFill"></span></div>
+                        <span class="brief-progress-label" id="briefProgressLabel">1 / 4</span>
+                      </div>
+                    </div>
+
+                    <div class="brief-panels" id="briefPanels">
+                      <div class="brief-panel is-active" data-brief-step="0">
+                        <p class="brief-question">¿Qué buscas con tu web?</p>
+                        <p class="brief-hint">Elegí lo más cercano a tu situación hoy.</p>
+                        <div class="brief-options" role="group" aria-label="Objetivo de la web">
+                          <button type="button" class="brief-option" data-field="goal" data-value="Presencia profesional (landing con contacto)"><span class="brief-option-icon" aria-hidden="true">✦</span><span class="brief-option-text"><strong>Presencia profesional</strong><span>Landing clara con WhatsApp y formulario</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="goal" data-value="Mostrar servicios o catálogo"><span class="brief-option-icon" aria-hidden="true">◫</span><span class="brief-option-text"><strong>Mostrar servicios</strong><span>Varias páginas, galería y mapa</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="goal" data-value="Vender en línea (tienda)"><span class="brief-option-icon" aria-hidden="true">🛒</span><span class="brief-option-text"><strong>Vender en línea</strong><span>Catálogo, carrito y checkout</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="goal" data-value="Renovar una web que ya tengo"><span class="brief-option-icon" aria-hidden="true">↻</span><span class="brief-option-text"><strong>Renovar mi web actual</strong><span>Diseño nuevo y mejor experiencia</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        </div>
+                      </div>
+
+                      <div class="brief-panel" data-brief-step="1">
+                        <p class="brief-question">¿Qué plan te interesa?</p>
+                        <p class="brief-hint">Podés cambiarlo después en la reunión.</p>
+                        <div class="brief-options" role="group" aria-label="Plan de interés">
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Básica · $600.000" data-suggest="presencia"><span class="brief-option-text"><strong>Web Básica</strong><span>$600.000 · 1 página</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Esencial · $850.000" data-suggest="servicios"><span class="brief-option-text"><strong>Web Esencial</strong><span>$850.000 · hasta 4 páginas</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Profesional · $1.100.000" data-suggest="servicios renovar"><span class="brief-option-text"><strong>Web Profesional</strong><span>$1.100.000 · SEO y blog</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web Premium · $1.400.000"><span class="brief-option-text"><strong>Web Premium</strong><span>$1.400.000 · panel admin</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Web + Tienda · $1.700.000" data-suggest="tienda"><span class="brief-option-text"><strong>Web + Tienda</strong><span>$1.700.000 · e-commerce</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="plan" data-value="Aún no sé, necesito orientación"><span class="brief-option-text"><strong>No estoy seguro</strong><span>Quiero que me recomienden en la reunión</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        </div>
+                      </div>
+
+                      <div class="brief-panel" data-brief-step="2">
+                        <p class="brief-question">¿Cuándo te gustaría lanzar?</p>
+                        <p class="brief-hint">Nos ayuda a priorizar fechas contigo.</p>
+                        <div class="brief-options" role="group" aria-label="Plazo estimado">
+                          <button type="button" class="brief-option" data-field="timeline" data-value="Lo antes posible (2–3 semanas)"><span class="brief-option-text"><strong>Lo antes posible</strong><span>Arranque inmediato si calza el plan</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="timeline" data-value="En el próximo mes"><span class="brief-option-text"><strong>En el próximo mes</strong><span>Tengo fecha objetivo cercana</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="timeline" data-value="Sin apuro, estoy explorando"><span class="brief-option-text"><strong>Sin apuro</strong><span>Estoy comparando opciones</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        </div>
+                      </div>
+
+                      <div class="brief-panel" data-brief-step="3">
+                        <p class="brief-question">¿Cómo prefieres pagar?</p>
+                        <p class="brief-hint">Ambas opciones están disponibles.</p>
+                        <div class="brief-options" role="group" aria-label="Forma de pago">
+                          <button type="button" class="brief-option" data-field="payment" data-value="50% inicio / 50% entrega"><span class="brief-option-text"><strong>50% inicio / 50% entrega</strong><span>Transferencia en dos hitos</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="payment" data-value="Mercado Pago en cuotas"><span class="brief-option-text"><strong>Mercado Pago en cuotas</strong><span>Con tarjeta de crédito</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                          <button type="button" class="brief-option" data-field="payment" data-value="Quiero conocer ambas opciones"><span class="brief-option-text"><strong>Ver ambas opciones</strong><span>Lo definimos en la reunión</span></span><span class="brief-option-check" aria-hidden="true"></span></button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="brief-nav">
+                      <button type="button" class="brief-back" id="briefBack" disabled>Atrás</button>
+                      <button type="button" class="brief-next" id="briefNext" disabled>Continuar</button>
+                    </div>
+                    <button type="button" class="brief-skip" id="briefSkip">Saltar y escribir directo</button>
+
+                    <div class="brief-recap" id="briefRecap" aria-live="polite">
+                      <span class="brief-recap-label">Mensaje listo para WhatsApp</span>
+                      <p class="brief-recap-item"><strong>Objetivo:</strong> <span id="briefRecapGoal">—</span></p>
+                      <p class="brief-recap-item"><strong>Plan:</strong> <span id="briefRecapPlan">—</span></p>
+                      <p class="brief-recap-item"><strong>Plazo:</strong> <span id="briefRecapTimeline">—</span></p>
+                      <p class="brief-recap-item"><strong>Pago:</strong> <span id="briefRecapPayment">—</span></p>
+                      <button type="button" class="brief-recap-edit" id="briefEdit">Editar respuestas</button>
+                    </div>
+                  </div>
+
                   <div class="cta-actions">
-                    <a href="https://wa.me/56967289704?text=Hola%20Captas%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.%20%C2%BFPodemos%20coordinar%3F" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                    <a href="https://wa.me/56967289704?text=Hola%20Captas%2C%20quiero%20cotizar%20una%20p%C3%A1gina%20web%20para%20mi%20negocio.%20%C2%BFPodemos%20coordinar%3F" class="btn-primary" id="briefQuiero" target="_blank" rel="noopener noreferrer">
                       Quiero <span class="arr">→</span>
                     </a>
                     <a href="https://wa.me/56967289704?text=Hola%20Captas%2C%20tengo%20una%20consulta%20sobre%20los%20planes%20de%20p%C3%A1gina%20web." class="btn-secondary" target="_blank" rel="noopener noreferrer">
@@ -3789,6 +4214,191 @@
           const anchor = target.querySelector('.section-intro') || target.querySelector('.hero-sticky') || target;
           anchor.scrollIntoView({ behavior: 'auto', block: 'start' });
         });
+      }
+
+      /* Asistente brief — guía animada antes de WhatsApp */
+      const briefWizard = document.getElementById('briefWizard');
+      if (briefWizard) {
+        const briefPanels = briefWizard.querySelectorAll('.brief-panel');
+        const briefBack = document.getElementById('briefBack');
+        const briefNext = document.getElementById('briefNext');
+        const briefSkip = document.getElementById('briefSkip');
+        const briefRecap = document.getElementById('briefRecap');
+        const briefEdit = document.getElementById('briefEdit');
+        const briefProgress = document.getElementById('briefProgress');
+        const briefProgressFill = document.getElementById('briefProgressFill');
+        const briefProgressLabel = document.getElementById('briefProgressLabel');
+        const briefQuiero = document.getElementById('briefQuiero');
+        const briefFields = ['goal', 'plan', 'timeline', 'payment'];
+        const briefAnswers = { goal: '', plan: '', timeline: '', payment: '' };
+        let briefStep = 0;
+        let briefComplete = false;
+        const BRIEF_DEFAULT_MSG = 'Hola Captas, quiero cotizar una página web para mi negocio. ¿Podemos coordinar?';
+
+        const goalSuggestMap = {
+          'Presencia profesional (landing con contacto)': 'presencia',
+          'Mostrar servicios o catálogo': 'servicios',
+          'Vender en línea (tienda)': 'tienda',
+          'Renovar una web que ya tengo': 'renovar'
+        };
+
+        function briefCurrentPanel() {
+          return briefWizard.querySelector('.brief-panel[data-brief-step="' + briefStep + '"]');
+        }
+
+        function briefStepHasAnswer() {
+          return Boolean(briefAnswers[briefFields[briefStep]]);
+        }
+
+        function briefUpdateProgress() {
+          const stepNum = Math.min(briefStep + 1, briefFields.length);
+          const pct = briefComplete ? 100 : ((briefStep + (briefStepHasAnswer() ? 0.35 : 0)) / briefFields.length) * 100;
+          if (briefProgressFill) briefProgressFill.style.width = pct + '%';
+          if (briefProgressLabel) briefProgressLabel.textContent = briefComplete ? 'Listo' : stepNum + ' / ' + briefFields.length;
+          if (briefProgress) briefProgress.setAttribute('aria-valuenow', String(briefComplete ? briefFields.length : stepNum));
+        }
+
+        function briefUpdateNav() {
+          if (briefBack) briefBack.disabled = briefStep === 0 || briefComplete;
+          if (briefNext) {
+            briefNext.disabled = !briefStepHasAnswer();
+            briefNext.textContent = briefStep === briefFields.length - 1 ? 'Armar mensaje' : 'Continuar';
+          }
+          if (briefSkip) briefSkip.hidden = briefComplete;
+          const briefNav = briefWizard.querySelector('.brief-nav');
+          if (briefNav) briefNav.hidden = briefComplete;
+          briefPanels.forEach((panel, i) => {
+            panel.classList.toggle('is-active', !briefComplete && i === briefStep);
+          });
+          if (briefRecap) briefRecap.classList.toggle('is-visible', briefComplete);
+          briefUpdateProgress();
+        }
+
+        function briefApplySuggestions() {
+          const hint = goalSuggestMap[briefAnswers.goal] || '';
+          briefWizard.querySelectorAll('[data-field="plan"]').forEach(btn => {
+            const tags = (btn.dataset.suggest || '').split(/\s+/).filter(Boolean);
+            btn.classList.toggle('is-suggested', hint && tags.includes(hint));
+          });
+        }
+
+        function briefBuildMessage() {
+          const lines = [
+            'Hola Captas, quiero cotizar una página web.',
+            '',
+            'Objetivo: ' + briefAnswers.goal,
+            'Plan de interés: ' + briefAnswers.plan,
+            'Plazo: ' + briefAnswers.timeline,
+            'Forma de pago: ' + briefAnswers.payment,
+            '',
+            '¿Podemos coordinar una reunión breve?'
+          ];
+          return lines.join('\n');
+        }
+
+        function briefUpdateWhatsApp() {
+          if (!briefQuiero) return;
+          const msg = briefComplete ? briefBuildMessage() : BRIEF_DEFAULT_MSG;
+          briefQuiero.href = 'https://wa.me/56967289704?text=' + encodeURIComponent(msg);
+          briefQuiero.classList.toggle('is-ready', briefComplete);
+          briefQuiero.setAttribute('aria-label', briefComplete
+            ? 'Enviar mensaje personalizado por WhatsApp'
+            : 'Escribir por WhatsApp (completa el asistente para un mensaje más detallado)');
+        }
+
+        function briefUpdateRecap() {
+          const map = {
+            goal: document.getElementById('briefRecapGoal'),
+            plan: document.getElementById('briefRecapPlan'),
+            timeline: document.getElementById('briefRecapTimeline'),
+            payment: document.getElementById('briefRecapPayment')
+          };
+          Object.keys(map).forEach(key => {
+            if (map[key]) map[key].textContent = briefAnswers[key] || '—';
+          });
+        }
+
+        function briefSelectOption(btn) {
+          const field = btn.dataset.field;
+          const value = btn.dataset.value;
+          if (!field || !value) return;
+          briefAnswers[field] = value;
+          briefWizard.querySelectorAll('.brief-option[data-field="' + field + '"]').forEach(el => {
+            el.classList.toggle('is-selected', el === btn);
+            el.setAttribute('aria-pressed', el === btn ? 'true' : 'false');
+          });
+          if (field === 'goal') briefApplySuggestions();
+          briefUpdateNav();
+          briefUpdateWhatsApp();
+          if (!reduced && briefStep < briefFields.length - 1) {
+            setTimeout(() => {
+              if (briefStepHasAnswer() && briefNext && !briefNext.disabled) briefNext.focus();
+            }, 180);
+          }
+        }
+
+        function briefShowStep(nextStep) {
+          briefStep = Math.max(0, Math.min(briefFields.length - 1, nextStep));
+          briefComplete = false;
+          briefWizard.classList.remove('is-complete');
+          briefUpdateNav();
+          briefUpdateWhatsApp();
+        }
+
+        function briefFinish() {
+          briefComplete = true;
+          briefWizard.classList.add('is-complete');
+          briefUpdateRecap();
+          briefUpdateNav();
+          briefUpdateWhatsApp();
+          if (briefQuiero && !reduced) {
+            briefQuiero.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+
+        briefWizard.querySelectorAll('.brief-option').forEach(btn => {
+          btn.setAttribute('aria-pressed', 'false');
+          btn.addEventListener('click', () => briefSelectOption(btn));
+        });
+
+        if (briefBack) {
+          briefBack.addEventListener('click', () => {
+            if (briefStep > 0) briefShowStep(briefStep - 1);
+          });
+        }
+
+        if (briefNext) {
+          briefNext.addEventListener('click', () => {
+            if (!briefStepHasAnswer()) return;
+            if (briefStep < briefFields.length - 1) {
+              briefShowStep(briefStep + 1);
+              const first = briefCurrentPanel()?.querySelector('.brief-option');
+              if (first) first.focus();
+            } else {
+              briefFinish();
+            }
+          });
+        }
+
+        if (briefSkip) {
+          briefSkip.addEventListener('click', () => {
+            if (briefQuiero) {
+              briefQuiero.classList.remove('is-ready');
+              briefQuiero.href = 'https://wa.me/56967289704?text=' + encodeURIComponent(BRIEF_DEFAULT_MSG);
+              briefQuiero.focus();
+            }
+          });
+        }
+
+        if (briefEdit) {
+          briefEdit.addEventListener('click', () => {
+            briefComplete = false;
+            briefShowStep(0);
+          });
+        }
+
+        briefUpdateNav();
+        briefUpdateWhatsApp();
       }
 
       /* Smooth nav */
