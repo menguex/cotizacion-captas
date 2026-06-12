@@ -1726,31 +1726,41 @@
       width: 100vw;
       max-width: 100vw;
       margin-left: calc(50% - 50vw);
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
       padding: 0.75rem 0 1.75rem;
+      cursor: grab;
+      touch-action: pan-x;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
       mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    }
+
+    .plans-viewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    .plans-viewport.is-dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .plans-viewport.is-fitted {
+      overflow: hidden;
+      cursor: default;
+      touch-action: auto;
     }
 
     .plans-marquee {
       display: flex;
       width: max-content;
-      will-change: transform;
-      animation: plans-marquee 52s linear infinite;
-    }
-
-    .plans-viewport:hover .plans-marquee {
-      animation-play-state: paused;
+      will-change: scroll-position;
     }
 
     .plans-viewport.is-fitted .plans-marquee {
       width: 100%;
       justify-content: center;
-      animation: plans-sway 9s ease-in-out infinite;
-    }
-
-    .plans-viewport.is-fitted:hover .plans-marquee {
-      animation-play-state: paused;
     }
 
     .plans-set {
@@ -1766,16 +1776,6 @@
 
     .plans-viewport.is-fitted .plans-set--clone {
       display: none;
-    }
-
-    @keyframes plans-marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @keyframes plans-sway {
-      0%, 100% { transform: translateX(-10px); }
-      50% { transform: translateX(10px); }
     }
 
     .plan-card {
@@ -2482,10 +2482,6 @@
         width: min(82vw, 17rem);
       }
 
-      .plans-marquee {
-        animation-duration: 38s;
-      }
-
       .story-section:not(.hero) { padding: 3.5rem 1.15rem; }
 
       #contacto {
@@ -2862,7 +2858,6 @@
       .scroll-section { opacity: 1; transition: none; }
       .scroll-hint, .pulse-dot { animation: none; }
       .system-card:hover, .plan-card:hover, .btn-primary:hover, .btn-secondary:hover, .btn-hero-primary:hover, .btn-hero-ghost:hover, .hero-service:hover { transform: none; }
-      .plans-marquee { animation: none !important; transform: none !important; }
       .plans-viewport.is-fitted .plans-marquee { justify-content: center; width: 100%; }
       body.captas-ready #captas-preload { transition: none; }
       .hero .section-media-inner,
@@ -3590,23 +3585,82 @@
         videoObs.observe(flujoSection);
       }
 
-      /* Planes — carrusel premium con los 5 juntos */
+      /* Planes — scroll manual + auto avance pausable */
       const plansViewport = document.getElementById('plansViewport');
       const plansMarquee = document.getElementById('plansMarquee');
       const plansSet = document.getElementById('plansSet');
 
-      if (plansViewport && plansMarquee && plansSet && !reduced) {
+      if (plansViewport && plansMarquee && plansSet) {
         const plansClone = plansSet.cloneNode(true);
         plansClone.removeAttribute('id');
         plansClone.classList.add('plans-set--clone');
         plansClone.setAttribute('aria-hidden', 'true');
         plansMarquee.appendChild(plansClone);
 
+        let plansFits = false;
+        let plansInView = false;
+        let plansUserActive = false;
+        let plansResumeTimer = 0;
+        let plansLoopWidth = 0;
+        let plansAutoRaf = 0;
+        let plansLastTs = 0;
+        const PLANS_AUTO_PX_PER_SEC = reduced ? 0 : 42;
+        const PLANS_RESUME_MS = 3500;
+
+        let plansDragging = false;
+        let plansDragMoved = false;
+        let plansDragStartX = 0;
+        let plansDragStartScroll = 0;
+        let plansActivePointer = null;
+
+        function normalizePlansScroll() {
+          if (!plansLoopWidth) return;
+          let left = plansViewport.scrollLeft;
+          if (left >= plansLoopWidth) {
+            left -= plansLoopWidth;
+            plansViewport.scrollLeft = left;
+          } else if (left < 0) {
+            left += plansLoopWidth;
+            plansViewport.scrollLeft = left;
+          }
+        }
+
+        function pausePlansAuto(resumeAfter) {
+          plansUserActive = true;
+          if (plansResumeTimer) clearTimeout(plansResumeTimer);
+          if (resumeAfter) {
+            plansResumeTimer = setTimeout(() => {
+              plansUserActive = false;
+              plansLastTs = 0;
+            }, PLANS_RESUME_MS);
+          }
+        }
+
         function updatePlansLayout() {
-          const setWidth = plansSet.getBoundingClientRect().width;
+          plansLoopWidth = plansSet.getBoundingClientRect().width;
           const viewWidth = plansViewport.clientWidth;
-          const fits = setWidth <= viewWidth - 24;
-          plansViewport.classList.toggle('is-fitted', fits);
+          plansFits = plansLoopWidth <= viewWidth - 24;
+          plansViewport.classList.toggle('is-fitted', plansFits);
+          if (plansFits) {
+            plansViewport.scrollLeft = 0;
+            plansUserActive = true;
+          } else {
+            normalizePlansScroll();
+            if (!plansDragging) plansUserActive = false;
+          }
+        }
+
+        function plansAutoTick(ts) {
+          if (!plansLastTs) plansLastTs = ts;
+          const dt = (ts - plansLastTs) / 1000;
+          plansLastTs = ts;
+
+          if (!reduced && plansInView && !plansFits && !plansUserActive && !plansDragging) {
+            plansViewport.scrollLeft += PLANS_AUTO_PX_PER_SEC * dt;
+            normalizePlansScroll();
+          }
+
+          plansAutoRaf = requestAnimationFrame(plansAutoTick);
         }
 
         updatePlansLayout();
@@ -3614,10 +3668,77 @@
 
         const plansObs = new IntersectionObserver((entries) => {
           entries.forEach(e => {
-            plansMarquee.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+            plansInView = e.isIntersecting;
+            if (plansInView) plansLastTs = 0;
           });
         }, { threshold: 0.2 });
         plansObs.observe(plansViewport);
+
+        plansViewport.addEventListener('scroll', () => {
+          if (!plansDragging) normalizePlansScroll();
+        }, { passive: true });
+
+        plansViewport.addEventListener('pointerdown', (e) => {
+          if (plansFits || e.button > 0) return;
+          plansDragging = true;
+          plansDragMoved = false;
+          plansActivePointer = e.pointerId;
+          plansDragStartX = e.clientX;
+          plansDragStartScroll = plansViewport.scrollLeft;
+          pausePlansAuto(false);
+          plansViewport.classList.add('is-dragging');
+          if (plansViewport.setPointerCapture) plansViewport.setPointerCapture(e.pointerId);
+        });
+
+        plansViewport.addEventListener('pointermove', (e) => {
+          if (!plansDragging || e.pointerId !== plansActivePointer) return;
+          const dx = e.clientX - plansDragStartX;
+          if (Math.abs(dx) > 4) plansDragMoved = true;
+          plansViewport.scrollLeft = plansDragStartScroll - dx;
+          normalizePlansScroll();
+        });
+
+        function endPlansDrag(e) {
+          if (!plansDragging || (e && e.pointerId !== plansActivePointer)) return;
+          plansDragging = false;
+          plansActivePointer = null;
+          plansViewport.classList.remove('is-dragging');
+          if (plansViewport.releasePointerCapture && e) {
+            try { plansViewport.releasePointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+          }
+          pausePlansAuto(true);
+        }
+
+        plansViewport.addEventListener('pointerup', endPlansDrag);
+        plansViewport.addEventListener('pointercancel', endPlansDrag);
+        plansViewport.addEventListener('lostpointercapture', () => {
+          if (plansDragging) endPlansDrag();
+        });
+
+        plansViewport.addEventListener('wheel', (e) => {
+          if (plansFits) return;
+          if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
+            pausePlansAuto(true);
+          }
+        }, { passive: true });
+
+        plansViewport.addEventListener('mouseenter', () => {
+          if (!plansFits && !plansDragging) pausePlansAuto(false);
+        });
+
+        plansViewport.addEventListener('mouseleave', () => {
+          if (!plansDragging) pausePlansAuto(true);
+        });
+
+        plansViewport.addEventListener('touchstart', () => {
+          if (!plansFits) pausePlansAuto(false);
+        }, { passive: true });
+
+        plansViewport.addEventListener('touchend', () => {
+          if (!plansFits) pausePlansAuto(true);
+        }, { passive: true });
+
+        plansAutoRaf = requestAnimationFrame(plansAutoTick);
       }
 
       function updateFiberPulse(idx) {
