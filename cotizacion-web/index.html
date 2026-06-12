@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Servicios Web · Captas Agencia Creativa</title>
   <meta name="description" content="Cotización de páginas web profesionales: desde landing básica hasta tienda con carrito. Diseño, desarrollo, SEO y hosting por Captas.">
-  <link rel="preload" href="../brand/captas-icon.png" as="image" type="image/png">
+  <link rel="preload" href="brand/captas-icon.png" as="image" type="image/png">
   <link rel="preload" href="media/hero-web.jpg" as="image" type="image/jpeg">
   <meta name="theme-color" content="#007aff">
   <style>
     @font-face {
       font-family: 'Geist';
-      src: url('../fonts/GeistVF.woff') format('woff');
+      src: url('fonts/GeistVF.woff') format('woff');
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
     }
     @font-face {
       font-family: 'Geist Mono';
-      src: url('../fonts/GeistMonoVF.woff') format('woff');
+      src: url('fonts/GeistMonoVF.woff') format('woff');
       font-weight: 100 900;
       font-style: normal;
       font-display: swap;
@@ -2712,7 +2712,7 @@
 <body class="captas-loading">
   <div id="captas-preload" aria-hidden="true">
     <div class="captas-preload-inner">
-      <img src="../brand/captas-icon.png" alt="" class="captas-preload-icon" width="72" height="72">
+      <img src="brand/captas-icon.png" alt="" class="captas-preload-icon" width="72" height="72">
       <span class="captas-preload-logo">CAPTAS<span class="captas-preload-dot">.</span></span>
       <div class="captas-preload-copy">
         <p class="captas-preload-title">Servicios Web</p>
@@ -2757,7 +2757,7 @@
       <div class="header-glass"></div>
       <div class="header-content">
         <a href="https://captas-cyan.vercel.app/" class="captas-logo" target="_blank" rel="noopener" aria-label="Captas">
-          <img src="../brand/captas-icon.png" alt="" class="captas-logo-mark" width="36" height="36">
+          <img src="brand/captas-icon.png" alt="" class="captas-logo-mark" width="36" height="36">
           <span class="captas-logo-word">CAPTAS<span class="captas-logo-dot">.</span></span>
         </a>
         <nav class="nav-pills" aria-label="Secciones">
@@ -3217,7 +3217,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
         <a href="https://captas-cyan.vercel.app/" class="captas-logo" target="_blank" rel="noopener" style="color:inherit;">
-          <img src="../brand/captas-icon.png" alt="" class="captas-logo-mark" width="28" height="28">
+          <img src="brand/captas-icon.png" alt="" class="captas-logo-mark" width="28" height="28">
           <span class="captas-logo-word">CAPTAS<span class="captas-logo-dot">.</span></span>
         </a>
         <div class="footer-meta">Agencia Creativa · Limarí · Servicios Web · Captas 2026</div>
@@ -3276,7 +3276,7 @@
         rafId = requestAnimationFrame(tickPreload);
 
         const icon = new Image();
-        icon.src = '../brand/captas-icon.png';
+        icon.src = 'brand/captas-icon.png';
         Promise.all([
           document.fonts ? document.fonts.ready : Promise.resolve(),
           new Promise(r => { icon.onload = icon.onerror = r; }),
