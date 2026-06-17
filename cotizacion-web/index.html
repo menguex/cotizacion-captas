@@ -60,12 +60,27 @@
       --ls-normal: -0.011em;
       --ls-wide: 0.16em;
       --ls-wider: 0.22em;
-      --t-hero: clamp(2.75rem, 7vw, 4.5rem);
-      --t-h1: clamp(2rem, 4.8vw, 3.25rem);
-      --t-h2: clamp(1.625rem, 3.2vw, 2.5rem);
+      --t-hero: clamp(2.5rem, 6.5vw, 4rem);
+      --t-h1: clamp(1.875rem, 3.6vw, 2.75rem);
+      --t-h2: clamp(1.5rem, 2.6vw, 2.125rem);
+      --t-h3: clamp(1.125rem, 1.8vw, 1.375rem);
+      --t-body: clamp(0.9375rem, 1.05vw, 1.0625rem);
+      --t-body-sm: 0.8125rem;
+      --t-caption: 0.75rem;
+      --t-label: 0.5625rem;
       --t-kicker: 0.6875rem;
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --content: min(680px, calc(100% - 2rem));
+      --t-btn: 0.75rem;
+      --btn-h: 2.75rem;
+      --btn-px: 1.5rem;
+      --btn-radius: 999px;
+      --btn-shadow: 0 8px 28px rgba(0, 122, 255, 0.32);
+      --btn-shadow-hover: 0 14px 40px rgba(0, 122, 255, 0.46);
+      --focus-ring: 0 0 0 2px var(--c-ink), 0 0 0 4px rgba(100, 210, 255, 0.55);
+      --dur-fast: 0.2s;
+      --dur-med: 0.32s;
+      --dur-slow: 0.55s;
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out: var(--ease-spring);
       --content-wide: min(1040px, calc(100% - 2rem));
       --hero-content: min(780px, calc(100% - 2.5rem));
       --rail-w: 88px;
@@ -93,12 +108,23 @@
       font-family: var(--font-b);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      font-size: var(--t-body);
+      line-height: 1.6;
       letter-spacing: var(--ls-normal);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       padding-left: env(safe-area-inset-left, 0);
       padding-right: env(safe-area-inset-right, 0);
+    }
+
+    :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    :where(.btn-hero-primary, .btn-hero-ghost, .btn-primary, .btn-secondary, .brief-option, .brief-nav-btn, .nav-pills a):focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
     }
 
     img,
@@ -364,18 +390,23 @@
     /* Glass utility */
     .glass {
       background: var(--glass);
-      backdrop-filter: blur(24px) saturate(1.4);
-      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      backdrop-filter: blur(20px) saturate(1.35);
+      -webkit-backdrop-filter: blur(20px) saturate(1.35);
       border: 1px solid var(--glass-border);
       box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.25),
+        0 4px 20px rgba(0, 0, 0, 0.22),
         inset 0 1px 0 var(--glass-shine);
+      transition: border-color var(--dur-fast) ease, box-shadow var(--dur-med) ease, transform var(--dur-med) var(--ease-spring);
     }
 
     .glass-strong {
       background: rgba(255, 255, 255, 0.055);
-      backdrop-filter: blur(32px) saturate(1.5);
-      -webkit-backdrop-filter: blur(32px) saturate(1.5);
+      backdrop-filter: blur(28px) saturate(1.45);
+      -webkit-backdrop-filter: blur(28px) saturate(1.45);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.28),
+        inset 0 1px 0 var(--glass-shine);
     }
 
     /* Header — solo barra superior; no section-intro */
@@ -438,18 +469,21 @@
 
     .nav-pills a {
       font-family: var(--font-mono);
-      font-size: 0.58rem;
-      font-weight: 450;
-      letter-spacing: 0.18em;
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-muted);
       text-decoration: none;
-      padding: 0.45rem 0.9rem;
+      padding: 0.5rem 0.85rem;
+      min-height: 2rem;
       border-radius: 100px;
-      transition: all 0.25s ease;
+      transition: color var(--dur-fast) ease, background var(--dur-fast) ease, transform var(--dur-fast) var(--ease-spring);
     }
 
     .nav-pills a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+
+    .nav-pills a:active { transform: scale(0.97); }
 
     .nav-pills a.active {
       color: #fff;
@@ -496,11 +530,17 @@
 
     .scroll-section {
       opacity: 0;
-      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(12px);
+      transition: opacity var(--dur-slow) var(--ease-spring), transform var(--dur-slow) var(--ease-spring);
     }
 
     .scroll-section.visible {
       opacity: 1;
+      transform: none;
+    }
+
+    .hero.scroll-section {
+      transform: none;
     }
 
     .hero .section-media {
@@ -600,49 +640,6 @@
       padding-bottom: 0;
     }
 
-    #flujo .flujo-hero {
-      text-align: center;
-      padding: clamp(2rem, 5vh, 3rem) clamp(1.25rem, 4vw, 2.5rem);
-      border-radius: var(--radius);
-      max-width: 44rem;
-      margin-inline: auto;
-    }
-
-    #flujo .flujo-hero-title {
-      font-size: clamp(1.85rem, 3.4vw, 2.85rem);
-      line-height: 1.12;
-      letter-spacing: -0.035em;
-      text-shadow: none;
-    }
-
-    #flujo .flujo-hero .section-lead-text {
-      max-width: 46ch;
-      margin-inline: auto;
-      font-size: clamp(1rem, 1.2vw, 1.08rem);
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
-    }
-
-    #flujo .flujo-hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.35rem;
-    }
-
-    #flujo .flujo-hero-chips span {
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      font-weight: 450;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      padding: 0.5rem 0.9rem;
-      border-radius: 100px;
-      background: rgba(0, 122, 255, 0.14);
-      border: 1px solid rgba(0, 122, 255, 0.28);
-      color: rgba(234, 232, 228, 0.92);
-    }
-
     .section-wrap {
       width: var(--content-wide);
       margin: 0 auto;
@@ -676,7 +673,85 @@
     }
 
     .section-intro > * + * {
-      margin-top: 0.65rem;
+      margin-top: 0.75rem;
+    }
+
+    .section-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-mono);
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-fog);
+    }
+
+    .section-step .num { color: var(--c-sky-soft); font-variant-numeric: tabular-nums; }
+    .section-step .sep { opacity: 0.35; }
+
+    .section-title {
+      font-family: var(--font-d);
+      font-size: var(--t-h2);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
+      margin: 0;
+      text-wrap: balance;
+    }
+
+    .section-title.is-xl {
+      font-size: var(--t-h1);
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    #flujo .section-title.is-xl .flujo-hero-title-shadow {
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-lead-text {
+      font-size: var(--t-body);
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 50ch;
+      margin: 0;
+      text-wrap: pretty;
+    }
+
+    #flujo .section-lead-text {
+      text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+    }
+
+    .section-chips,
+    #contexto .contexto-chips,
+    #flujo .flujo-hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-top: 0.35rem;
+    }
+
+    .section-chips span,
+    #contexto .contexto-chips span,
+    #flujo .flujo-hero-chips span {
+      font-family: var(--font-mono);
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border-radius: 100px;
+      background: rgba(91, 97, 255, 0.1);
+      border: 1px solid rgba(91, 97, 255, 0.22);
+      color: rgba(234, 232, 228, 0.9);
+    }
+
+    #flujo .flujo-hero-chips span {
+      background: rgba(0, 122, 255, 0.12);
+      border-color: rgba(0, 122, 255, 0.26);
     }
 
     .section-intro.is-center {
@@ -693,53 +768,20 @@
       margin-inline: auto;
     }
 
-    .section-step {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      font-weight: 450;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--c-fog);
-    }
-
-    .section-step .num { color: var(--c-sky-soft); font-variant-numeric: tabular-nums; }
-    .section-step .sep { opacity: 0.35; }
-
-    .section-title {
-      font-family: var(--font-d);
-      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
-      font-weight: 700;
-      line-height: 1.25;
-      letter-spacing: -0.03em;
-      margin: 0;
-    }
-
-    .section-lead-text {
-      font-size: clamp(0.95rem, 1.15vw, 1.05rem);
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 52ch;
-      margin: 0;
-      text-wrap: pretty;
-    }
-
     .section-intro:not(.is-center) .section-lead-text,
     .section-intro:not(.is-center) .section-takeaway {
       max-width: 56ch;
     }
 
     .section-takeaway {
-      padding: 0.85rem 1.1rem;
+      padding: 0.8rem 1rem;
       border-radius: var(--radius-sm);
-      background: rgba(0, 122, 255, 0.08);
-      border: 1px solid rgba(0, 122, 255, 0.18);
-      font-size: 0.82rem;
+      background: rgba(0, 122, 255, 0.07);
+      border: 1px solid rgba(0, 122, 255, 0.16);
+      font-size: var(--t-body-sm);
       line-height: 1.55;
       color: rgba(234, 232, 228, 0.92);
-      max-width: 52ch;
+      max-width: 50ch;
       width: 100%;
       text-wrap: balance;
     }
@@ -774,9 +816,9 @@
       padding-top: var(--space-block);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       font-family: var(--font-mono);
-      font-size: 0.52rem;
-      font-weight: 450;
-      letter-spacing: 0.16em;
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
@@ -796,13 +838,14 @@
     /* Títulos — patrón Captas (líneas naturales, no cortes forzados) */
     .hero-title {
       font-family: var(--font-d);
-      font-size: clamp(2.25rem, 6.5vw, 3.75rem);
+      font-size: var(--t-hero);
       font-weight: 700;
-      line-height: 1.02;
+      line-height: 1.04;
       letter-spacing: -0.04em;
       text-align: center;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.15rem;
       text-shadow: none;
+      text-wrap: balance;
     }
 
     .hero-title .hero-line {
@@ -980,16 +1023,9 @@
     }
 
     .hero-copy .hero-desc {
-      margin: 0 auto 1.5rem;
-      max-width: 38ch;
+      margin: 0 auto 0;
+      max-width: 42ch;
       text-align: center;
-    }
-
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.6rem;
     }
 
     .hero-services {
@@ -1036,15 +1072,15 @@
 
     .hero-service-title {
       font-family: var(--font-d);
-      font-size: 0.92rem;
-      font-weight: 700;
+      font-size: var(--t-h3);
+      font-weight: 650;
       letter-spacing: -0.02em;
-      line-height: 1.25;
-      margin-bottom: 0.2rem;
+      line-height: 1.22;
+      margin-bottom: 0.25rem;
     }
 
     .hero-service-desc {
-      font-size: 0.78rem;
+      font-size: var(--t-caption);
       line-height: 1.45;
       color: var(--text-muted);
     }
@@ -1052,53 +1088,6 @@
     .hero-service.featured {
       border-color: rgba(142, 216, 255, 0.28);
       background: rgba(0, 122, 255, 0.08);
-    }
-
-    .btn-hero-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.5rem;
-      font-family: var(--font-d);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--bg);
-      background: var(--c-accent);
-      border-radius: 100px;
-      box-shadow: 0 8px 28px rgba(0, 122, 255, 0.35);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .btn-hero-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 36px rgba(0, 122, 255, 0.45);
-    }
-
-    .btn-hero-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.85rem 1.35rem;
-      font-family: var(--font-d);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--c-text-bright);
-      background: rgba(142, 216, 255, 0.08);
-      border: 1px solid rgba(142, 216, 255, 0.35);
-      border-radius: 100px;
-      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-    }
-
-    .btn-hero-ghost:hover {
-      transform: translateY(-2px);
-      background: rgba(142, 216, 255, 0.14);
-      border-color: rgba(142, 216, 255, 0.5);
     }
 
     .hero-top {
@@ -1141,10 +1130,89 @@
     }
 
     .hero-desc {
-      font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+      font-size: var(--t-body);
       font-weight: 400;
       color: rgba(234, 232, 228, 0.88);
       line-height: 1.65;
+      max-width: 44ch;
+      margin-inline: auto;
+      text-wrap: pretty;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Botones — sistema unificado */
+    .btn-hero-primary,
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: var(--btn-h);
+      padding: 0 var(--btn-px);
+      font-family: var(--font-d);
+      font-size: var(--t-btn);
+      font-weight: 650;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--c-accent);
+      border: 1px solid transparent;
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      box-shadow: var(--btn-shadow);
+      transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-med) ease, background var(--dur-fast) ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-hero-primary:hover,
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--btn-shadow-hover);
+    }
+
+    .btn-hero-primary:active,
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-hero-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: var(--btn-h);
+      padding: 0 calc(var(--btn-px) - 0.15rem);
+      font-family: var(--font-d);
+      font-size: var(--t-btn);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--c-text-bright);
+      background: rgba(142, 216, 255, 0.07);
+      border: 1px solid rgba(142, 216, 255, 0.32);
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      transition: transform var(--dur-fast) var(--ease-spring), background var(--dur-fast) ease, border-color var(--dur-fast) ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-hero-ghost:hover {
+      transform: translateY(-2px);
+      background: rgba(142, 216, 255, 0.12);
+      border-color: rgba(142, 216, 255, 0.48);
+    }
+
+    .btn-hero-ghost:active {
+      transform: translateY(0) scale(0.98);
     }
 
     .scroll-hint {
@@ -1185,27 +1253,6 @@
     #contexto .section-intro {
       border-bottom: none;
       padding-bottom: 0;
-    }
-
-    #contexto .contexto-chips {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.4rem;
-      margin-top: 0.85rem;
-    }
-
-    #contexto .contexto-chips span {
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      font-weight: 450;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.38rem 0.7rem;
-      border-radius: 100px;
-      background: rgba(91, 97, 255, 0.1);
-      border: 1px solid rgba(91, 97, 255, 0.24);
-      color: rgba(234, 232, 228, 0.88);
     }
 
     #contexto .section-content {
@@ -1363,9 +1410,9 @@
     .system-card.webpay::before { background: linear-gradient(90deg, var(--c-accent), var(--c-brand-cyan)); }
 
     .system-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-3px);
       border-color: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 var(--glass-shine);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.3), inset 0 1px 0 var(--glass-shine);
     }
 
     .card-header {
@@ -1579,13 +1626,14 @@
 
     .flow-card h4 {
       font-family: var(--font-d);
-      font-size: 0.92rem;
-      font-weight: 600;
-      margin-bottom: 0.45rem;
+      font-size: var(--t-h3);
+      font-weight: 650;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
     }
 
     .flow-card p {
-      font-size: 0.8rem;
+      font-size: var(--t-body-sm);
       color: var(--text-muted);
       line-height: 1.55;
     }
@@ -1617,15 +1665,11 @@
       padding-bottom: 1.75rem;
     }
 
-    #inversion .section-title {
-      font-size: clamp(2rem, 3.8vw, 2.85rem);
-    }
-
     .inversion-flag {
       display: inline-flex;
-      margin-bottom: 0.65rem;
+      margin-bottom: 0.25rem;
       font-family: var(--font-mono);
-      font-size: 0.5rem;
+      font-size: var(--t-label);
       font-weight: 500;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -1835,9 +1879,9 @@
     }
 
     .plan-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.38);
-      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .plan-card.is-featured {
@@ -2199,18 +2243,18 @@
 
     .combined .combined-title {
       font-family: var(--font-d);
-      font-size: clamp(1.35rem, 2.2vw, 1.65rem);
+      font-size: var(--t-h2);
       font-weight: 700;
       line-height: 1.15;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       margin-bottom: 0.5rem;
     }
 
     .combined .desc {
       color: var(--text-muted);
-      max-width: 42ch;
-      margin: 0 auto 2rem;
-      font-size: 0.95rem;
+      max-width: 44ch;
+      margin: 0 auto 1.5rem;
+      font-size: var(--t-body);
     }
 
     .compare {
@@ -2306,12 +2350,6 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-gap);
-    }
-
-    .contact-finale-title {
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -0.035em;
     }
 
     #contacto .section-wrap.narrow {
@@ -3015,15 +3053,6 @@
       color: var(--c-sky-soft);
     }
 
-    .btn-primary.is-ready {
-      animation: brief-cta-pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes brief-cta-pulse {
-      0%, 100% { box-shadow: 0 8px 32px rgba(0, 122, 255, 0.4); }
-      50% { box-shadow: 0 10px 40px rgba(0, 122, 255, 0.62), 0 0 0 4px rgba(0, 122, 255, 0.12); }
-    }
-
     .contact-trust {
       display: flex;
       flex-wrap: wrap;
@@ -3031,9 +3060,9 @@
       gap: 0.5rem 1.25rem;
       padding: 1rem 0 0.25rem;
       font-family: var(--font-mono);
-      font-size: 0.52rem;
-      font-weight: 450;
-      letter-spacing: 0.14em;
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
@@ -3054,33 +3083,55 @@
       overflow: hidden;
     }
 
-    .btn-primary {
+    .btn-primary .arr { transition: transform var(--dur-fast) var(--ease-spring); }
+    .btn-primary:hover .arr { transform: translateX(3px); }
+
+    .btn-primary.is-ready {
+      animation: brief-cta-pulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes brief-cta-pulse {
+      0%, 100% { box-shadow: var(--btn-shadow); }
+      50% { box-shadow: var(--btn-shadow-hover), 0 0 0 3px rgba(0, 122, 255, 0.1); }
+    }
+
+    .btn-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 0.65rem;
-      padding: 1rem 2rem;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: var(--btn-h);
+      padding: 0 calc(var(--btn-px) - 0.1rem);
       font-family: var(--font-d);
-      font-size: 0.8rem;
+      font-size: var(--t-btn);
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
-      color: var(--bg);
-      background: var(--c-accent);
-      border-radius: 100px;
-      border: none;
+      color: rgba(234, 232, 228, 0.96);
+      background: rgba(37, 211, 102, 0.1);
+      border: 1px solid rgba(37, 211, 102, 0.38);
+      border-radius: var(--btn-radius);
       cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      box-shadow: 0 8px 32px rgba(0, 122, 255, 0.4);
+      transition: transform var(--dur-fast) var(--ease-spring), background var(--dur-fast) ease, border-color var(--dur-fast) ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 48px rgba(0, 122, 255, 0.5);
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(37, 211, 102, 0.18);
+      border-color: rgba(37, 211, 102, 0.52);
     }
 
-    .btn-primary .arr { transition: transform 0.25s; }
-    .btn-primary:hover .arr { transform: translateX(4px); }
+    .btn-secondary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-secondary svg {
+      width: 1.05rem;
+      height: 1.05rem;
+      fill: #25d366;
+    }
 
     /* Footer — barra mínima */
     .site-footer {
@@ -3116,34 +3167,6 @@
       gap: 0.75rem;
       margin-top: 0.25rem;
       width: 100%;
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 1rem 1.65rem;
-      font-family: var(--font-d);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-decoration: none;
-      color: rgba(234, 232, 228, 0.95);
-      background: rgba(37, 211, 102, 0.12);
-      border: 1px solid rgba(37, 211, 102, 0.4);
-      border-radius: 100px;
-      transition: transform 0.25s ease, background 0.25s ease;
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      background: rgba(37, 211, 102, 0.2);
-    }
-
-    .btn-secondary svg {
-      width: 1.1rem;
-      height: 1.1rem;
-      fill: #25d366;
     }
 
     /* Responsive */
@@ -3330,10 +3353,6 @@
       .hero-top { flex-direction: column; gap: 1.25rem; }
       .hero-agency { text-align: left; }
 
-      #flujo .flujo-hero {
-        padding: 1.5rem 1.15rem;
-      }
-
       .system-card { padding: 1.5rem 1.15rem; }
 
       .price-body,
@@ -3438,8 +3457,6 @@
       .card-header { flex-wrap: wrap; }
 
       .flow-card { padding: 1.35rem 1rem; }
-
-      .contact-finale-title { font-size: clamp(1.75rem, 7.5vw, 2.25rem); }
     }
 
     /* Preloader — igual que captas-cyan.vercel.app */
@@ -3642,7 +3659,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .scroll-section { opacity: 1; transition: none; }
+      .scroll-section { opacity: 1; transform: none !important; transition: none; }
       .scroll-hint, .pulse-dot { animation: none; }
       .system-card:hover, .plan-card:hover, .btn-primary:hover, .btn-secondary:hover, .btn-hero-primary:hover, .btn-hero-ghost:hover, .hero-service:hover { transform: none; }
       .brief-panel { animation: none; }
@@ -3802,7 +3819,7 @@
             <div class="section-step"><span class="num">01</span><span class="sep">·</span><span class="label">El problema hoy</span></div>
             <h2 class="section-title">De plantilla genérica a <span class="text-captas-gradient">marca propia.</span></h2>
             <p class="section-lead-text">Te buscan en Google primero. Tu web define si confían o siguen.</p>
-            <div class="contexto-chips" aria-hidden="true">
+            <div class="contexto-chips section-chips" aria-hidden="true">
               <span>Presencia</span>
               <span>Confianza</span>
               <span>Ventas</span>
@@ -3913,16 +3930,14 @@
         </div>
         <div class="section-wrap story-body">
           <header class="section-intro is-center">
-            <div class="flujo-hero glass-strong">
-              <div class="section-step"><span class="num">03</span><span class="sep">·</span><span class="label">Cómo funciona</span></div>
-              <h2 class="section-title flujo-hero-title"><span class="flujo-hero-title-shadow">Del brief al </span><span class="text-captas-gradient">lanzamiento.</span></h2>
-              <p class="section-lead-text">Un proceso claro en cuatro etapas: tú aportas el conocimiento del negocio, nosotros lo convertimos en una web que vende.</p>
-              <div class="flujo-hero-chips" aria-hidden="true">
-                <span>Reunión inicial</span>
-                <span>Diseño</span>
-                <span>Desarrollo</span>
-                <span>Publicación</span>
-              </div>
+            <div class="section-step"><span class="num">03</span><span class="sep">·</span><span class="label">Cómo funciona</span></div>
+            <h2 class="section-title is-xl"><span class="flujo-hero-title-shadow">Del brief al </span><span class="text-captas-gradient">lanzamiento.</span></h2>
+            <p class="section-lead-text">Cuatro etapas claras: reunión, diseño, desarrollo y publicación.</p>
+            <div class="flujo-hero-chips section-chips" aria-hidden="true">
+              <span>Reunión</span>
+              <span>Diseño</span>
+              <span>Desarrollo</span>
+              <span>Publicación</span>
             </div>
           </header>
 
@@ -3967,7 +3982,7 @@
           <header class="section-intro is-center">
             <span class="inversion-flag">Cotización · Precios de desarrollo</span>
             <div class="section-step"><span class="num">04</span><span class="sep">·</span><span class="label">Inversión</span></div>
-            <h2 class="section-title">Elegí el plan para tu negocio.</h2>
+            <h2 class="section-title is-xl">Elegí el plan para tu negocio.</h2>
             <p class="section-lead-text">Desarrollo a medida con 50% inicio / 50% entrega o cuotas Mercado Pago. Mantención mensual con hosting, SSL y soporte.</p>
           </header>
 
@@ -4223,8 +4238,8 @@
       <section class="story-section scroll-section" id="contacto" data-step="5">
         <div class="section-wrap story-body">
           <header class="section-intro is-center">
-            <div class="section-step"><span class="num">06</span><span class="sep">·</span><span class="label">Siguiente paso</span></div>
-            <h2 class="section-title contact-finale-title">¿Avanzamos <span class="text-captas-gradient">juntos?</span></h2>
+            <div class="section-step"><span class="num">05</span><span class="sep">·</span><span class="label">Siguiente paso</span></div>
+            <h2 class="section-title is-xl">¿Avanzamos <span class="text-captas-gradient">juntos?</span></h2>
             <p class="section-lead-text">El asistente arma tu mensaje para WhatsApp en 5 pasos.</p>
           </header>
           <div class="section-content">
@@ -4342,7 +4357,7 @@
                 <span>Respuesta en menos de 24 h</span>
                 <span>Mercado Pago · cuotas</span>
                 <span>Sin compromiso</span>
-                <span>06 / 06 · Servicios Web Captas 2026</span>
+                <span>05 / 06 · Servicios Web Captas 2026</span>
               </div>
             </div>
           </div>
