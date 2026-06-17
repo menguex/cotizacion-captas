@@ -1,5 +1,4 @@
 {
-  "name": "cotizacion-captas",
-  "version": 2,
-  "public": true
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2
 }
