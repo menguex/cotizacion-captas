@@ -1174,7 +1174,7 @@
       50% { transform: translateY(6px); }
     }
 
-    /* Context — antes / después dinámico */
+    /* Context — antes / después compacto */
     #contexto {
       --section-accent: var(--c-brand-indigo);
       background:
@@ -1187,44 +1187,25 @@
       padding-bottom: 0;
     }
 
-    #contexto .contexto-hero {
-      text-align: center;
-      padding: clamp(1.75rem, 4vh, 2.5rem) clamp(1.25rem, 4vw, 2rem);
-      border-radius: var(--radius);
-      max-width: 40rem;
-      margin-inline: auto;
-    }
-
-    #contexto .contexto-hero-title {
-      font-size: clamp(1.75rem, 3.2vw, 2.65rem);
-      line-height: 1.14;
-      letter-spacing: -0.035em;
-    }
-
-    #contexto .contexto-hero .section-lead-text {
-      margin-inline: auto;
-      max-width: 48ch;
-    }
-
     #contexto .contexto-chips {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.45rem;
-      margin-top: 1.15rem;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
     }
 
     #contexto .contexto-chips span {
       font-family: var(--font-mono);
-      font-size: 0.52rem;
+      font-size: 0.5rem;
       font-weight: 450;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding: 0.45rem 0.85rem;
+      padding: 0.38rem 0.7rem;
       border-radius: 100px;
-      background: rgba(91, 97, 255, 0.12);
-      border: 1px solid rgba(91, 97, 255, 0.28);
-      color: rgba(234, 232, 228, 0.9);
+      background: rgba(91, 97, 255, 0.1);
+      border: 1px solid rgba(91, 97, 255, 0.24);
+      color: rgba(234, 232, 228, 0.88);
     }
 
     #contexto .section-content {
@@ -1232,174 +1213,120 @@
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .contexto-flow {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .contexto-row {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0.85rem;
-      align-items: stretch;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .contexto-flow.is-live .contexto-row:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
-    .contexto-flow.is-live .contexto-row:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.2s; }
-
-    .contexto-node {
-      border-radius: var(--radius-sm);
-      padding: 1.25rem 1.15rem;
+    .contexto-compare {
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
-      transition: border-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .contexto-node:hover {
-      transform: translateY(-2px);
-    }
-
-    .contexto-node.from {
-      border-left: 2px solid rgba(234, 232, 228, 0.2);
-    }
-
-    .contexto-node.to {
-      border-left: 2px solid var(--c-accent);
-      background: rgba(0, 122, 255, 0.06);
-    }
-
-    .contexto-node-tag {
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      font-weight: 450;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .contexto-node.from .contexto-node-tag { color: rgba(234, 232, 228, 0.45); }
-    .contexto-node.to .contexto-node-tag { color: var(--c-sky-soft); }
-
-    .contexto-node h3 {
-      font-family: var(--font-d);
-      font-size: clamp(1rem, 1.5vw, 1.12rem);
-      font-weight: 700;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-    }
-
-    .contexto-node p {
-      font-size: 0.84rem;
-      line-height: 1.55;
-      color: var(--text-muted);
-    }
-
-    .contexto-connector {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      min-width: 2.75rem;
-      padding-inline: 0.15rem;
-    }
-
-    .contexto-connector-line {
-      width: auto;
-      height: 2px;
-      flex: 1;
-      min-width: 1.25rem;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(234, 232, 228, 0.15), var(--c-accent));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .contexto-flow.is-live .contexto-connector-line {
-      transform: scaleX(1);
-    }
-
-    .contexto-flow.is-live .contexto-row:nth-child(1) .contexto-connector-line { transition-delay: 0.12s; }
-    .contexto-flow.is-live .contexto-row:nth-child(2) .contexto-connector-line { transition-delay: 0.27s; }
-
-    .contexto-connector-arrow {
-      width: 1.65rem;
-      height: 1.65rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      color: var(--c-sky-soft);
-      background: rgba(0, 122, 255, 0.15);
-      border: 1px solid rgba(0, 122, 255, 0.35);
-      box-shadow: 0 0 16px rgba(0, 122, 255, 0.25);
-      opacity: 0;
-      transform: scale(0.6);
-      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .contexto-flow.is-live .contexto-connector-arrow {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .contexto-flow.is-live .contexto-row:nth-child(1) .contexto-connector-arrow { transition-delay: 0.35s; }
-    .contexto-flow.is-live .contexto-row:nth-child(2) .contexto-connector-arrow { transition-delay: 0.5s; }
-
-    .contexto-synthesis {
-      margin-top: 0.25rem;
-      padding: 1.35rem 1.5rem;
-      border-radius: var(--radius-sm);
-      text-align: center;
-      font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-      line-height: 1.65;
-      color: rgba(234, 232, 228, 0.92);
+      padding: 1.1rem 1.15rem;
+      border-radius: var(--radius);
       opacity: 0;
       transform: translateY(14px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .contexto-flow.is-live + .contexto-synthesis {
+    .contexto-compare.is-live {
       opacity: 1;
       transform: none;
-      transition-delay: 0.45s;
     }
 
-    @media (max-width: 768px) {
-      .contexto-row {
-        grid-template-columns: 1fr;
-        gap: 0.65rem;
+    .contexto-compare-head {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0.65rem;
+      align-items: center;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 0.15rem;
+    }
+
+    .contexto-compare-label {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .contexto-compare-label.is-before { color: rgba(234, 232, 228, 0.42); }
+    .contexto-compare-label.is-after { color: var(--c-sky-soft); text-align: right; }
+
+    .contexto-pair {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0.55rem;
+      align-items: stretch;
+    }
+
+    .ctx-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.6rem;
+      padding: 0.55rem 0.65rem;
+      border-radius: 0.55rem;
+      text-align: center;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .ctx-chip.is-before {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .ctx-chip.is-after {
+      border: 1px solid rgba(0, 122, 255, 0.28);
+      background: rgba(0, 122, 255, 0.08);
+    }
+
+    .ctx-chip strong {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    .ctx-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      color: var(--c-sky-soft);
+      background: rgba(0, 122, 255, 0.12);
+      border: 1px solid rgba(0, 122, 255, 0.28);
+      flex-shrink: 0;
+    }
+
+    .contexto-synthesis {
+      margin-top: 0.65rem;
+      padding: 0.85rem 1.1rem;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: rgba(234, 232, 228, 0.9);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .contexto-compare.is-live + .contexto-synthesis {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.15s;
+    }
+
+    @media (max-width: 640px) {
+      .contexto-pair,
+      .contexto-compare-head {
+        grid-template-columns: 1fr auto 1fr;
+        gap: 0.4rem;
       }
 
-      .contexto-connector {
-        flex-direction: column;
-        min-width: 0;
-        padding: 0.2rem 0;
-      }
-
-      .contexto-connector-line {
-        width: 2px;
-        height: auto;
-        min-height: 1.25rem;
-        flex: 1;
-        transform: scaleY(0);
-        transform-origin: top;
-        background: linear-gradient(180deg, rgba(234, 232, 228, 0.15), var(--c-accent));
-      }
-
-      .contexto-flow.is-live .contexto-connector-line {
-        transform: scaleY(1);
-      }
-
-      .contexto-connector-arrow { transform: rotate(90deg) scale(0.6); }
-      .contexto-flow.is-live .contexto-connector-arrow { transform: rotate(90deg) scale(1); }
+      .ctx-chip strong { font-size: 0.72rem; }
+      .ctx-arrow { width: 1.35rem; height: 1.35rem; font-size: 0.65rem; }
     }
 
     /* Systems */
@@ -1413,10 +1340,13 @@
 
     .system-card {
       border-radius: var(--radius);
-      padding: 2rem 1.75rem;
+      padding: 1.5rem 1.35rem 1.35rem;
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
     }
 
     .system-card::before {
@@ -1440,16 +1370,24 @@
 
     .card-header {
       display: flex;
-      align-items: flex-start;
-      gap: 0.85rem;
-      margin-bottom: 0.85rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    .card-header-main {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
     }
 
     .card-badge {
       flex-shrink: 0;
-      width: 2.1rem;
-      height: 2.1rem;
-      margin-top: 0.1rem;
+      width: 1.85rem;
+      height: 1.85rem;
+      margin-top: 0;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -1467,42 +1405,78 @@
 
     .card-title-main {
       display: block;
-      font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+      font-size: clamp(1rem, 1.2vw, 1.1rem);
       line-height: 1.2;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.02em;
     }
+
+    .card-tag {
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 0.46rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-sky-soft);
+      padding: 0.3rem 0.5rem;
+      border-radius: 99px;
+      background: rgba(0, 122, 255, 0.1);
+      border: 1px solid rgba(0, 122, 255, 0.22);
+      white-space: nowrap;
+    }
+
+    .system-card.fichas .card-tag { color: #9ba0ff; border-color: rgba(155, 160, 255, 0.28); background: rgba(91, 97, 255, 0.1); }
 
     .card-title-role {
-      display: block;
-      margin-top: 0.35rem;
-      font-family: var(--font-mono);
-      font-size: 0.5rem;
-      font-weight: 450;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      display: none;
     }
-
-    .system-card.fichas .card-title-role { color: #9ba0ff; }
-    .system-card.webpay .card-title-role { color: var(--c-sky-soft); }
 
     .card-sub {
-      font-family: var(--font-mono);
-      font-size: 0.52rem;
-      font-weight: 450;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--c-fog);
-      margin-top: 0.45rem;
+      display: none;
     }
 
-    .system-card.fichas .card-sub { color: rgba(155, 160, 255, 0.72); }
-    .system-card.webpay .card-sub { color: rgba(125, 211, 252, 0.78); }
-
     .system-card .lead {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
+      display: none;
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.45rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .feat-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.35rem;
+      padding: 0.5rem 0.45rem;
+      border-radius: 0.55rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      text-align: center;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s var(--ease-out);
+    }
+
+    .feat-chip:hover {
+      border-color: rgba(142, 216, 255, 0.3);
+      background: rgba(142, 216, 255, 0.06);
+      transform: translateY(-1px);
+    }
+
+    .feat-chip strong {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .feat-chip.is-highlight {
+      border-color: rgba(0, 122, 255, 0.35);
+      background: rgba(0, 122, 255, 0.08);
     }
 
     .features { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
@@ -1534,27 +1508,21 @@
     .features span { color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; }
 
     .meta-row {
-      margin-top: 1.25rem;
-      padding-top: 1.1rem;
+      margin-top: auto;
+      padding-top: 0.75rem;
       border-top: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.68rem;
+      font-size: 0.62rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
 
-    .meta-row em { font-style: normal; color: var(--c-sky-soft); }
-
     .note-glass {
-      margin-top: 0.85rem;
-      padding: 0.85rem 1rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      border-left: 2px solid var(--c-accent);
-      line-height: 1.55;
+      display: none;
     }
+
+    .meta-row em { font-style: normal; color: var(--c-sky-soft); }
 
     /* Flow */
     #flujo { --section-accent: var(--c-brand-cyan); }
@@ -1632,13 +1600,78 @@
       margin-inline: auto;
     }
 
-    /* Pricing */
+    /* Pricing — sección principal de cotización */
     #inversion {
       --section-accent: var(--c-accent);
+      background:
+        radial-gradient(ellipse 90% 55% at 50% 0%, rgba(0, 122, 255, 0.14), transparent 58%),
+        radial-gradient(ellipse 60% 40% at 100% 80%, rgba(91, 97, 255, 0.1), transparent 50%),
+        var(--c-ink);
     }
 
     #inversion .section-wrap {
-      width: min(1180px, calc(100% - 2rem));
+      width: min(1240px, calc(100% - 2rem));
+    }
+
+    #inversion .section-intro {
+      padding-bottom: 1.75rem;
+    }
+
+    #inversion .section-title {
+      font-size: clamp(2rem, 3.8vw, 2.85rem);
+    }
+
+    .inversion-flag {
+      display: inline-flex;
+      margin-bottom: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-sky-soft);
+      padding: 0.38rem 0.75rem;
+      border-radius: 100px;
+      background: rgba(0, 122, 255, 0.14);
+      border: 1px solid rgba(0, 122, 255, 0.32);
+    }
+
+    .plans-summary-bar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+      padding: 0.85rem 1rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .plans-summary-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.15rem;
+      text-align: center;
+      padding: 0.35rem 0.25rem;
+    }
+
+    .plans-summary-val {
+      font-family: var(--font-d);
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: var(--c-text-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .plans-summary-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.46rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
     }
 
     #inversion .section-content {
@@ -1779,8 +1812,8 @@
     }
 
     .plan-card {
-      flex: 0 0 clamp(15.5rem, 17.5vw, 17.5rem);
-      width: clamp(15.5rem, 17.5vw, 17.5rem);
+      flex: 0 0 clamp(17rem, 20.5vw, 21.5rem);
+      width: clamp(17rem, 20.5vw, 21.5rem);
       border-radius: var(--radius);
       display: flex;
       flex-direction: column;
@@ -1909,44 +1942,85 @@
       gap: 1rem;
     }
 
+    .plan-audience {
+      font-size: 0.74rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+    }
+
     .plan-features {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.65rem;
+      gap: 0;
       flex: 1;
     }
 
     .plan-features li {
       font-size: 0.8rem;
       color: rgba(234, 232, 228, 0.78);
-      line-height: 1.5;
-      padding-left: 1rem;
+      line-height: 1.45;
+      padding: 0.55rem 0 0.55rem 0.85rem;
       position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
+
+    .plan-features li:last-child { border-bottom: none; }
 
     .plan-features li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 0.55em;
-      width: 6px;
-      height: 6px;
+      top: 0.95em;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: var(--c-accent);
-      box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+      box-shadow: 0 0 8px rgba(0, 122, 255, 0.45);
+    }
+
+    .plan-features strong {
+      display: block;
+      font-weight: 600;
+      font-size: 0.76rem;
+      margin-bottom: 0.12rem;
+      color: rgba(234, 232, 228, 0.95);
+    }
+
+    .plan-features span {
+      display: block;
+      font-size: 0.7rem;
+      line-height: 1.4;
+      color: var(--text-muted);
     }
 
     .plan-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
       font-family: var(--font-mono);
-      font-size: 0.5rem;
+      font-size: 0.48rem;
       font-weight: 450;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--c-sky-soft);
       padding-top: 0.85rem;
       border-top: 1px solid rgba(255, 255, 255, 0.07);
-      line-height: 1.6;
+    }
+
+    .plan-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .plan-meta-row em {
+      font-style: normal;
+      color: var(--c-sky-soft);
+      font-weight: 500;
+      letter-spacing: 0.06em;
     }
 
     .plans-legend {
@@ -1978,6 +2052,68 @@
       height: 6px;
       border-radius: 50%;
       background: var(--c-accent);
+    }
+
+    .plans-matrix-wrap {
+      margin-top: 1.5rem;
+      overflow-x: auto;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .plans-matrix {
+      width: 100%;
+      min-width: 36rem;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+    }
+
+    .plans-matrix th,
+    .plans-matrix td {
+      padding: 0.55rem 0.65rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .plans-matrix th:first-child,
+    .plans-matrix td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: rgba(234, 232, 228, 0.88);
+      position: sticky;
+      left: 0;
+      background: rgba(12, 14, 20, 0.95);
+      z-index: 1;
+    }
+
+    .plans-matrix thead th {
+      font-family: var(--font-mono);
+      font-size: 0.48rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-sky-soft);
+      background: rgba(0, 122, 255, 0.06);
+    }
+
+    .plans-matrix thead th.is-featured {
+      color: #fff;
+      background: rgba(0, 122, 255, 0.18);
+    }
+
+    .plans-matrix td {
+      color: var(--text-muted);
+    }
+
+    .plans-matrix td.is-yes {
+      color: var(--c-sky-soft);
+      font-weight: 600;
+    }
+
+    .plans-matrix tbody tr:last-child td,
+    .plans-matrix tbody tr:last-child th {
+      border-bottom: none;
     }
 
     .payment-strip {
@@ -3097,10 +3233,18 @@
       .pricing-grid,
       .flow-track { grid-template-columns: 1fr; }
 
+      .feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
       .plan-card {
-        flex: 0 0 min(82vw, 17rem);
-        width: min(82vw, 17rem);
+        flex: 0 0 min(86vw, 19.5rem);
+        width: min(86vw, 19.5rem);
       }
+
+      .plans-summary-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .plans-matrix-wrap { display: none; }
 
       .story-section:not(.hero) { padding: 3.5rem 1.15rem; }
 
@@ -3186,7 +3330,6 @@
       .hero-top { flex-direction: column; gap: 1.25rem; }
       .hero-agency { text-align: left; }
 
-      .contexto-hero,
       #flujo .flujo-hero {
         padding: 1.5rem 1.15rem;
       }
@@ -3521,10 +3664,8 @@
         background: center / cover no-repeat;
       }
       #flujo .section-media-inner { background-image: url('/media/web-flujo-poster.jpg'); }
-      .contexto-row,
-      .contexto-synthesis,
-      .contexto-connector-line,
-      .contexto-connector-arrow { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .contexto-compare,
+      .contexto-synthesis { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
   </style>
 </head>
@@ -3656,57 +3797,43 @@
       </section>
 
       <section class="story-section scroll-section" id="contexto" data-step="1">
-        <div class="section-wrap narrow story-body">
+        <div class="section-wrap story-body">
           <header class="section-intro is-center">
-            <div class="contexto-hero glass-strong">
-              <div class="section-step"><span class="num">01</span><span class="sep">·</span><span class="label">El problema hoy</span></div>
-              <h2 class="section-title contexto-hero-title">De plantilla genérica a <span class="text-captas-gradient">marca propia.</span></h2>
-              <p class="section-lead-text">Tus clientes buscan en Google antes de llamar — una web profesional es la primera impresión que define si confían en ti o siguen buscando.</p>
-              <div class="contexto-chips" aria-hidden="true">
-                <span>Presencia</span>
-                <span>Confianza</span>
-                <span>Ventas</span>
-              </div>
+            <div class="section-step"><span class="num">01</span><span class="sep">·</span><span class="label">El problema hoy</span></div>
+            <h2 class="section-title">De plantilla genérica a <span class="text-captas-gradient">marca propia.</span></h2>
+            <p class="section-lead-text">Te buscan en Google primero. Tu web define si confían o siguen.</p>
+            <div class="contexto-chips" aria-hidden="true">
+              <span>Presencia</span>
+              <span>Confianza</span>
+              <span>Ventas</span>
             </div>
           </header>
           <div class="section-content">
-            <div class="contexto-flow" id="contextoFlow">
-              <div class="contexto-row">
-                <article class="contexto-node from glass">
-                  <span class="contexto-node-tag">Hoy · Visibilidad</span>
-                  <h3>Sin web o plantilla vieja</h3>
-                  <p>Dependes del boca a boca y pierdes clientes que ya buscaron a la competencia en línea.</p>
-                </article>
-                <div class="contexto-connector" aria-hidden="true">
-                  <span class="contexto-connector-line"></span>
-                  <span class="contexto-connector-arrow">→</span>
-                </div>
-                <article class="contexto-node to glass">
-                  <span class="contexto-node-tag">Con Captas</span>
-                  <h3>Sitio profesional</h3>
-                  <p>Presencia moderna, rápida y alineada con la imagen real de tu negocio.</p>
-                </article>
+            <div class="contexto-compare glass" id="contextoFlow" aria-label="Comparación antes y después">
+              <div class="contexto-compare-head">
+                <span class="contexto-compare-label is-before">Hoy</span>
+                <span class="ctx-arrow" aria-hidden="true">→</span>
+                <span class="contexto-compare-label is-after">Con Captas</span>
               </div>
-              <div class="contexto-row">
-                <article class="contexto-node from glass">
-                  <span class="contexto-node-tag">Hoy · Ventas</span>
-                  <h3>Solo atención presencial</h3>
-                  <p>Sin canal digital, las ventas tienen techo cuando cierras o no hay quien atienda.</p>
-                </article>
-                <div class="contexto-connector" aria-hidden="true">
-                  <span class="contexto-connector-line"></span>
-                  <span class="contexto-connector-arrow">→</span>
-                </div>
-                <article class="contexto-node to glass">
-                  <span class="contexto-node-tag">Con Captas</span>
-                  <h3>Web + carrito opcional</h3>
-                  <p>Contacto 24/7, catálogo visible y venta en línea cuando tu negocio lo necesite.</p>
-                </article>
+              <div class="contexto-pair">
+                <div class="ctx-chip is-before"><strong>Sin web</strong></div>
+                <span class="ctx-arrow" aria-hidden="true">→</span>
+                <div class="ctx-chip is-after"><strong>Sitio profesional</strong></div>
+              </div>
+              <div class="contexto-pair">
+                <div class="ctx-chip is-before"><strong>Solo presencial</strong></div>
+                <span class="ctx-arrow" aria-hidden="true">→</span>
+                <div class="ctx-chip is-after"><strong>Contacto 24/7</strong></div>
+              </div>
+              <div class="contexto-pair">
+                <div class="ctx-chip is-before"><strong>Sin catálogo</strong></div>
+                <span class="ctx-arrow" aria-hidden="true">→</span>
+                <div class="ctx-chip is-after"><strong>Tienda opcional</strong></div>
               </div>
             </div>
-            <p class="contexto-synthesis glass">No es solo una página bonita — es <strong>una herramienta comercial</strong> que trabaja por tu negocio las 24 horas.</p>
+            <p class="contexto-synthesis glass">Herramienta comercial <strong>24/7</strong> — no solo diseño.</p>
             <aside class="section-outro">
-              <p class="section-takeaway">Cinco planes según tu etapa y presupuesto.</p>
+              <p class="section-takeaway">Cinco planes según tu etapa.</p>
             </aside>
           </div>
           <footer class="section-foot">
@@ -3721,54 +3848,47 @@
           <header class="section-intro is-center">
             <div class="section-step"><span class="num">02</span><span class="sep">·</span><span class="label">Qué incluye</span></div>
             <h2 class="section-title">Qué incluye cada desarrollo.</h2>
-            <p class="section-lead-text">Todos incluyen lo esencial. A mayor plan: más páginas, SEO y e-commerce.</p>
+            <p class="section-lead-text">Lo esencial en todos. SEO y tienda en planes superiores.</p>
           </header>
 
           <div class="section-content">
           <div class="systems-grid">
             <article class="system-card fichas glass">
               <div class="card-header">
-                <span class="card-badge">01</span>
-                <div>
-                  <h3 class="card-title">
-                    <span class="card-title-main">Diseño y desarrollo</span>
-                    <span class="card-title-role">Base · En todos los planes</span>
-                  </h3>
-                  <div class="card-sub">UX, identidad visual y código a medida</div>
+                <div class="card-header-main">
+                  <span class="card-badge">01</span>
+                  <h3 class="card-title"><span class="card-title-main">Diseño y desarrollo</span></h3>
                 </div>
+                <span class="card-tag">Todos los planes</span>
               </div>
-              <p class="lead">Cada sitio se construye desde cero para tu rubro: sin plantillas genéricas, con la estética y el mensaje de tu marca.</p>
-              <ul class="features">
-                <li><span class="feat-dot"></span><div><strong>Diseño responsive</strong><span>Impecable en celular, tablet y escritorio.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Velocidad optimizada</strong><span>Carga rápida, imágenes comprimidas y buenas prácticas técnicas.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>WhatsApp integrado</strong><span>Botón de contacto directo con mensaje predefinido.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Formulario de contacto</strong><span>Consultas al correo con validación y protección anti-spam.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Certificado SSL</strong><span>Candado de seguridad y confianza para tus visitantes.</span></div></li>
+              <ul class="feat-grid" aria-label="Incluido en todos los planes">
+                <li class="feat-chip"><strong>Responsive</strong></li>
+                <li class="feat-chip"><strong>Velocidad</strong></li>
+                <li class="feat-chip"><strong>WhatsApp</strong></li>
+                <li class="feat-chip"><strong>Formulario</strong></li>
+                <li class="feat-chip"><strong>SSL</strong></li>
+                <li class="feat-chip"><strong>A medida</strong></li>
               </ul>
-              <div class="meta-row">Incluido · <em>desde plan Básica</em></div>
+              <div class="meta-row">Desde plan <em>Básica</em></div>
             </article>
 
             <article class="system-card webpay glass">
               <div class="card-header">
-                <span class="card-badge">02</span>
-                <div>
-                  <h3 class="card-title">
-                    <span class="card-title-main">Crecimiento y venta en línea</span>
-                    <span class="card-title-role">Avanzado · Planes superiores</span>
-                  </h3>
-                  <div class="card-sub">SEO, integraciones y e-commerce</div>
+                <div class="card-header-main">
+                  <span class="card-badge">02</span>
+                  <h3 class="card-title"><span class="card-title-main">Crecimiento y venta</span></h3>
                 </div>
+                <span class="card-tag">Planes superiores</span>
               </div>
-              <p class="lead">Cuando tu negocio necesita más que presencia: posicionamiento local, contenido dinámico y venta directa desde la web.</p>
-              <ul class="features">
-                <li><span class="feat-dot"></span><div><strong>SEO on-page</strong><span>Metadatos, estructura y contenido optimizado para Google.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Google Maps + Search Console</strong><span>Ubicación visible y monitoreo de indexación.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Galería y catálogo</strong><span>Productos o servicios con fotos, categorías y filtros.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Carrito de compras</strong><span>Plan Tienda: catálogo, pedidos y panel de gestión.</span></div></li>
-                <li><span class="feat-dot"></span><div><strong>Hosting + mantención</strong><span>Respaldos, soporte y ajustes menores de contenido.</span></div></li>
+              <ul class="feat-grid" aria-label="Incluido en planes avanzados">
+                <li class="feat-chip"><strong>SEO</strong></li>
+                <li class="feat-chip"><strong>Maps</strong></li>
+                <li class="feat-chip"><strong>Catálogo</strong></li>
+                <li class="feat-chip"><strong>Carrito</strong></li>
+                <li class="feat-chip"><strong>Hosting</strong></li>
+                <li class="feat-chip is-highlight"><strong>Webpay</strong></li>
               </ul>
-              <div class="note-glass glass">Pasarela de pago (Webpay u otra) se configura en plan Tienda. Comisión de transacción según proveedor contratado.</div>
-              <div class="meta-row">E-commerce · <em>plan Tienda · $1.700.000</em></div>
+              <div class="meta-row">Tienda <em>$1.700.000</em> · pasarela según plan</div>
             </article>
           </div>
           <aside class="section-outro">
@@ -3845,12 +3965,32 @@
       <section class="story-section scroll-section section-muted" id="inversion" data-step="4">
         <div class="section-wrap story-body">
           <header class="section-intro is-center">
+            <span class="inversion-flag">Cotización · Precios de desarrollo</span>
             <div class="section-step"><span class="num">04</span><span class="sep">·</span><span class="label">Inversión</span></div>
-            <h2 class="section-title">Cinco planes, un solo estándar.</h2>
-            <p class="section-lead-text">50/50 o Mercado Pago en cuotas. Mantención desde $18.000/mes.</p>
+            <h2 class="section-title">Elegí el plan para tu negocio.</h2>
+            <p class="section-lead-text">Desarrollo a medida con 50% inicio / 50% entrega o cuotas Mercado Pago. Mantención mensual con hosting, SSL y soporte.</p>
           </header>
 
           <div class="section-content">
+          <div class="plans-summary-bar glass" aria-label="Resumen de planes">
+            <div class="plans-summary-item">
+              <span class="plans-summary-val">5</span>
+              <span class="plans-summary-lbl">Planes</span>
+            </div>
+            <div class="plans-summary-item">
+              <span class="plans-summary-val">$600k</span>
+              <span class="plans-summary-lbl">Desde</span>
+            </div>
+            <div class="plans-summary-item">
+              <span class="plans-summary-val">2–6</span>
+              <span class="plans-summary-lbl">Semanas</span>
+            </div>
+            <div class="plans-summary-item">
+              <span class="plans-summary-val">MP</span>
+              <span class="plans-summary-lbl">Cuotas</span>
+            </div>
+          </div>
+
           <div class="plans-viewport" id="plansViewport">
             <div class="plans-marquee" id="plansMarquee">
             <div class="plans-set" id="plansSet" role="list" aria-label="Planes de desarrollo web">
@@ -3860,16 +4000,21 @@
                   <h3 class="plan-name">Web Básica</h3>
                   <div class="plan-price-wrap">
                     <div class="plan-price">$600.000</div>
-                    <p class="plan-price-note">Desarrollo · contado</p>
+                    <p class="plan-price-note">Desarrollo · contado o cuotas</p>
                   </div>
                 </div>
                 <div class="plan-body">
+                  <p class="plan-audience">Para empezar con presencia y contacto en línea.</p>
                   <ul class="plan-features">
-                    <li>Landing 1 página</li>
-                    <li>WhatsApp + formulario</li>
-                    <li>SSL y hosting</li>
+                    <li><strong>Landing 1 página</strong><span>Scroll con identidad de tu marca.</span></li>
+                    <li><strong>WhatsApp + formulario</strong><span>Contacto directo y consultas al correo.</span></li>
+                    <li><strong>Diseño responsive</strong><span>Impecable en celular y escritorio.</span></li>
+                    <li><strong>SSL + hosting</strong><span>Sitio seguro, en línea desde el día uno.</span></li>
                   </ul>
-                  <div class="plan-meta">Entrega · 2 semanas<br>Mant. $18.000/mes</div>
+                  <div class="plan-meta">
+                    <div class="plan-meta-row"><span>Entrega</span><em>2 semanas</em></div>
+                    <div class="plan-meta-row"><span>Mantención</span><em>$18.000/mes</em></div>
+                  </div>
                 </div>
               </article>
 
@@ -3879,16 +4024,21 @@
                   <h3 class="plan-name">Web Esencial</h3>
                   <div class="plan-price-wrap">
                     <div class="plan-price">$850.000</div>
-                    <p class="plan-price-note">Desarrollo · contado</p>
+                    <p class="plan-price-note">Desarrollo · contado o cuotas</p>
                   </div>
                 </div>
                 <div class="plan-body">
+                  <p class="plan-audience">Para negocios con varios servicios o secciones.</p>
                   <ul class="plan-features">
-                    <li>Hasta 4 páginas</li>
-                    <li>Maps + galería</li>
-                    <li>Todo lo de Básica</li>
+                    <li><strong>Hasta 4 páginas</strong><span>Inicio, nosotros, servicios y contacto.</span></li>
+                    <li><strong>Maps + galería</strong><span>Ubicación visible y fotos de tu trabajo.</span></li>
+                    <li><strong>SEO básico</strong><span>Metadatos y estructura para Google.</span></li>
+                    <li><strong>Todo lo de Básica</strong><span>WhatsApp, formulario, SSL y hosting.</span></li>
                   </ul>
-                  <div class="plan-meta">Entrega · 2–3 semanas<br>Mant. $22.000/mes</div>
+                  <div class="plan-meta">
+                    <div class="plan-meta-row"><span>Entrega</span><em>2–3 semanas</em></div>
+                    <div class="plan-meta-row"><span>Mantención</span><em>$22.000/mes</em></div>
+                  </div>
                 </div>
               </article>
 
@@ -3899,16 +4049,21 @@
                   <h3 class="plan-name">Web Profesional</h3>
                   <div class="plan-price-wrap">
                     <div class="plan-price">$1.100.000</div>
-                    <p class="plan-price-note">Desarrollo · contado</p>
+                    <p class="plan-price-note">Desarrollo · contado o cuotas</p>
                   </div>
                 </div>
                 <div class="plan-body">
+                  <p class="plan-audience">Para posicionarte y publicar contenido con frecuencia.</p>
                   <ul class="plan-features">
-                    <li>Hasta 8 páginas</li>
-                    <li>SEO + blog</li>
-                    <li>Animaciones</li>
+                    <li><strong>Hasta 8 páginas + blog</strong><span>Contenido amplio y artículos propios.</span></li>
+                    <li><strong>SEO completo</strong><span>Search Console y optimización on-page.</span></li>
+                    <li><strong>Animaciones</strong><span>Microinteracciones y experiencia premium.</span></li>
+                    <li><strong>Todo lo de Esencial</strong><span>Maps, galería y base de contacto.</span></li>
                   </ul>
-                  <div class="plan-meta">Entrega · 3–4 semanas<br>Mant. $28.000/mes</div>
+                  <div class="plan-meta">
+                    <div class="plan-meta-row"><span>Entrega</span><em>3–4 semanas</em></div>
+                    <div class="plan-meta-row"><span>Mantención</span><em>$28.000/mes</em></div>
+                  </div>
                 </div>
               </article>
 
@@ -3918,16 +4073,21 @@
                   <h3 class="plan-name">Web Premium</h3>
                   <div class="plan-price-wrap">
                     <div class="plan-price">$1.400.000</div>
-                    <p class="plan-price-note">Desarrollo · contado</p>
+                    <p class="plan-price-note">Desarrollo · contado o cuotas</p>
                   </div>
                 </div>
                 <div class="plan-body">
+                  <p class="plan-audience">Para operaciones con mucho contenido o integraciones.</p>
                   <ul class="plan-features">
-                    <li>Panel admin</li>
-                    <li>Integraciones a medida</li>
-                    <li>Multi-idioma</li>
+                    <li><strong>Panel admin</strong><span>Editá textos e imágenes sin código.</span></li>
+                    <li><strong>Integraciones</strong><span>CRM, reservas u otras herramientas a medida.</span></li>
+                    <li><strong>Multi-idioma</strong><span>Español + segundo idioma si lo necesitás.</span></li>
+                    <li><strong>Todo lo de Profesional</strong><span>SEO, blog y diseño avanzado.</span></li>
                   </ul>
-                  <div class="plan-meta">Entrega · 4–5 semanas<br>Mant. $35.000/mes</div>
+                  <div class="plan-meta">
+                    <div class="plan-meta-row"><span>Entrega</span><em>4–5 semanas</em></div>
+                    <div class="plan-meta-row"><span>Mantención</span><em>$35.000/mes</em></div>
+                  </div>
                 </div>
               </article>
 
@@ -3938,16 +4098,21 @@
                   <h3 class="plan-name">Web + Tienda</h3>
                   <div class="plan-price-wrap">
                     <div class="plan-price">$1.700.000</div>
-                    <p class="plan-price-note">Desarrollo · contado</p>
+                    <p class="plan-price-note">Desarrollo · contado o cuotas</p>
                   </div>
                 </div>
                 <div class="plan-body">
+                  <p class="plan-audience">Para vender productos o servicios directo desde la web.</p>
                   <ul class="plan-features">
-                    <li>Carrito de compras</li>
-                    <li>Panel de pedidos</li>
-                    <li>Checkout + pasarela*</li>
+                    <li><strong>Catálogo + carrito</strong><span>Categorías, filtros y checkout.</span></li>
+                    <li><strong>Panel de pedidos</strong><span>Gestioná ventas desde un panel propio.</span></li>
+                    <li><strong>Pasarela de pago*</strong><span>Webpay u otra según tu proveedor.</span></li>
+                    <li><strong>Todo lo de Premium</strong><span>Admin, SEO y diseño completo.</span></li>
                   </ul>
-                  <div class="plan-meta">Entrega · 5–6 semanas<br>Mant. $40.000/mes</div>
+                  <div class="plan-meta">
+                    <div class="plan-meta-row"><span>Entrega</span><em>4–6 semanas</em></div>
+                    <div class="plan-meta-row"><span>Mantención</span><em>$40.000/mes</em></div>
+                  </div>
                 </div>
               </article>
             </div>
@@ -3956,8 +4121,74 @@
 
           <div class="plans-legend" aria-hidden="true">
             <span>50/50 o MP cuotas</span>
-            <span>Hosting + SSL</span>
-            <span>Dominio aparte</span>
+            <span>Hosting + SSL incluidos</span>
+            <span>Dominio aparte (~$15.000/año)</span>
+            <span>Mantención con reajuste IPC</span>
+          </div>
+
+          <div class="plans-matrix-wrap" aria-label="Comparación rápida de planes">
+            <table class="plans-matrix">
+              <thead>
+                <tr>
+                  <th scope="col">Incluye</th>
+                  <th scope="col">Básica</th>
+                  <th scope="col">Esencial</th>
+                  <th scope="col" class="is-featured">Profesional</th>
+                  <th scope="col">Premium</th>
+                  <th scope="col">Tienda</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Páginas</th>
+                  <td>1</td>
+                  <td>4</td>
+                  <td class="is-yes">8 + blog</td>
+                  <td>8+</td>
+                  <td>8+</td>
+                </tr>
+                <tr>
+                  <th scope="row">SEO</th>
+                  <td>—</td>
+                  <td>Básico</td>
+                  <td class="is-yes">Completo</td>
+                  <td class="is-yes">Completo</td>
+                  <td class="is-yes">Completo</td>
+                </tr>
+                <tr>
+                  <th scope="row">Galería / Maps</th>
+                  <td>—</td>
+                  <td class="is-yes">Sí</td>
+                  <td class="is-yes">Sí</td>
+                  <td class="is-yes">Sí</td>
+                  <td class="is-yes">Sí</td>
+                </tr>
+                <tr>
+                  <th scope="row">Panel admin</th>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td class="is-yes">Sí</td>
+                  <td class="is-yes">Sí</td>
+                </tr>
+                <tr>
+                  <th scope="row">E-commerce</th>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td class="is-yes">Sí</td>
+                </tr>
+                <tr>
+                  <th scope="row">Mantención</th>
+                  <td>$18k</td>
+                  <td>$22k</td>
+                  <td class="is-yes">$28k</td>
+                  <td>$35k</td>
+                  <td>$40k</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="payment-strip glass" role="note" aria-label="Formas de pago">
@@ -3965,21 +4196,21 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/><path d="M6 15h3"/></svg>
             </div>
             <div>
-              <p class="payment-strip-title">Mercado Pago</p>
-              <p class="payment-strip-desc">Cuotas con tarjeta o pago 50% inicio / 50% entrega.</p>
+              <p class="payment-strip-title">Mercado Pago · Transferencia</p>
+              <p class="payment-strip-desc"><strong>Cuotas con tarjeta</strong> vía Mercado Pago, o <strong>50% al iniciar / 50% al entregar</strong> por transferencia. Comisión de pasarela según proveedor (Webpay ~1,2–3% + IVA). Lo no descrito se cotiza aparte.</p>
             </div>
           </div>
 
-          <p class="pricing-foot">CLP · Vigencia 30 días</p>
+          <p class="pricing-foot">Valores en CLP · Vigencia 30 días · IVA incluido en desarrollo</p>
 
           <div class="combined glass-strong">
-            <p class="combined-label">Recomendado</p>
+            <p class="combined-label">Recomendado para la mayoría</p>
             <h3 class="combined-title">Web Profesional · $1.100.000</h3>
-            <p class="desc">8 páginas, SEO y blog — el equilibrio para la mayoría de negocios.</p>
-            <p class="combined-detail">Entrega 3–4 semanas · Mant. $28.000/mes</p>
+            <p class="desc">8 páginas, blog, SEO completo y animaciones — el equilibrio entre inversión y resultado para negocios que quieren crecer en Google.</p>
+            <p class="combined-detail">Entrega 3–4 semanas · Mantención $28.000/mes · 50/50 o cuotas MP</p>
           </div>
           <aside class="section-outro">
-            <p class="section-takeaway">¿Algo extra? Lo cotizamos aparte.</p>
+            <p class="section-takeaway">¿Dudas sobre qué plan elegir? Usá el asistente en Contacto.</p>
           </aside>
           </div>
           <footer class="section-foot">
