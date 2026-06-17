@@ -1429,13 +1429,54 @@
       .ctx-bridge-arrow { transform: rotate(90deg); }
     }
 
-    /* Systems */
-    #servicios { --section-accent: var(--c-accent); }
+    /* Systems — video + inclusiones */
+    #servicios {
+      --section-accent: var(--c-accent);
+      overflow: hidden;
+      background-color: var(--c-ink);
+    }
+
+    #servicios.story-section:not(.hero) {
+      padding-top: clamp(5rem, 12vh, 7rem);
+    }
+
+    #servicios .servicios-scrim {
+      background:
+        linear-gradient(180deg, rgba(8, 10, 15, 0.62) 0%, rgba(15, 18, 24, 0.5) 40%, rgba(15, 18, 24, 0.92) 100%),
+        radial-gradient(ellipse 75% 55% at 50% 18%, rgba(91, 97, 255, 0.22), transparent 58%),
+        linear-gradient(90deg, rgba(8, 10, 15, 0.4) 0%, transparent 20%, transparent 80%, rgba(8, 10, 15, 0.4) 100%);
+    }
+
+    #servicios .section-video-bg {
+      filter: saturate(0.75) contrast(1.06) brightness(0.82);
+      object-position: center 35%;
+    }
+
+    #servicios .section-intro {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    #servicios .section-lead-text {
+      text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55);
+    }
+
+    #servicios .section-content {
+      padding-top: var(--space-block);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .servicios-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
     .systems-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
+      align-items: stretch;
     }
 
     .system-card {
@@ -1446,8 +1487,11 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: linear-gradient(165deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 14, 20, 0.72);
+      backdrop-filter: blur(22px) saturate(1.35);
+      -webkit-backdrop-filter: blur(22px) saturate(1.35);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
     }
 
     .system-card::before {
@@ -1511,49 +1555,103 @@
     .system-card.fichas .sys-tier { color: rgba(155, 160, 255, 0.75); }
     .system-card.webpay .sys-tier { color: rgba(125, 211, 252, 0.8); }
 
-    .sys-feats {
-      list-style: none;
+    .sys-lead {
       margin: 0;
-      padding: 0.25rem 1.35rem 0.5rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      flex: 1;
+      padding: 0 1.35rem 0.85rem;
+      font-size: var(--t-body-sm);
+      line-height: 1.5;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .sys-feats li {
+    .sys-rows {
+      list-style: none;
+      margin: 0;
+      padding: 0.35rem 1.35rem 0.65rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sys-rows li {
       position: relative;
-      padding: 0.62rem 0 0.62rem 0.85rem;
-      font-size: var(--t-body-sm);
-      font-weight: 500;
-      line-height: 1.3;
-      color: rgba(234, 232, 228, 0.88);
+      padding: 0.7rem 0 0.7rem 1rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .sys-feats li::before {
+    .sys-rows li:last-child { border-bottom: none; }
+
+    .sys-rows li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 1.05rem;
       width: 4px;
       height: 4px;
       border-radius: 50%;
       background: var(--c-accent);
-      box-shadow: 0 0 8px rgba(0, 122, 255, 0.5);
+      box-shadow: 0 0 8px rgba(0, 122, 255, 0.45);
     }
 
-    .system-card.fichas .sys-feats li::before { background: #9ba0ff; box-shadow: 0 0 8px rgba(155, 160, 255, 0.45); }
+    .system-card.fichas .sys-rows li::before { background: #9ba0ff; }
 
-    .sys-feats li.is-accent {
-      color: var(--c-sky-soft);
+    .sys-rows strong {
+      display: block;
+      font-size: var(--t-body-sm);
       font-weight: 600;
+      color: rgba(234, 232, 228, 0.95);
+      margin-bottom: 0.12rem;
     }
 
-    .sys-feats li.is-accent::before {
+    .sys-rows span {
+      display: block;
+      font-size: var(--t-caption);
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    .sys-rows li.is-accent strong { color: var(--c-sky-soft); }
+
+    .servicios-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.25rem;
+      padding: 0.9rem 1.15rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.25);
+      font-family: var(--font-mono);
+      font-size: var(--t-label);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .servicios-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .servicios-legend span::before {
+      content: '';
       width: 5px;
       height: 5px;
-      background: var(--c-sky-soft);
+      border-radius: 50%;
+      background: var(--c-accent);
+    }
+
+    #servicios .section-outro {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    #servicios .section-takeaway--link {
+      max-width: 28rem;
+      width: 100%;
     }
 
     .sys-foot {
@@ -1573,8 +1671,8 @@
       color: var(--c-sky-soft);
     }
 
-    @media (max-width: 640px) {
-      .sys-feats { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .systems-grid { grid-template-columns: 1fr; }
     }
 
     /* Flow */
@@ -3685,6 +3783,7 @@
         background: center / cover no-repeat;
       }
       #flujo .section-media-inner { background-image: url('/media/web-flujo-poster.jpg'); }
+      #servicios .section-media-inner { background-image: url('/media/hero-web-poster.jpg'); }
       .contexto-transform,
       .contexto-synthesis { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
@@ -3863,15 +3962,31 @@
         </div>
       </section>
 
-      <section class="story-section scroll-section section-muted" id="servicios" data-step="2">
+      <section class="story-section scroll-section section-video" id="servicios" data-step="2">
+        <div class="section-media" aria-hidden="true">
+          <div class="section-media-inner" data-parallax="0.22">
+            <video class="section-video-bg" autoplay muted loop playsinline poster="/media/hero-web-poster.jpg" preload="metadata">
+              <source src="/media/hero-web.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="section-scrim servicios-scrim"></div>
+        </div>
         <div class="section-wrap story-body">
           <header class="section-intro is-center">
             <div class="section-step"><span class="num">02</span><span class="sep">·</span><span class="label">Qué incluye</span></div>
-            <h2 class="section-title">Qué incluye cada desarrollo.</h2>
-            <p class="section-lead-text">Lo esencial en todos. SEO y tienda en planes superiores.</p>
+            <h2 class="section-title is-xl">Qué incluye cada desarrollo.</h2>
+            <p class="section-lead-text">Diseño, código y contacto en todos los planes. SEO, catálogo y tienda según el nivel que elijas.</p>
+            <div class="section-chips" aria-hidden="true">
+              <span>Base</span>
+              <span>Contacto</span>
+              <span>Performance</span>
+              <span>SEO</span>
+              <span>E-commerce</span>
+            </div>
           </header>
 
           <div class="section-content">
+          <div class="servicios-shell">
           <div class="systems-grid">
             <article class="system-card fichas">
               <header class="sys-head">
@@ -3881,15 +3996,15 @@
                   <p class="sys-tier">Todos los planes</p>
                 </div>
               </header>
-              <ul class="sys-feats" aria-label="Incluido en todos los planes">
-                <li>Responsive</li>
-                <li>Velocidad</li>
-                <li>WhatsApp</li>
-                <li>Formulario</li>
-                <li>SSL</li>
-                <li>A medida</li>
+              <p class="sys-lead">Sitio a medida para tu rubro — sin plantillas genéricas.</p>
+              <ul class="sys-rows" aria-label="Incluido en todos los planes">
+                <li><strong>Responsive</strong><span>Impecable en celular, tablet y escritorio.</span></li>
+                <li><strong>Velocidad</strong><span>Carga rápida e imágenes optimizadas.</span></li>
+                <li><strong>WhatsApp</strong><span>Botón directo con mensaje listo.</span></li>
+                <li><strong>Formulario</strong><span>Consultas al correo con anti-spam.</span></li>
+                <li><strong>SSL + hosting</strong><span>Sitio seguro y en línea desde el día uno.</span></li>
               </ul>
-              <footer class="sys-foot">Desde plan <em>Básica</em></footer>
+              <footer class="sys-foot">Desde plan <em>Básica · $600.000</em></footer>
             </article>
 
             <article class="system-card webpay">
@@ -3897,22 +4012,30 @@
                 <span class="sys-num">02</span>
                 <div class="sys-head-text">
                   <h3>Crecimiento y venta</h3>
-                  <p class="sys-tier">Planes superiores</p>
+                  <p class="sys-tier">Planes Esencial en adelante</p>
                 </div>
               </header>
-              <ul class="sys-feats" aria-label="Incluido en planes avanzados">
-                <li>SEO</li>
-                <li>Maps</li>
-                <li>Catálogo</li>
-                <li>Carrito</li>
-                <li>Hosting</li>
-                <li class="is-accent">Webpay</li>
+              <p class="sys-lead">Posicionamiento, contenido y venta cuando tu negocio lo necesita.</p>
+              <ul class="sys-rows" aria-label="Incluido en planes avanzados">
+                <li><strong>SEO on-page</strong><span>Metadatos y estructura para Google.</span></li>
+                <li><strong>Maps + Search Console</strong><span>Ubicación visible y monitoreo.</span></li>
+                <li><strong>Galería / catálogo</strong><span>Fotos, categorías y filtros.</span></li>
+                <li><strong>Carrito de compras</strong><span>Checkout completo en plan Tienda.</span></li>
+                <li><strong>Mantención mensual</strong><span>Respaldos, soporte y ajustes menores.</span></li>
+                <li class="is-accent"><strong>Webpay u otra pasarela</strong><span>Configurada en plan Tienda · $1.700.000</span></li>
               </ul>
-              <footer class="sys-foot">Tienda <em>$1.700.000</em></footer>
+              <footer class="sys-foot">Profesional <em>$1.100.000</em> · Tienda <em>$1.700.000</em></footer>
             </article>
           </div>
+          <div class="servicios-legend" aria-hidden="true">
+            <span>Hosting + SSL incluidos</span>
+            <span>Mantención desde $18.000/mes</span>
+            <span>Dominio aparte</span>
+            <span>50/50 o cuotas MP</span>
+          </div>
+          </div>
           <aside class="section-outro">
-            <a class="section-takeaway section-takeaway--link" href="#inversion">Compará planes en Inversión →</a>
+            <a class="section-takeaway section-takeaway--link" href="#inversion">Compará los 5 planes en Inversión →</a>
           </aside>
           </div>
           <footer class="section-foot">
@@ -4540,6 +4663,18 @@
           });
         }, { threshold: 0.12 });
         videoObs.observe(flujoSection);
+      }
+
+      const serviciosVideo = document.querySelector('#servicios .section-video-bg');
+      if (serviciosVideo && !reduced) {
+        const serviciosSection = document.getElementById('servicios');
+        const serviciosVideoObs = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) serviciosVideo.play().catch(() => {});
+            else serviciosVideo.pause();
+          });
+        }, { threshold: 0.12 });
+        serviciosVideoObs.observe(serviciosSection);
       }
 
       /* Planes — scroll manual + auto avance pausable */
