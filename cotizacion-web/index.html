@@ -562,10 +562,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 40%;
+      object-position: center 42%;
       display: block;
-      filter: saturate(0.75) contrast(1.12) brightness(0.48);
-      transform: scale(1.1);
+      filter: saturate(0.68) contrast(1.14) brightness(0.5);
+      transform: scale(1.12);
     }
 
     .hero .hero-video-bg {
@@ -573,10 +573,11 @@
       inset: 0;
     }
 
-    .hero .section-scrim {
+    .hero .section-scrim,
+    .story-section.section-video .section-scrim {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Video cinematográfico — sección Flujo */
@@ -604,13 +605,30 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: saturate(0.8) contrast(1.07) brightness(0.88);
+      filter: saturate(0.82) contrast(1.1) brightness(0.84);
+      transform: scale(1.1);
     }
 
-    .story-section.section-video .section-scrim {
+    .section-media::before {
+      content: '';
       position: absolute;
       inset: 0;
       z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 115% 80% at 50% 48%, transparent 32%, rgba(8, 10, 15, 0.5) 100%),
+        linear-gradient(180deg, rgba(8, 10, 15, 0.35) 0%, transparent 28%, transparent 72%, rgba(8, 10, 15, 0.42) 100%);
+      opacity: 0.92;
+    }
+
+    .section-media .video-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.045;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     #flujo .flujo-scrim {
@@ -625,8 +643,8 @@
     }
 
     #flujo .section-video-bg {
-      filter: saturate(0.82) contrast(1.08) brightness(0.85);
-      object-position: center 42%;
+      filter: saturate(0.86) contrast(1.12) brightness(0.8);
+      object-position: center 38%;
     }
 
     #flujo .flow-card.glass,
@@ -952,17 +970,17 @@
 
     .hero .section-scrim.hero-scrim {
       background:
-        linear-gradient(180deg, rgba(8, 10, 15, 0.72) 0%, rgba(12, 15, 22, 0.55) 42%, rgba(15, 18, 24, 0.88) 78%, rgba(15, 18, 24, 0.96) 100%),
-        radial-gradient(ellipse 90% 70% at 50% 38%, rgba(0, 122, 255, 0.18), transparent 58%),
-        radial-gradient(ellipse 50% 40% at 85% 15%, rgba(91, 97, 255, 0.12), transparent 55%);
+        linear-gradient(180deg, rgba(8, 10, 15, 0.7) 0%, rgba(12, 15, 22, 0.48) 40%, rgba(15, 18, 24, 0.86) 76%, rgba(15, 18, 24, 0.96) 100%),
+        radial-gradient(ellipse 90% 70% at 50% 36%, rgba(0, 122, 255, 0.2), transparent 58%),
+        radial-gradient(ellipse 50% 40% at 88% 12%, rgba(91, 97, 255, 0.14), transparent 55%);
     }
 
     .hero .section-media::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(91, 97, 255, 0.08) 0%, transparent 45%, rgba(14, 165, 233, 0.06) 100%);
-      z-index: 1;
+      background: linear-gradient(135deg, rgba(91, 97, 255, 0.1) 0%, transparent 42%, rgba(14, 165, 233, 0.08) 100%);
+      z-index: 2;
       pointer-events: none;
     }
 
@@ -1448,8 +1466,8 @@
     }
 
     #servicios .section-video-bg {
-      filter: saturate(0.75) contrast(1.06) brightness(0.82);
-      object-position: center 35%;
+      filter: saturate(0.88) contrast(1.1) brightness(0.78);
+      object-position: center 48%;
     }
 
     #servicios .section-intro {
@@ -3775,7 +3793,8 @@
       .hero .section-media-inner,
       .story-section.section-video .section-media-inner { transform: none !important; }
       .hero.story-section { height: auto; }
-      .hero .hero-video-bg { display: none; }
+      .hero .video-grain,
+      .story-section.section-video .video-grain { display: none; }
       .hero .section-media-inner { background: center / cover no-repeat url('/media/hero-web-poster.jpg'); }
       .story-section.section-video .section-video-bg { display: none; }
       .story-section.section-video .section-media-inner {
@@ -3783,7 +3802,7 @@
         background: center / cover no-repeat;
       }
       #flujo .section-media-inner { background-image: url('/media/web-flujo-poster.jpg'); }
-      #servicios .section-media-inner { background-image: url('/media/hero-web-poster.jpg'); }
+      #servicios .section-media-inner { background-image: url('/media/web-servicios-poster.jpg'); }
       .contexto-transform,
       .contexto-synthesis { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
@@ -3858,10 +3877,11 @@
       <section class="story-section scroll-section hero visible active-section" id="hero" data-step="0">
         <div class="section-media" aria-hidden="true">
           <div class="section-media-inner" data-parallax="0.35">
-            <video class="hero-video-bg" autoplay muted loop playsinline poster="/media/hero-web-poster.jpg" preload="auto">
+            <video class="hero-video-bg" autoplay muted loop playsinline poster="/media/hero-web-poster.jpg" preload="auto" aria-label="Oficina creativa con equipos trabajando en proyectos web">
               <source src="/media/hero-web.mp4" type="video/mp4">
             </video>
           </div>
+          <span class="video-grain" aria-hidden="true"></span>
           <div class="section-scrim hero-scrim"></div>
         </div>
         <div class="hero-sticky">
@@ -3965,10 +3985,11 @@
       <section class="story-section scroll-section section-video" id="servicios" data-step="2">
         <div class="section-media" aria-hidden="true">
           <div class="section-media-inner" data-parallax="0.22">
-            <video class="section-video-bg" autoplay muted loop playsinline poster="/media/hero-web-poster.jpg" preload="metadata">
-              <source src="/media/hero-web.mp4" type="video/mp4">
+            <video class="section-video-bg" autoplay muted loop playsinline poster="/media/web-servicios-poster.jpg" preload="metadata" aria-label="Pareja comprando en una tienda online desde laptop">
+              <source src="/media/web-servicios.mp4" type="video/mp4">
             </video>
           </div>
+          <span class="video-grain" aria-hidden="true"></span>
           <div class="section-scrim servicios-scrim"></div>
         </div>
         <div class="section-wrap story-body">
@@ -4048,10 +4069,11 @@
       <section class="story-section scroll-section section-video" id="flujo" data-step="3">
         <div class="section-media" aria-hidden="true">
           <div class="section-media-inner" data-parallax="0.28">
-            <video class="section-video-bg" autoplay muted loop playsinline poster="/media/web-flujo-poster.jpg" preload="metadata">
+            <video class="section-video-bg" autoplay muted loop playsinline poster="/media/web-flujo-poster.jpg" preload="metadata" aria-label="Equipo de marketing revisando un proyecto web en laptop">
               <source src="/media/web-flujo.mp4" type="video/mp4">
             </video>
           </div>
+          <span class="video-grain" aria-hidden="true"></span>
           <div class="section-scrim flujo-scrim"></div>
         </div>
         <div class="section-wrap story-body">
@@ -4640,42 +4662,23 @@
         });
       }
 
-      const heroVideo = document.querySelector('#hero .hero-video-bg');
-      if (heroVideo && !reduced) {
-        heroVideo.play().catch(() => {});
-        const heroSection = document.getElementById('hero');
-        const heroVideoObs = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) heroVideo.play().catch(() => {});
-            else heroVideo.pause();
+      function bindSectionVideo(sectionId, selector, threshold = 0.12) {
+        const section = document.getElementById(sectionId);
+        const video = section?.querySelector(selector);
+        if (!video || reduced) return;
+        video.play().catch(() => {});
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) video.play().catch(() => {});
+            else video.pause();
           });
-        }, { threshold: 0.08 });
-        heroVideoObs.observe(heroSection);
+        }, { threshold });
+        obs.observe(section);
       }
 
-      const flujoVideo = document.querySelector('#flujo .section-video-bg');
-      if (flujoVideo && !reduced) {
-        const flujoSection = document.getElementById('flujo');
-        const videoObs = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) flujoVideo.play().catch(() => {});
-            else flujoVideo.pause();
-          });
-        }, { threshold: 0.12 });
-        videoObs.observe(flujoSection);
-      }
-
-      const serviciosVideo = document.querySelector('#servicios .section-video-bg');
-      if (serviciosVideo && !reduced) {
-        const serviciosSection = document.getElementById('servicios');
-        const serviciosVideoObs = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) serviciosVideo.play().catch(() => {});
-            else serviciosVideo.pause();
-          });
-        }, { threshold: 0.12 });
-        serviciosVideoObs.observe(serviciosSection);
-      }
+      bindSectionVideo('hero', '.hero-video-bg', 0.08);
+      bindSectionVideo('servicios', '.section-video-bg', 0.12);
+      bindSectionVideo('flujo', '.section-video-bg', 0.12);
 
       /* Planes — scroll manual + auto avance pausable */
       const plansViewport = document.getElementById('plansViewport');
