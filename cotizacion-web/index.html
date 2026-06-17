@@ -799,6 +799,22 @@
       text-align: center;
     }
 
+    .section-takeaway--link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      color: rgba(234, 232, 228, 0.92);
+      transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease, color var(--dur-fast) ease;
+    }
+
+    .section-takeaway--link:hover {
+      color: #fff;
+      border-color: rgba(0, 122, 255, 0.35);
+      background: rgba(0, 122, 255, 0.12);
+    }
+
     .section-content {
       position: relative;
       display: flex;
@@ -1242,11 +1258,11 @@
       50% { transform: translateY(6px); }
     }
 
-    /* Context — antes / después compacto */
+    /* Context — transform editorial */
     #contexto {
       --section-accent: var(--c-brand-indigo);
       background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(91, 97, 255, 0.08), transparent 55%),
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(91, 97, 255, 0.1), transparent 55%),
         var(--c-ink);
     }
 
@@ -1260,120 +1276,157 @@
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .contexto-compare {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      padding: 1.1rem 1.15rem;
+    .contexto-transform {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
       border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(165deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
+      overflow: hidden;
       opacity: 0;
       transform: translateY(14px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: opacity var(--dur-slow) var(--ease-spring), transform var(--dur-slow) var(--ease-spring);
     }
 
-    .contexto-compare.is-live {
+    .contexto-transform.is-live {
       opacity: 1;
       transform: none;
     }
 
-    .contexto-compare-head {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0.65rem;
-      align-items: center;
-      padding-bottom: 0.35rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 0.15rem;
+    .ctx-panel {
+      padding: 1.35rem 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
     }
 
-    .contexto-compare-label {
+    .ctx-panel--before {
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    .ctx-panel--after {
+      background: linear-gradient(165deg, rgba(0, 122, 255, 0.1) 0%, rgba(91, 97, 255, 0.05) 100%);
+    }
+
+    .ctx-panel-head {
       font-family: var(--font-mono);
-      font-size: 0.48rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-size: var(--t-label);
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .contexto-compare-label.is-before { color: rgba(234, 232, 228, 0.42); }
-    .contexto-compare-label.is-after { color: var(--c-sky-soft); text-align: right; }
+    .ctx-panel--before .ctx-panel-head { color: rgba(234, 232, 228, 0.45); }
+    .ctx-panel--after .ctx-panel-head { color: var(--c-sky-soft); }
 
-    .contexto-pair {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0.55rem;
-      align-items: stretch;
-    }
-
-    .ctx-chip {
+    .ctx-panel-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 2.6rem;
-      padding: 0.55rem 0.65rem;
-      border-radius: 0.55rem;
-      text-align: center;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      flex-direction: column;
+      gap: 0;
     }
 
-    .ctx-chip.is-before {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.02);
+    .ctx-panel-list li {
+      font-size: var(--t-body-sm);
+      font-weight: 500;
+      line-height: 1.35;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: rgba(234, 232, 228, 0.82);
     }
 
-    .ctx-chip.is-after {
-      border: 1px solid rgba(0, 122, 255, 0.28);
-      background: rgba(0, 122, 255, 0.08);
-    }
+    .ctx-panel-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .ctx-panel-list li:first-child { padding-top: 0; }
 
-    .ctx-chip strong {
-      font-size: 0.78rem;
+    .ctx-panel--after .ctx-panel-list li {
+      color: rgba(234, 232, 228, 0.96);
       font-weight: 600;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
     }
 
-    .ctx-arrow {
+    .ctx-bridge {
+      position: relative;
+      width: 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 1.5rem;
-      height: 1.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .ctx-bridge::before {
+      content: '';
+      position: absolute;
+      inset: 12% 50% 12% auto;
+      width: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(100, 210, 255, 0.45), transparent);
+    }
+
+    .ctx-bridge-arrow {
+      position: relative;
+      z-index: 1;
+      width: 1.65rem;
+      height: 1.65rem;
       border-radius: 50%;
-      font-size: 0.7rem;
+      display: grid;
+      place-items: center;
+      font-size: 0.75rem;
       color: var(--c-sky-soft);
-      background: rgba(0, 122, 255, 0.12);
-      border: 1px solid rgba(0, 122, 255, 0.28);
-      flex-shrink: 0;
+      background: rgba(0, 122, 255, 0.2);
+      border: 1px solid rgba(100, 210, 255, 0.35);
+      box-shadow: 0 0 20px rgba(0, 122, 255, 0.25);
     }
 
     .contexto-synthesis {
-      margin-top: 0.65rem;
-      padding: 0.85rem 1.1rem;
+      margin-top: 0.75rem;
+      padding: 0.9rem 1.25rem;
       border-radius: var(--radius-sm);
       text-align: center;
-      font-size: 0.88rem;
+      font-size: var(--t-body-sm);
       line-height: 1.5;
-      color: rgba(234, 232, 228, 0.9);
+      color: rgba(234, 232, 228, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
       opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
+      transform: translateY(8px);
+      transition: opacity var(--dur-slow) ease, transform var(--dur-slow) ease;
     }
 
-    .contexto-compare.is-live + .contexto-synthesis {
+    .contexto-transform.is-live + .contexto-synthesis {
       opacity: 1;
       transform: none;
-      transition-delay: 0.15s;
+      transition-delay: 0.12s;
     }
 
     @media (max-width: 640px) {
-      .contexto-pair,
-      .contexto-compare-head {
-        grid-template-columns: 1fr auto 1fr;
-        gap: 0.4rem;
+      .contexto-transform {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
       }
 
-      .ctx-chip strong { font-size: 0.72rem; }
-      .ctx-arrow { width: 1.35rem; height: 1.35rem; font-size: 0.65rem; }
+      .ctx-bridge {
+        width: 100%;
+        height: 2.25rem;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .ctx-bridge::before {
+        inset: 50% 12% auto 12%;
+        width: auto;
+        height: 1px;
+        transform: translateY(-50%);
+        background: linear-gradient(90deg, transparent, rgba(100, 210, 255, 0.45), transparent);
+      }
+
+      .ctx-bridge-arrow { transform: rotate(90deg); }
     }
 
     /* Systems */
@@ -1382,18 +1435,19 @@
     .systems-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+      gap: 1rem;
     }
 
     .system-card {
       border-radius: var(--radius);
-      padding: 1.5rem 1.35rem 1.35rem;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+      padding: 0;
+      transition: transform var(--dur-med) var(--ease-spring), box-shadow var(--dur-med) ease, border-color var(--dur-fast) ease;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(165deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.02) 100%);
     }
 
     .system-card::before {
@@ -1403,7 +1457,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      opacity: 0.8;
+      opacity: 1;
     }
 
     .system-card.fichas::before { background: var(--c-brand-gradient); }
@@ -1411,165 +1465,117 @@
 
     .system-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.14);
-      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.3), inset 0 1px 0 var(--glass-shine);
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.32);
     }
 
-    .card-header {
+    .sys-head {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 0;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 1.35rem 1.35rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .card-header-main {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      min-width: 0;
-    }
-
-    .card-badge {
+    .sys-num {
       flex-shrink: 0;
-      width: 1.85rem;
-      height: 1.85rem;
-      margin-top: 0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: var(--font-mono);
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
+      font-size: var(--t-label);
+      font-weight: 600;
+      letter-spacing: 0.08em;
       color: var(--c-sky-soft);
-      background: rgba(0, 122, 255, 0.1);
-      border: 1px solid rgba(0, 122, 255, 0.22);
+      padding-top: 0.15rem;
     }
 
-    .card-header .card-title { margin: 0; flex: 1; }
+    .system-card.fichas .sys-num { color: #9ba0ff; }
 
-    .card-title-main {
-      display: block;
-      font-size: clamp(1rem, 1.2vw, 1.1rem);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+    .sys-head-text h3 {
+      font-family: var(--font-d);
+      font-size: var(--t-h3);
+      font-weight: 650;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin: 0 0 0.3rem;
     }
 
-    .card-tag {
-      flex-shrink: 0;
+    .sys-tier {
       font-family: var(--font-mono);
-      font-size: 0.46rem;
+      font-size: var(--t-label);
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--c-sky-soft);
-      padding: 0.3rem 0.5rem;
-      border-radius: 99px;
-      background: rgba(0, 122, 255, 0.1);
-      border: 1px solid rgba(0, 122, 255, 0.22);
-      white-space: nowrap;
+      color: var(--text-muted);
+      margin: 0;
     }
 
-    .system-card.fichas .card-tag { color: #9ba0ff; border-color: rgba(155, 160, 255, 0.28); background: rgba(91, 97, 255, 0.1); }
+    .system-card.fichas .sys-tier { color: rgba(155, 160, 255, 0.75); }
+    .system-card.webpay .sys-tier { color: rgba(125, 211, 252, 0.8); }
 
-    .card-title-role {
-      display: none;
-    }
-
-    .card-sub {
-      display: none;
-    }
-
-    .system-card .lead {
-      display: none;
-    }
-
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.45rem;
+    .sys-feats {
       list-style: none;
       margin: 0;
-      padding: 0;
+      padding: 0.25rem 1.35rem 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
     }
 
-    .feat-chip {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 2.35rem;
-      padding: 0.5rem 0.45rem;
-      border-radius: 0.55rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.03);
-      text-align: center;
-      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s var(--ease-out);
+    .sys-feats li {
+      position: relative;
+      padding: 0.62rem 0 0.62rem 0.85rem;
+      font-size: var(--t-body-sm);
+      font-weight: 500;
+      line-height: 1.3;
+      color: rgba(234, 232, 228, 0.88);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .feat-chip:hover {
-      border-color: rgba(142, 216, 255, 0.3);
-      background: rgba(142, 216, 255, 0.06);
-      transform: translateY(-1px);
-    }
-
-    .feat-chip strong {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-    }
-
-    .feat-chip.is-highlight {
-      border-color: rgba(0, 122, 255, 0.35);
-      background: rgba(0, 122, 255, 0.08);
-    }
-
-    .features { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
-
-    .features li {
-      display: flex;
-      gap: 0.85rem;
-      align-items: flex-start;
-      font-size: 0.88rem;
-      padding: 0.65rem 0.75rem;
-      border-radius: var(--radius-sm);
-      transition: background 0.25s;
-    }
-
-    .features li:hover { background: rgba(255,255,255,0.03); }
-
-    .feat-dot {
-      flex-shrink: 0;
-      width: 6px;
-      height: 6px;
+    .sys-feats li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
-      margin-top: 0.55rem;
+      background: var(--c-accent);
+      box-shadow: 0 0 8px rgba(0, 122, 255, 0.5);
     }
 
-    .system-card.fichas .feat-dot,
-    .system-card.webpay .feat-dot { background: var(--c-accent); box-shadow: 0 0 8px rgba(0,122,255,0.5); }
+    .system-card.fichas .sys-feats li::before { background: #9ba0ff; box-shadow: 0 0 8px rgba(155, 160, 255, 0.45); }
 
-    .features strong { display: block; font-weight: 600; margin-bottom: 0.1rem; }
-    .features span { color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; }
-
-    .meta-row {
-      margin-top: auto;
-      padding-top: 0.75rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      font-size: 0.62rem;
+    .sys-feats li.is-accent {
+      color: var(--c-sky-soft);
       font-weight: 600;
+    }
+
+    .sys-feats li.is-accent::before {
+      width: 5px;
+      height: 5px;
+      background: var(--c-sky-soft);
+    }
+
+    .sys-foot {
+      margin-top: auto;
+      padding: 0.85rem 1.35rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: var(--font-mono);
+      font-size: var(--t-label);
+      font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-muted);
     }
 
-    .note-glass {
-      display: none;
+    .sys-foot em {
+      font-style: normal;
+      color: var(--c-sky-soft);
     }
 
-    .meta-row em { font-style: normal; color: var(--c-sky-soft); }
+    @media (max-width: 640px) {
+      .sys-feats { grid-template-columns: 1fr; }
+    }
 
     /* Flow */
     #flujo { --section-accent: var(--c-brand-cyan); }
@@ -3256,8 +3262,6 @@
       .pricing-grid,
       .flow-track { grid-template-columns: 1fr; }
 
-      .feat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
       .plan-card {
         flex: 0 0 min(86vw, 19.5rem);
         width: min(86vw, 19.5rem);
@@ -3681,7 +3685,7 @@
         background: center / cover no-repeat;
       }
       #flujo .section-media-inner { background-image: url('/media/web-flujo-poster.jpg'); }
-      .contexto-compare,
+      .contexto-transform,
       .contexto-synthesis { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
   </style>
@@ -3826,31 +3830,30 @@
             </div>
           </header>
           <div class="section-content">
-            <div class="contexto-compare glass" id="contextoFlow" aria-label="Comparación antes y después">
-              <div class="contexto-compare-head">
-                <span class="contexto-compare-label is-before">Hoy</span>
-                <span class="ctx-arrow" aria-hidden="true">→</span>
-                <span class="contexto-compare-label is-after">Con Captas</span>
+            <div class="contexto-transform" id="contextoFlow" aria-label="Comparación antes y después">
+              <div class="ctx-panel ctx-panel--before">
+                <header class="ctx-panel-head">Hoy</header>
+                <ul class="ctx-panel-list">
+                  <li>Sin web</li>
+                  <li>Solo presencial</li>
+                  <li>Sin catálogo</li>
+                </ul>
               </div>
-              <div class="contexto-pair">
-                <div class="ctx-chip is-before"><strong>Sin web</strong></div>
-                <span class="ctx-arrow" aria-hidden="true">→</span>
-                <div class="ctx-chip is-after"><strong>Sitio profesional</strong></div>
+              <div class="ctx-bridge" aria-hidden="true">
+                <span class="ctx-bridge-arrow">→</span>
               </div>
-              <div class="contexto-pair">
-                <div class="ctx-chip is-before"><strong>Solo presencial</strong></div>
-                <span class="ctx-arrow" aria-hidden="true">→</span>
-                <div class="ctx-chip is-after"><strong>Contacto 24/7</strong></div>
-              </div>
-              <div class="contexto-pair">
-                <div class="ctx-chip is-before"><strong>Sin catálogo</strong></div>
-                <span class="ctx-arrow" aria-hidden="true">→</span>
-                <div class="ctx-chip is-after"><strong>Tienda opcional</strong></div>
+              <div class="ctx-panel ctx-panel--after">
+                <header class="ctx-panel-head">Con Captas</header>
+                <ul class="ctx-panel-list">
+                  <li>Sitio profesional</li>
+                  <li>Contacto 24/7</li>
+                  <li>Tienda opcional</li>
+                </ul>
               </div>
             </div>
-            <p class="contexto-synthesis glass">Herramienta comercial <strong>24/7</strong> — no solo diseño.</p>
+            <p class="contexto-synthesis">Herramienta comercial <strong>24/7</strong> — no solo diseño.</p>
             <aside class="section-outro">
-              <p class="section-takeaway">Cinco planes según tu etapa.</p>
+              <a class="section-takeaway section-takeaway--link" href="#inversion">Cinco planes según tu etapa →</a>
             </aside>
           </div>
           <footer class="section-foot">
@@ -3870,46 +3873,46 @@
 
           <div class="section-content">
           <div class="systems-grid">
-            <article class="system-card fichas glass">
-              <div class="card-header">
-                <div class="card-header-main">
-                  <span class="card-badge">01</span>
-                  <h3 class="card-title"><span class="card-title-main">Diseño y desarrollo</span></h3>
+            <article class="system-card fichas">
+              <header class="sys-head">
+                <span class="sys-num">01</span>
+                <div class="sys-head-text">
+                  <h3>Diseño y desarrollo</h3>
+                  <p class="sys-tier">Todos los planes</p>
                 </div>
-                <span class="card-tag">Todos los planes</span>
-              </div>
-              <ul class="feat-grid" aria-label="Incluido en todos los planes">
-                <li class="feat-chip"><strong>Responsive</strong></li>
-                <li class="feat-chip"><strong>Velocidad</strong></li>
-                <li class="feat-chip"><strong>WhatsApp</strong></li>
-                <li class="feat-chip"><strong>Formulario</strong></li>
-                <li class="feat-chip"><strong>SSL</strong></li>
-                <li class="feat-chip"><strong>A medida</strong></li>
+              </header>
+              <ul class="sys-feats" aria-label="Incluido en todos los planes">
+                <li>Responsive</li>
+                <li>Velocidad</li>
+                <li>WhatsApp</li>
+                <li>Formulario</li>
+                <li>SSL</li>
+                <li>A medida</li>
               </ul>
-              <div class="meta-row">Desde plan <em>Básica</em></div>
+              <footer class="sys-foot">Desde plan <em>Básica</em></footer>
             </article>
 
-            <article class="system-card webpay glass">
-              <div class="card-header">
-                <div class="card-header-main">
-                  <span class="card-badge">02</span>
-                  <h3 class="card-title"><span class="card-title-main">Crecimiento y venta</span></h3>
+            <article class="system-card webpay">
+              <header class="sys-head">
+                <span class="sys-num">02</span>
+                <div class="sys-head-text">
+                  <h3>Crecimiento y venta</h3>
+                  <p class="sys-tier">Planes superiores</p>
                 </div>
-                <span class="card-tag">Planes superiores</span>
-              </div>
-              <ul class="feat-grid" aria-label="Incluido en planes avanzados">
-                <li class="feat-chip"><strong>SEO</strong></li>
-                <li class="feat-chip"><strong>Maps</strong></li>
-                <li class="feat-chip"><strong>Catálogo</strong></li>
-                <li class="feat-chip"><strong>Carrito</strong></li>
-                <li class="feat-chip"><strong>Hosting</strong></li>
-                <li class="feat-chip is-highlight"><strong>Webpay</strong></li>
+              </header>
+              <ul class="sys-feats" aria-label="Incluido en planes avanzados">
+                <li>SEO</li>
+                <li>Maps</li>
+                <li>Catálogo</li>
+                <li>Carrito</li>
+                <li>Hosting</li>
+                <li class="is-accent">Webpay</li>
               </ul>
-              <div class="meta-row">Tienda <em>$1.700.000</em> · pasarela según plan</div>
+              <footer class="sys-foot">Tienda <em>$1.700.000</em></footer>
             </article>
           </div>
           <aside class="section-outro">
-            <p class="section-takeaway">Compará planes en Inversión.</p>
+            <a class="section-takeaway section-takeaway--link" href="#inversion">Compará planes en Inversión →</a>
           </aside>
           </div>
           <footer class="section-foot">
